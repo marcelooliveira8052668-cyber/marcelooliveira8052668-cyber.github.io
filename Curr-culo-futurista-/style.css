@@ -3,6 +3,7 @@
    RESET
 ========================== */
 
+/* Reset basico: zera as margens e define o modelo de caixa */
 *{
     margin:0;
     padding:0;
@@ -28,6 +29,7 @@ html{
 
 }
 
+/* Corpo da pagina: fundo, fonte e espacamento geral */
 body{
 
     font-family:'Poppins',sans-serif;
@@ -311,6 +313,7 @@ section{
 
 }
 
+/* Card de produto: caixa com bordas arredondadas e sombra */
 .card{
 
     max-width:900px;
@@ -488,6 +491,7 @@ section{
    FOOTER
 ========================== */
 
+/* Rodape do site */
 footer{
 
     text-align:center;
@@ -504,6 +508,7 @@ footer{
    MOBILE
 ========================== */
 
+/* Ajuste de layout para telas menores (celular) */
 @media(max-width:768px){
 
     .hero{
@@ -745,6 +750,7 @@ img{
 
 }
 
+/* Ajuste de layout para telas menores (celular) */
 @media(max-width:768px){
 
     .timeline-section{

@@ -8,6 +8,7 @@ cards.forEach(card => {
     btn.addEventListener('click', () => {
 
         cards.forEach(item => {
+            // Condicao: o bloco so roda se for verdadeiro
             if(item !== card){
                 item.classList.remove('active');
             }

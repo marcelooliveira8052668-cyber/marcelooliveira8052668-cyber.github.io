@@ -30,6 +30,7 @@ const Flashcards = (() => {
 
   function open() {
     queue = dueCards();
+    // Condicao: o bloco so roda se for verdadeiro
     if (queue.length === 0) {
       queue = allCards().slice(0, 10); // se nada venceu, sorteia 10 para praticar
       toast("Nenhuma revisão vencida — modo prática sorteou 10 cards.", "info");
@@ -49,6 +50,7 @@ const Flashcards = (() => {
     const body = document.getElementById("flashBody");
 
     /* Fim da revisão */
+    // Condicao: o bloco so roda se for verdadeiro
     if (pos >= queue.length) {
       const ok = results.filter(r => r >= 2).length;
       body.innerHTML = `
@@ -73,7 +75,9 @@ const Flashcards = (() => {
     const card = queue[pos];
     const dots = queue.map((_, i) => {
       let cls = "flash-dot";
+      // Condicao: o bloco so roda se for verdadeiro
       if (i < results.length) cls += results[i] >= 2 ? " ok" : " no";
+      // Condicao: o bloco so roda se for verdadeiro
       if (i === pos) cls += " active";
       return `<span class="${cls}"></span>`;
     }).join("");

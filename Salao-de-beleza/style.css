@@ -25,6 +25,7 @@
 }
 
 
+/* Reset basico: zera as margens e define o modelo de caixa */
 * {
     margin: 0;
     padding: 0;
@@ -37,6 +38,7 @@ html {
 }
 
 
+/* Corpo da pagina: fundo, fonte e espacamento geral */
 body {
 
     font-family: "DM Sans", sans-serif;
@@ -801,6 +803,7 @@ nav a:hover {
    FOOTER
 ===================================================== */
 
+/* Rodape do site */
 footer {
 
     background: var(--dark);
@@ -974,6 +977,7 @@ footer {
    RESPONSIVO
 ===================================================== */
 
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 900px) {
 
     nav {
@@ -1040,6 +1044,7 @@ footer {
 }
 
 
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 600px) {
 
     .section {

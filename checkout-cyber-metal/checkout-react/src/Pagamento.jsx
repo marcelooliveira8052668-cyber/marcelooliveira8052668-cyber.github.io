@@ -79,6 +79,7 @@ export function Pagamento({ totalCompra, aoFinalizar }) {
             {...register("validade")} 
             onInput={(e) => {
               let valor = e.target.value.replace(/\D/g, "").slice(0, 4);
+              // Condicao: o bloco so roda se for verdadeiro
               if (valor.length > 2) {
                 valor = valor.substring(0, 2) + "/" + valor.substring(2, 4);
               }

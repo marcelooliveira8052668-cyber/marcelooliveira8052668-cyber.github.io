@@ -80,8 +80,11 @@ function renderProducts(list = products) {
 function addToCart(id) {
   const p = products.find((x) => x.id === id),
     item = cart.find((x) => x.id === id);
+  // Condicao: o bloco so roda se for verdadeiro
   if (!p || p.stock <= 0) return toast("Produto sem estoque");
+  // Condicao: o bloco so roda se for verdadeiro
   if (item) {
+    // Condicao: o bloco so roda se for verdadeiro
     if (item.qty >= p.stock) return toast("Quantidade máxima disponível");
     item.qty++;
   } else cart.push({ id, qty: 1 });
@@ -89,6 +92,7 @@ function addToCart(id) {
   toast("Produto adicionado ao carrinho");
 }
 function saveCart() {
+  // Le ou grava dados no navegador
   localStorage.setItem("cm_cart", JSON.stringify(cart));
   renderCartCount();
 }
@@ -107,6 +111,7 @@ function closeCart() {
 }
 function renderCart() {
   const box = document.querySelector("#cartItems");
+  // Condicao: o bloco so roda se for verdadeiro
   if (!cart.length) {
     box.innerHTML = '<div class="empty">Seu carrinho está vazio.</div>';
     document.querySelector("#cartTotal").textContent = money(0);
@@ -126,14 +131,18 @@ function renderCart() {
 function changeQty(id, d) {
   const item = cart.find((x) => x.id === id),
     p = products.find((x) => x.id === id);
+  // Condicao: o bloco so roda se for verdadeiro
   if (!item) return;
   item.qty += d;
+  // Condicao: o bloco so roda se for verdadeiro
   if (item.qty > p.stock) item.qty = p.stock;
+  // Condicao: o bloco so roda se for verdadeiro
   if (item.qty <= 0) cart = cart.filter((x) => x.id !== id);
   saveCart();
   renderCart();
 }
 function openCheckout() {
+  // Condicao: o bloco so roda se for verdadeiro
   if (!cart.length) return toast("Adicione produtos antes de continuar");
   closeCart();
   renderCheckout();
@@ -158,6 +167,7 @@ function placeOrder() {
   const name = document.querySelector("#customerName").value.trim(),
     phone = document.querySelector("#customerPhone").value.trim(),
     address = document.querySelector("#customerAddress").value.trim();
+  // Condicao: o bloco so roda se for verdadeiro
   if (!name || !phone || !address)
     return toast("Preencha nome, WhatsApp e endereço");
   const order = {
@@ -171,6 +181,7 @@ function placeOrder() {
     status: "Recebido",
     created: new Date().toLocaleString("pt-BR"),
   };
+  // Le ou grava dados no navegador
   localStorage.setItem("cm_last_order", JSON.stringify(order));
   cart = [];
   saveCart();
@@ -197,13 +208,16 @@ function sortProducts() {
       ? [...products]
       : products.filter((p) => p.cat === currentFilter);
   const v = document.querySelector("#sort").value;
+  // Condicao: o bloco so roda se for verdadeiro
   if (v === "low") list.sort((a, b) => a.price - b.price);
+  // Condicao: o bloco so roda se for verdadeiro
   if (v === "high") list.sort((a, b) => b.price - a.price);
   renderProducts(list);
 }
 function checkCep() {
   const cep = document.querySelector("#cep").value.replace(/\D/g, "");
   const r = document.querySelector("#cepResult");
+  // Condicao: o bloco so roda se for verdadeiro
   if (cep.length !== 8) {
     r.textContent = "Digite um CEP válido com 8 números.";
     return;
@@ -211,6 +225,7 @@ function checkCep() {
   r.textContent =
     "Entrega estimada: R$ 19,90 • prazo de 1 a 3 dias úteis (simulação).";
 }
+// Mostra uma notificacao temporaria na tela
 function toast(msg) {
   const t = document.querySelector("#toast");
   t.textContent = msg;

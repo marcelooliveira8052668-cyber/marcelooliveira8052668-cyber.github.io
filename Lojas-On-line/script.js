@@ -1,8 +1,8 @@
-﻿// Desenvolvido por Prof. Marcelo Oliveira
 let carrinho = [];
 let totalBase = 0;
 
 // Adiciona o produto à lista e atualiza o total base
+// Adiciona um produto ao carrinho
 function adicionar(nome, preco, categoria) {
     carrinho.push({ nome, preco, categoria });
     totalBase += preco;
@@ -24,7 +24,9 @@ function atualizarInterfaceCarrinho() {
 }
 
 // Faz os cálculos de impostos e descontos
+// Conclui o pedido, salva o historico e zera o carrinho
 function finalizarCompra() {
+    // Condicao: o bloco so roda se for verdadeiro
     if (carrinho.length === 0) {
         alert("Adicione itens ao carrinho primeiro!");
         return;
@@ -37,8 +39,11 @@ function finalizarCompra() {
     carrinho.forEach(item => {
         let porcentagemTaxa = 0;
         
+        // Condicao: o bloco so roda se for verdadeiro
         if (item.categoria === "ELETRONICO") porcentagemTaxa = 0.15;
+        // Condicao: o bloco so roda se for verdadeiro
         if (item.categoria === "VESTUARIO") porcentagemTaxa = 0.05;
+        // Condicao: o bloco so roda se for verdadeiro
         if (item.categoria === "ALIMENTO") porcentagemTaxa = 0;
 
         let taxaItem = item.preco * porcentagemTaxa;
@@ -50,6 +55,7 @@ function finalizarCompra() {
     let temCupom = document.getElementById("cupom").value === "sim";
     let desconto = 0;
 
+    // Condicao: o bloco so roda se for verdadeiro
     if (temCupom && valorComTaxas < 100000) {
         desconto = 10;
     }
@@ -79,4 +85,3 @@ function limparCarrinho() {
     document.getElementById("resultado").style.display = "none";
     alert("Carrinho limpo! Pode escolher novos produtos.");
 }
-

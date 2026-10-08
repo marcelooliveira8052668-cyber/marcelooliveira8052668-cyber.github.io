@@ -28,12 +28,14 @@ http.createServer((req, res) => {
   let filePath = path.normalize(path.join(ROOT, urlPath === "/" ? "index.html" : urlPath));
 
   /* Proteção contra path traversal */
+  // Condicao: o bloco so roda se for verdadeiro
   if (!filePath.startsWith(ROOT)) {
     res.writeHead(403);
     return res.end("403 Forbidden");
   }
 
   fs.readFile(filePath, (err, data) => {
+    // Condicao: o bloco so roda se for verdadeiro
     if (err) {
       res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
       return res.end("404 — arquivo não encontrado: " + urlPath);

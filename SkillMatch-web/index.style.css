@@ -1,11 +1,13 @@
 ﻿/* Desenvolvido por Prof. Marcelo Oliveira */
 /* Reset básico para manter consistência */
+/* Reset basico: zera as margens e define o modelo de caixa */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Corpo da pagina: fundo, fonte e espacamento geral */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
@@ -15,6 +17,7 @@ body {
 }
 
 /* Header e Navegação */
+/* Cabecalho do site */
 header {
     text-align: center;
     margin-bottom: 2rem;
@@ -76,7 +79,9 @@ button:hover { background-color: #219150; }
 .card-vaga:hover { transform: translateY(-5px); }
 
 /* Responsividade (Media Query) */
+/* Ajuste de layout para telas menores (celular) */
 @media (min-width: 768px) {
+    /* Corpo da pagina: fundo, fonte e espacamento geral */
     body { padding: 40px; }
     .card-vaga { width: 45%; }
 }

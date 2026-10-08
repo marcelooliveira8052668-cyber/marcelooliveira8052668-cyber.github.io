@@ -115,6 +115,7 @@ const loginButton = document.getElementById('loginButton');
 
 function renderLessonPractice(lessonTitle) {
   const exercise = lessonExercises[lessonTitle];
+  // Condicao: o bloco so roda se for verdadeiro
   if (!exercise) return;
 
   lessonPractice.classList.remove('hidden');
@@ -157,6 +158,7 @@ function renderLessonPractice(lessonTitle) {
 
   const feedback = document.getElementById('quizFeedback');
   document.getElementById('checkLessonAnswer').addEventListener('click', () => {
+    // Condicao: o bloco so roda se for verdadeiro
     if (!selectedAnswer) {
       feedback.textContent = 'Selecione uma opção antes de verificar.';
       feedback.className = 'quiz-feedback warning';
@@ -204,6 +206,7 @@ function renderLessons() {
 
   document.querySelectorAll('.lesson-card-clickable').forEach((card) => {
     card.addEventListener('click', (event) => {
+      // Condicao: o bloco so roda se for verdadeiro
       if (event.target.closest('.button')) {
         return;
       }
@@ -249,6 +252,7 @@ function renderVocab() {
 }
 
 function speakEnglish(text) {
+  // Condicao: o bloco so roda se for verdadeiro
   if (!('speechSynthesis' in window)) {
     return;
   }
@@ -264,6 +268,7 @@ function speakEnglish(text) {
 function showModal(item, type) {
   let inner = '';
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (type === 'word') {
     inner = `
       <div class="modal-content-block">
@@ -282,6 +287,7 @@ function showModal(item, type) {
     `;
   }
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (type === 'question') {
     inner = `
       <div class="modal-content-block">
@@ -302,11 +308,13 @@ function showModal(item, type) {
   modal.classList.remove('hidden');
 
   const audioButton = modalContent.querySelector('[data-audio]');
+  // Condicao: o bloco so roda se for verdadeiro
   if (audioButton) {
     audioButton.addEventListener('click', () => speakEnglish(audioButton.dataset.audio));
   }
 
   const closeBtn = modalContent.querySelector('[data-close="true"]');
+  // Condicao: o bloco so roda se for verdadeiro
   if (closeBtn) {
     closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
   }
@@ -314,6 +322,7 @@ function showModal(item, type) {
 
 function buildWordBank() {
   const bank = [];
+  // Laco de repeticao: repete o bloco enquanto a condicao valer
   for (let i = 0; i < 500; i += 1) {
     const word = baseWords[i % baseWords.length];
     const meaning = {
@@ -476,6 +485,7 @@ const wordBank = buildWordBank();
 
 function buildQuestionBank() {
   const bank = [];
+  // Laco de repeticao: repete o bloco enquanto a condicao valer
   for (let i = 0; i < 500; i += 1) {
     const sentence = baseQuestions[i % baseQuestions.length];
     const focus = sentence.startsWith('Do') ? 'do' : sentence.startsWith('Did') ? 'did' : 'will';
@@ -514,6 +524,7 @@ function buildAutoCompleteBank() {
     { template: 'I ___ up at 7 a.m.', answer: 'wake', explain: 'Use “wake up” para falar sobre acordar.', translation: 'Eu acordo às sete da manhã.', pronunciation: 'ai weik ap at seven a em' }
   ];
 
+  // Laco de repeticao: repete o bloco enquanto a condicao valer
   for (let i = 0; i < 500; i += 1) {
     const pattern = sentencePatterns[i % sentencePatterns.length];
     const title = `Auto-complete ${i + 1}`;
@@ -569,6 +580,7 @@ function renderWordCards() {
 
   document.querySelectorAll('[data-type="word"]').forEach((card) => {
     card.addEventListener('click', (event) => {
+      // Condicao: o bloco so roda se for verdadeiro
       if (event.target.closest('.pronounce-inline')) {
         return;
       }
@@ -586,6 +598,7 @@ function renderWordCards() {
   });
 
   const loadMoreWords = document.getElementById('loadMoreWords');
+  // Condicao: o bloco so roda se for verdadeiro
   if (loadMoreWords) {
     loadMoreWords.addEventListener('click', () => {
       wordVisibleCount = Math.min(wordVisibleCount + 24, wordBank.length);
@@ -623,6 +636,7 @@ function renderQuestionCards() {
 
   document.querySelectorAll('[data-type="question"]').forEach((card) => {
     card.addEventListener('click', (event) => {
+      // Condicao: o bloco so roda se for verdadeiro
       if (event.target.closest('.pronounce-inline')) {
         return;
       }
@@ -640,6 +654,7 @@ function renderQuestionCards() {
   });
 
   const loadMoreQuestions = document.getElementById('loadMoreQuestions');
+  // Condicao: o bloco so roda se for verdadeiro
   if (loadMoreQuestions) {
     loadMoreQuestions.addEventListener('click', () => {
       questionVisibleCount = Math.min(questionVisibleCount + 24, questionBank.length);
@@ -699,6 +714,7 @@ function renderAutocomplete() {
   });
 
   const loadMoreAutocomplete = document.getElementById('loadMoreAutocomplete');
+  // Condicao: o bloco so roda se for verdadeiro
   if (loadMoreAutocomplete) {
     loadMoreAutocomplete.addEventListener('click', () => {
       autocompleteVisibleCount = Math.min(autocompleteVisibleCount + 12, autoCompleteBank.length);
@@ -743,6 +759,7 @@ function renderExerciseBank() {
     });
   });
 
+  // Laco de repeticao: repete o bloco enquanto a condicao valer
   for (let i = 0; i < 495; i += 1) {
     const focus = i % 3 === 0 ? 'do' : i % 3 === 1 ? 'did' : 'will';
     const template = focus === 'do'
@@ -772,6 +789,7 @@ let currentFilter = 'all';
 let visibleCount = 40;
 
 function getFilteredExercises() {
+  // Condicao: o bloco so roda se for verdadeiro
   if (currentFilter === 'all') {
     return exerciseBank;
   }
@@ -849,6 +867,7 @@ loginForm.addEventListener('submit', (event) => {
 
 closeModal.addEventListener('click', () => modal.classList.add('hidden'));
 modal.addEventListener('click', (event) => {
+  // Condicao: o bloco so roda se for verdadeiro
   if (event.target.dataset.close === 'true' || event.target === modal) {
     modal.classList.add('hidden');
   }

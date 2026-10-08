@@ -12,10 +12,14 @@ const Playground = (() => {
      comparamos e.source com o contentWindow de cada iframe. */
   const instances = new Set();
 
+  // Evento global do navegador
   window.addEventListener("message", e => {
+    // Condicao: o bloco so roda se for verdadeiro
     if (!e.data || e.data.__pg !== true) return;
     instances.forEach(inst => {
+      // Condicao: o bloco so roda se for verdadeiro
       if (inst.iframe.contentWindow !== e.source) return;
+      // Condicao: o bloco so roda se for verdadeiro
       if (!document.body.contains(inst.wrap)) { instances.delete(inst); return; }
       inst.log(e.data);
     });
@@ -70,12 +74,14 @@ const Playground = (() => {
 
     /* ─── Tab no editor: insere 2 espaços em vez de sair ─── */
     ta.addEventListener("keydown", e => {
+      // Condicao: o bloco so roda se for verdadeiro
       if (e.key === "Tab") {
         e.preventDefault();
         const s = ta.selectionStart, en = ta.selectionEnd;
         ta.value = ta.value.slice(0, s) + "  " + ta.value.slice(en);
         ta.selectionStart = ta.selectionEnd = s + 2;
       }
+      // Condicao: o bloco so roda se for verdadeiro
       if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
         e.preventDefault();
         run();
@@ -84,6 +90,7 @@ const Playground = (() => {
 
     /* ─── Console: injeta hook de captura antes do código do usuário ─── */
     function buildDoc(code) {
+      // Condicao: o bloco so roda se for verdadeiro
       if (!/<!DOCTYPE|<html/i.test(code)) {
         // trecho HTML parcial → embrulha
         code = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{font-family:system-ui;padding:16px}</style></head><body>${code}</body></html>`;
@@ -91,7 +98,9 @@ const Playground = (() => {
       const hook = `<script>
 (function(){
   const fmt = a => a.map(v => {
+    // Condicao: o bloco so roda se for verdadeiro
     if (v instanceof Error) return v.message;
+    // Condicao: o bloco so roda se for verdadeiro
     if (typeof v === 'object') { try { return JSON.stringify(v, null, 1); } catch { return String(v); } }
     return String(v);
   }).join(' ');
@@ -99,12 +108,16 @@ const Playground = (() => {
   console.log = new Proxy(console.log, { apply(t, s, a){ send(fmt(a)); return Reflect.apply(t, s, a); }});
   console.error = new Proxy(console.error, { apply(t, s, a){ send(fmt(a), true); return Reflect.apply(t, s, a); }});
   console.warn = new Proxy(console.warn, { apply(t, s, a){ send(fmt(a)); return Reflect.apply(t, s, a); }});
+  // Evento global do navegador
   window.addEventListener('error', e => send(e.message + ' (linha ' + e.lineno + ')', true));
+  // Evento global do navegador
   window.addEventListener('unhandledrejection', e => send('Promise rejeitada: ' + e.reason, true));
 })();
 <\/script>`;
       // injeta o hook logo após <head> ou no início
+      // Condicao: o bloco so roda se for verdadeiro
       if (/<head[^>]*>/i.test(code)) return code.replace(/<head[^>]*>/i, m => m + hook);
+      // Condicao: o bloco so roda se for verdadeiro
       if (/<html[^>]*>/i.test(code)) return code.replace(/<html[^>]*>/i, m => m + "<head>" + hook + "</head>");
       return hook + code;
     }
@@ -116,6 +129,7 @@ const Playground = (() => {
       iframe.srcdoc = buildDoc(code);
       runBtn.textContent = "✓ Rodado";
       setTimeout(() => (runBtn.textContent = "▶ Rodar"), 900);
+      // Condicao: o bloco so roda se for verdadeiro
       if (manual && !xpAwarded) {
         xpAwarded = true;
         Progress.addXP(2, "experimentou o código");
@@ -127,6 +141,7 @@ const Playground = (() => {
     function logToConsole(data) {
       consoleEl.hidden = false;
       const line = document.createElement("div");
+      // Condicao: o bloco so roda se for verdadeiro
       if (data.err) line.className = "log-err";
       line.textContent = "› " + data.txt;
       consoleEl.appendChild(line);
@@ -137,12 +152,14 @@ const Playground = (() => {
     /* ─── Botões ─── */
     wrap.querySelector('[data-action="run"]').addEventListener("click", () => run(true));
     wrap.querySelector('[data-action="reset"]').addEventListener("click", () => {
+      // Condicao: o bloco so roda se for verdadeiro
       if (confirm("Restaurar o código inicial?")) {
         ta.value = starterText;
         run(true);
       }
     });
     wrap.querySelector('[data-action="copy"]').addEventListener("click", async () => {
+      // Tratamento de erro: evita que o site quebre
       try {
         await navigator.clipboard.writeText(ta.value);
         toast("Código copiado!", "success");

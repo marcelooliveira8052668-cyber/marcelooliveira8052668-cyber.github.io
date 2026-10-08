@@ -8,6 +8,7 @@ const container = document.querySelector("#container-vagas");
 
 // Função principal que orquestra a lógica
 async function analisarVagas(event) {
+    // Condicao: o bloco so roda se for verdadeiro
     if (event) event.preventDefault(); // Impede o reload da página
 
     container.innerHTML = "<p>Carregando vagas...</p>"; // Estado de carregando
@@ -34,8 +35,10 @@ async function analisarVagas(event) {
 }
 
 // Inicialização
+// Evento global do documento
 document.addEventListener("DOMContentLoaded", () => {
     const perfilSalvo = lerPerfil();
+    // Condicao: o bloco so roda se for verdadeiro
     if (perfilSalvo) {
         document.querySelector("#nome").value = perfilSalvo.nome;
         document.querySelector("#habilidades").value = perfilSalvo.habilidades.join(", ");

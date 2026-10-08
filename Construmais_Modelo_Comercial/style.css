@@ -9,12 +9,14 @@
   --line: #e7e2da;
   --green: #198754;
 }
+/* Reset basico: zera as margens e define o modelo de caixa */
 * {
   box-sizing: border-box;
 }
 html {
   scroll-behavior: smooth;
 }
+/* Corpo da pagina: fundo, fonte e espacamento geral */
 body {
   margin: 0;
   font-family: Inter, sans-serif;
@@ -347,6 +349,7 @@ textarea {
 .contact p {
   margin: 5px 0;
 }
+/* Rodape do site */
 footer {
   background: #111;
   color: #aaa;
@@ -476,6 +479,7 @@ footer strong {
   font-size: 11px;
   cursor: pointer;
 }
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 900px) {
   nav {
     display: none;
@@ -501,6 +505,7 @@ footer strong {
     grid-template-columns: 1fr;
   }
 }
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 600px) {
   .nav {
     height: 68px;

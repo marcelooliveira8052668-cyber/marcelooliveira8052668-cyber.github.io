@@ -3,6 +3,7 @@
    FUNÇÃO GLOBAL DE FALA (Com filtro para voz feminina nativa)
    ========================================================================== */
 function falarTexto(textoParaFalar) {
+    // Condicao: o bloco so roda se for verdadeiro
     if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(textoParaFalar);
@@ -19,6 +20,7 @@ function falarTexto(textoParaFalar) {
              voice.name.toLowerCase().includes('google us english'))
         );
 
+        // Condicao: o bloco so roda se for verdadeiro
         if (vozFeminina) {
             utterance.voice = vozFeminina;
         }
@@ -29,6 +31,7 @@ function falarTexto(textoParaFalar) {
     }
 }
 
+// Condicao: o bloco so roda se for verdadeiro
 if ('speechSynthesis' in window) {
     window.speechSynthesis.onvoiceschanged = () => {
         window.speechSynthesis.getVoices();
@@ -203,8 +206,11 @@ function mostrarSecao(tipo) {
     
     container.innerHTML = "";
 
+    // Condicao: o bloco so roda se for verdadeiro
     if (tipo === 'palavras') {
+        // Condicao: o bloco so roda se for verdadeiro
         if(btnPalavras) btnPalavras.style.backgroundColor = "#0ea5e9";
+        // Condicao: o bloco so roda se for verdadeiro
         if(btnFrases) btnFrases.style.backgroundColor = "#64748b";
 
         listaPalavras.forEach((item, index) => {
@@ -228,7 +234,9 @@ function mostrarSecao(tipo) {
             container.appendChild(div);
         });
     } else {
+        // Condicao: o bloco so roda se for verdadeiro
         if(btnFrases) btnFrases.style.backgroundColor = "#0ea5e9";
+        // Condicao: o bloco so roda se for verdadeiro
         if(btnPalavras) btnPalavras.style.backgroundColor = "#64748b";
 
         listaFrases.forEach((item, index) => {
@@ -571,6 +579,7 @@ const resultBox = document.getElementById("result-box");
 const feedbackText = document.getElementById("feedback-text");
 
 function loadQuiz() {
+    // Condicao: o bloco so roda se for verdadeiro
     if (currentQuestionIndex < questionsDatabase.length) {
         const currentData = questionsDatabase[currentQuestionIndex];
         
@@ -613,18 +622,26 @@ function loadQuiz() {
             optionsBox.appendChild(wrapperDiv);
         });
 
+        // Condicao: o bloco so roda se for verdadeiro
         if (resultBox) resultBox.style.display = "none";
     } else {
+        // Condicao: o bloco so roda se for verdadeiro
         if (questionText) questionText.innerHTML = "<h3>Parabéns! Você concluiu todas as 50 questões do quiz.</h3>";
+        // Condicao: o bloco so roda se for verdadeiro
         if (optionsBox) optionsBox.innerHTML = "";
+        // Condicao: o bloco so roda se for verdadeiro
         if (translationBox) translationBox.style.display = "none";
+        // Condicao: o bloco so roda se for verdadeiro
         if (resultBox) resultBox.style.display = "block";
+        // Condicao: o bloco so roda se for verdadeiro
         if (feedbackText) feedbackText.innerText = "Excelente trabalho praticando o inglês!";
     }
 }
 
 function toggleTranslation() {
+    // Condicao: o bloco so roda se for verdadeiro
     if (translationBox) {
+        // Condicao: o bloco so roda se for verdadeiro
         if (translationBox.style.display === "none") {
             translationBox.style.display = "block";
         } else {
@@ -637,13 +654,16 @@ function selectOption(selectedIndex) {
     const currentData = questionsDatabase[currentQuestionIndex];
     const optionDivs = optionsBox.children;
 
+    // Laco de repeticao: repete o bloco enquanto a condicao valer
     for (let i = 0; i < optionDivs.length; i++) {
         const btn = optionDivs[i].querySelector("button");
+        // Condicao: o bloco so roda se for verdadeiro
         if (i === currentData.correct) {
             optionDivs[i].style.background = "#15803d"; // Verde para a correta
         } else if (i === selectedIndex) {
             optionDivs[i].style.background = "#b91c1c"; // Vermelho se errar
         }
+        // Condicao: o bloco so roda se for verdadeiro
         if (btn) btn.disabled = true;
     }
 

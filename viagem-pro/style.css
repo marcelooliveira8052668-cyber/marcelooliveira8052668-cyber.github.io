@@ -1,6 +1,7 @@
 ﻿/* Desenvolvido por Prof. Marcelo Oliveira */
 /* RESET */
 
+/* Reset basico: zera as margens e define o modelo de caixa */
 *{
 margin:0;
 padding:0;
@@ -10,6 +11,7 @@ font-family:Arial, Helvetica, sans-serif;
 
 /* CORPO */
 
+/* Corpo da pagina: fundo, fonte e espacamento geral */
 body{
 background:#f1f5f9;
 color:#1e293b;
@@ -17,6 +19,7 @@ color:#1e293b;
 
 /* TOPO */
 
+/* Cabecalho do site */
 header{
 background:#2563eb;
 color:white;
@@ -126,6 +129,7 @@ background:#06b6d4;
 
 /* RESPONSIVO */
 
+/* Ajuste de layout para telas menores (celular) */
 @media(max-width:768px){
 
 header h1{
@@ -197,6 +201,7 @@ background:white;
 
 /* CELULAR */
 
+/* Ajuste de layout para telas menores (celular) */
 @media(max-width:768px){
 
 .layout{

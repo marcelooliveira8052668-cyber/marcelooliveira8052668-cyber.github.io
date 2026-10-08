@@ -68,6 +68,7 @@
 /* ─── Reset ─── */
 *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+/* Corpo da pagina: fundo, fonte e espacamento geral */
 body {
   font-family: var(--font-sans);
   background: var(--bg);
@@ -95,6 +96,7 @@ a { color: var(--primary); text-decoration: none; }
   position: fixed; top: 18px; right: 18px; z-index: 9999;
   display: flex; flex-direction: column; gap: 10px; pointer-events: none;
 }
+/* Notificacao temporaria no canto da tela */
 .toast {
   pointer-events: auto;
   background: var(--surface); border: 1px solid var(--border);
@@ -519,10 +521,12 @@ a { color: var(--primary); text-decoration: none; }
 .pwa-bar .icon-btn { width: 30px; height: 30px; font-size: .8rem; }
 
 /* ═══════════ RESPONSIVO ═══════════ */
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 980px) {
   .pg-body { grid-template-columns: 1fr; }
   .pg-editor { border-right: none; border-bottom: 1px solid var(--border); }
 }
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 860px) {
   .only-mobile { display: grid; }
   .hide-sm { display: none; }
@@ -551,6 +555,7 @@ a { color: var(--primary); text-decoration: none; }
 @media print {
   .sidebar, .topbar, .chapter-nav, .foot, .pwa-bar { display: none !important; }
   .shell { margin: 0; }
+  /* Corpo da pagina: fundo, fonte e espacamento geral */
   body { background: #fff; color: #000; }
 }
 

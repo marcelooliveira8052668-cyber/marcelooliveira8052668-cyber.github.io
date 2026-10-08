@@ -28,9 +28,11 @@
   --sombra: 0 4px 18px rgba(0, 0, 0, .5);
 }
 
+/* Reset basico: zera as margens e define o modelo de caixa */
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { height: 100%; }
+/* Corpo da pagina: fundo, fonte e espacamento geral */
 body {
   margin: 0;
   font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
@@ -178,6 +180,7 @@ body {
   width: 100%; max-width: 320px; background: var(--fundo2); border-left: 1px solid var(--linha);
   padding: 14px; overflow-y: auto; display: none;
 }
+/* Ajuste de layout para telas menores (celular) */
 @media (min-width: 860px) { #app { flex-direction: row; } #chat { order: 2; } #painel { display: block; order: 3; } #msgs { padding-left: 20px; } }
 .painelTopo { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
 .painelTopo b { font-size: 17px; }
@@ -280,6 +283,7 @@ body {
   background: var(--fundo3); border-style: dashed; font-size: 13px; color: var(--texto2); text-align: center;
 }
 
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 859px) {
   #painel { position: fixed; inset: 0 0 0 auto; z-index: 45; box-shadow: var(--sombra); }
   #painel.aberto { display: block; }

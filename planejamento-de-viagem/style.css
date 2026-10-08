@@ -2,6 +2,7 @@
 /* ==========================================================================
    RESET & CONFIGURAÇÕES GERAIS
    ========================================================================== */
+/* Reset basico: zera as margens e define o modelo de caixa */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -9,6 +10,7 @@
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
+/* Corpo da pagina: fundo, fonte e espacamento geral */
 body {
     background-color: #f1f5f9;
     color: #1e293b;
@@ -19,6 +21,7 @@ body {
 /* ==========================================================================
    HEADER (TOPO DO SITE)
    ========================================================================== */
+/* Cabecalho do site */
 header {
     background: linear-gradient(135deg, #0f172a, #1e3a8a, #3b82f6);
     color: white;
@@ -49,6 +52,7 @@ header p {
     padding: 0 12px;
 }
 
+/* Card de produto: caixa com bordas arredondadas e sombra */
 .card {
     background: white;
     border-radius: 16px;
@@ -401,7 +405,9 @@ button:active {
 /* ==========================================================================
    CONFIGURAÇÕES PARA TELAS MAIORES (NOTEBOOK / TABLET)
    ========================================================================== */
+/* Ajuste de layout para telas menores (celular) */
 @media (min-width: 600px) {
+    /* Cabecalho do site */
     header {
         padding: 45px 20px;
     }
@@ -414,6 +420,7 @@ button:active {
         font-size: 14px;
     }
 
+    /* Card de produto: caixa com bordas arredondadas e sombra */
     .card {
         padding: 25px;
     }

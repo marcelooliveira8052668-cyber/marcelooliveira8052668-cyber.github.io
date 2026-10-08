@@ -12,8 +12,10 @@
   var MODELO_PADRAO = "gemini-3.5-flash";
 
   function getChave() {
+    // Tratamento de erro: evita que o site quebre
     try {
       var k = localStorage.getItem(LS_CHAVE) || "";
+      // Condicao: o bloco so roda se for verdadeiro
       if (k.trim().length > 8) return k;
     } catch (e) {}
     return window.CHAVE_IA || "";
@@ -23,11 +25,14 @@
   function urlServidor() {
     var url = (typeof window.LINA_API === "string" && window.LINA_API.trim()) ?
       window.LINA_API.trim() : "";
+    // Condicao: o bloco so roda se for verdadeiro
     if (!url) return "";
     /* Quando o app é aberto como arquivo local (file://), não usa o
        servidor — cai no modo básico ou na chave local. */
+    // Tratamento de erro: evita que o site quebre
     try {
       var p = window.location.protocol || "";
+      // Condicao: o bloco so roda se for verdadeiro
       if (p && p !== "http:" && p !== "https:") return "";
     } catch (e) {}
     return url;
@@ -36,18 +41,22 @@
     return !!urlServidor();
   }
   function setChave(k) {
+    // Tratamento de erro: evita que o site quebre
     try { localStorage.setItem(LS_CHAVE, String(k || "").trim()); } catch (e) {}
   }
   /* Em modo servidor, a IA "está ativa" sempre (a chave fica na API). */
   function temChave() {
+    // Condicao: o bloco so roda se for verdadeiro
     if (temServidor()) return true;
     var k = getChave();
     return typeof k === "string" && k.trim().length > 8;
   }
   function getModelo() {
+    // Tratamento de erro: evita que o site quebre
     try { return localStorage.getItem(LS_MODELO) || MODELO_PADRAO; } catch (e) { return MODELO_PADRAO; }
   }
   function setModelo(m) {
+    // Tratamento de erro: evita que o site quebre
     try { localStorage.setItem(LS_MODELO, String(m || "").trim() || MODELO_PADRAO); } catch (e) {}
   }
 
@@ -55,9 +64,11 @@
   var LS_MODELO_OR = "lina_ia_modelo_or_v1";
   var MODELO_OR_PADRAO = "openai/gpt-4o-mini";
   function getModeloOR() {
+    // Tratamento de erro: evita que o site quebre
     try { return localStorage.getItem(LS_MODELO_OR) || MODELO_OR_PADRAO; } catch (e) { return MODELO_OR_PADRAO; }
   }
   function setModeloOR(m) {
+    // Tratamento de erro: evita que o site quebre
     try { localStorage.setItem(LS_MODELO_OR, String(m || "").trim() || MODELO_OR_PADRAO); } catch (e) {}
   }
 
@@ -65,8 +76,11 @@
      AIza... ou AQ... = Gemini | sk-... = OpenRouter */
   function provedor(chave) {
     var k = String(chave || "").trim();
+    // Condicao: o bloco so roda se for verdadeiro
     if (!k) k = getChave();
+    // Condicao: o bloco so roda se for verdadeiro
     if (/^AIza/i.test(k) || /^AQ/i.test(k)) return "gemini";
+    // Condicao: o bloco so roda se for verdadeiro
     if (/^sk-/i.test(k)) return "openrouter";
     return "";
   }
@@ -74,6 +88,7 @@
   /* Monta o corpo da conversa no formato do Gemini */
   function montarConteudo(historico) {
     var contents = [];
+    // Laco de repeticao: repete o bloco enquanto a condicao valer
     for (var i = 0; i < historico.length; i++) {
       var item = historico[i];
       var papel = item.role === "model" ? "model" : "user";
@@ -96,10 +111,12 @@
 
     var res;
     var ctrl = {};
+    // Condicao: o bloco so roda se for verdadeiro
     if (typeof AbortController === "function") {
       ctrl = new AbortController();
       setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, 30000);
     }
+    // Tratamento de erro: evita que o site quebre
     try {
       res = await fetch(url, {
         method: "POST",
@@ -109,14 +126,18 @@
       });
     } catch (e) {
       var motivo = "Sem resposta da IA. Verifique sua internet ou sua chave.";
+      // Condicao: o bloco so roda se for verdadeiro
       if (e && e.name === "AbortError") motivo = "A IA demorou demais. Tente de novo em instantes.";
       throw new Error(motivo);
     }
 
+    // Condicao: o bloco so roda se for verdadeiro
     if (!res.ok) {
       var statusHTTP = res.status;
       var detalhe = "";
+      // Tratamento de erro: evita que o site quebre
       try { var j = await res.json(); if (j && j.error) { detalhe = j.error.message || detalhe; } } catch (e) {}
+      // Condicao: o bloco so roda se for verdadeiro
       if (statusHTTP === 403 && /disabled|not been used|SERVICE_DISABLED/i.test(detalhe)) {
         throw new Error(
           "Sua chave VALE, mas a API Gemini esta DESATIVADA neste projeto Google.\n" +
@@ -125,21 +146,27 @@
         );
       }
       var mensagem = "Erro " + statusHTTP;
+      // Condicao: o bloco so roda se for verdadeiro
       if (detalhe) mensagem += " \u2014 " + detalhe;
       throw new Error(mensagem.slice(0, 220));
     }
 
     var dados = await res.json();
     var texto = "";
+    // Condicao: o bloco so roda se for verdadeiro
     if (dados.candidates && dados.candidates[0]) {
       var conteudo = dados.candidates[0].content;
+      // Condicao: o bloco so roda se for verdadeiro
       if (conteudo && conteudo.parts) {
+        // Laco de repeticao: repete o bloco enquanto a condicao valer
         for (var i = 0; i < conteudo.parts.length; i++) {
+          // Condicao: o bloco so roda se for verdadeiro
           if (conteudo.parts[i].text) texto += conteudo.parts[i].text;
         }
       }
     }
     var xc = (dados.usageMetadata && dados.usageMetadata.promptTokenCount) || 0;
+    // Condicao: o bloco so roda se for verdadeiro
     if (!texto) throw new Error("A IA retornou vazio. Tente de novo.");
     return { texto: texto.trim(), tokens: xc };
   }
@@ -147,8 +174,10 @@
   /* Converte o histórico para o formato de mensagens de chat (OpenAI/OpenRouter) */
   function montarMensagens(historico, systemPrompt) {
     var mensagens = [{ role: "system", content: systemPrompt }];
+    // Laco de repeticao: repete o bloco enquanto a condicao valer
     for (var i = 0; i < historico.length; i++) {
       var item = historico[i];
+      // Condicao: o bloco so roda se for verdadeiro
       if (!item || !item.pts) continue;
       var papel = (item.role === "model" && !item.sys) ? "assistant" : "user";
       mensagens.push({ role: papel, content: item.pts });
@@ -168,10 +197,12 @@
 
     var res;
     var ctrl = {};
+    // Condicao: o bloco so roda se for verdadeiro
     if (typeof AbortController === "function") {
       ctrl = new AbortController();
       setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, 30000);
     }
+    // Tratamento de erro: evita que o site quebre
     try {
       res = await fetch(url, {
         method: "POST",
@@ -184,23 +215,29 @@
       });
     } catch (e) {
       var motivo = "Sem resposta da IA. Verifique sua internet ou sua chave.";
+      // Condicao: o bloco so roda se for verdadeiro
       if (e && e.name === "AbortError") motivo = "A IA demorou demais. Tente de novo em instantes.";
       throw new Error(motivo);
     }
 
+    // Condicao: o bloco so roda se for verdadeiro
     if (!res.ok) {
       var statusHTTP = res.status;
       var detalhe = "";
+      // Tratamento de erro: evita que o site quebre
       try { var j = await res.json(); if (j && j.error) { detalhe = j.error.message || detalhe; } } catch (e) {}
+      // Condicao: o bloco so roda se for verdadeiro
       if (detalhe && detalhe.length > 140) detalhe = detalhe.slice(0, 140) + "…";
       throw new Error("Erro " + statusHTTP + (detalhe ? " — " + detalhe : ""));
     }
 
     var dados = await res.json();
     var texto = "";
+    // Condicao: o bloco so roda se for verdadeiro
     if (dados.choices && dados.choices[0] && dados.choices[0].message) {
       texto = dados.choices[0].message.content || "";
     }
+    // Condicao: o bloco so roda se for verdadeiro
     if (!texto) throw new Error("A IA retornou vazio. Tente de novo.");
     return { texto: texto.trim(), tokens: (dados.usage && dados.usage.prompt_tokens) || 0 };
   }
@@ -208,9 +245,11 @@
   /* Escolhe: 1º API local (modo servidor, chave protegida),
      senão provedor conforme o tipo da chave salva. */
   async function responder(historico, systemPrompt, temperatura) {
+    // Condicao: o bloco so roda se for verdadeiro
     if (temServidor()) {
       return servidor(historico, systemPrompt, temperatura);
     }
+    // Condicao: o bloco so roda se for verdadeiro
     if (provedor() === "openrouter") {
       return openRouter(historico, systemPrompt, temperatura);
     }
@@ -222,6 +261,7 @@
     var url = urlServidor();
 
     var ctrl = {};
+    // Condicao: o bloco so roda se for verdadeiro
     if (typeof AbortController === "function") {
       ctrl = new AbortController();
       setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, 60000);
@@ -233,6 +273,7 @@
     };
 
     var res;
+    // Tratamento de erro: evita que o site quebre
     try {
       res = await fetch(url, {
         method: "POST",
@@ -242,6 +283,7 @@
       });
     } catch (e) {
       var motivo = "Sem resposta do servidor. Verifique sua internet.";
+      // Condicao: o bloco so roda se for verdadeiro
       if (e && e.name === "AbortError") motivo = "O servidor demorou demais. Tente de novo.";
       var err = new Error(motivo);
       err.modo = "rede";
@@ -249,7 +291,9 @@
     }
 
     var dados = null;
+    // Tratamento de erro: evita que o site quebre
     try { dados = await res.json(); } catch (e) {}
+    // Condicao: o bloco so roda se for verdadeiro
     if (!res.ok) {
       var msgApi = (dados && dados.erro) ? dados.erro : ("Erro " + res.status);
       var e2 = new Error(msgApi.slice(0, 220));
@@ -257,6 +301,7 @@
       throw e2;
     }
     var texto = (dados && dados.texto) ? dados.texto : "";
+    // Condicao: o bloco so roda se for verdadeiro
     if (!texto) throw new Error("A IA retornou vazio. Tente de novo.");
     return { texto: texto.trim(), tokens: (dados && dados.tokens) || 0 };
   }
@@ -267,7 +312,9 @@
     var marcadores = [" i ", " i'm ", " im ", " you ", " the ", " is ", " am ", " are ",
       " my ", " me ", " to ", " and ", " please ", " thanks ", " thank ", " hello ",
       " hi ", " what ", " how ", " where ", " do ", " don't ", " have ", " i'd ", " gonna "];
+    // Laco de repeticao: repete o bloco enquanto a condicao valer
     for (var i = 0; i < marcadores.length; i++) {
+      // Condicao: o bloco so roda se for verdadeiro
       if (t.indexOf(marcadores[i]) !== -1 && t.replace(/\s/g, "").length > 5) return true;
     }
     return false;
@@ -275,10 +322,12 @@
 
   /* Resposta do plano B (sem chave). Sempre ensina algo. */
   function planoB(ultimoTexto, perfil) {
+    // Condicao: o bloco so roda se for verdadeiro
     if (!perfil || !perfil.cena || !window.OFFLINE) {
       return window.OFFLINE.responder(ultimoTexto, perfil);
     }
     var frases = window.OFFLINE.cena(perfil.cena);
+    // Condicao: o bloco so roda se for verdadeiro
     if (!frases || !frases.length) {
       return window.OFFLINE.responder(ultimoTexto, perfil);
     }

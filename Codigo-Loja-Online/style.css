@@ -1,5 +1,6 @@
 ﻿/* Desenvolvido por Prof. Marcelo Oliveira */
 /* RESET */
+/* Reset basico: zera as margens e define o modelo de caixa */
 * {
     margin: 0;
     padding: 0;
@@ -7,6 +8,7 @@
 }
 
 /* BODY */
+/* Corpo da pagina: fundo, fonte e espacamento geral */
 body {
     background: linear-gradient(180deg, #0b132b 0%, #1a1a2e 100%);
     background-attachment: fixed;
@@ -17,6 +19,7 @@ body {
 }
 
 /* TOPO */
+/* Cabecalho do site */
 header {
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
     color: #212529;
@@ -86,6 +89,7 @@ header {
     border-color: #dc3545;
 }
 
+/* Area dos filtros de busca */
 .filtros {
     display: flex;
     gap: 15px;
@@ -109,6 +113,7 @@ header {
 }
 
 /* PRODUTOS */
+/* Grade que organize os produtos */
 .produtos {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -117,6 +122,7 @@ header {
 }
 
 /* CARD PRODUTO - ESTILO SHOPEE */
+/* Card de produto: caixa com bordas arredondadas e sombra */
 .card {
     background: #fff;
     border-radius: 16px;
@@ -128,6 +134,7 @@ header {
     flex-direction: column;
 }
 
+/* Efeito ao passar o mouse no card (levanta o elemento) */
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 35px rgba(0,0,0,0.15);
@@ -194,6 +201,7 @@ header {
     opacity: 1;
 }
 
+/* Card de produto: caixa com bordas arredondadas e sombra */
 .card {
     cursor: pointer;
 }
@@ -269,6 +277,7 @@ header {
    CARRINHO FUTURISTA
    ============================================ */
 
+/* Estilo do carrinho futurista (vidro e neon) */
 .carrinho-futurista {
     background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9));
     border: 1px solid rgba(0, 255, 200, 0.3);
@@ -799,6 +808,7 @@ header {
    MODAL DE DETALHES DO PRODUTO
    ============================================ */
 
+/* Fundo escuro por tras da janela de detalhes */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -1474,6 +1484,7 @@ header {
     gap: 4px;
 }
 
+/* Estrela clicavel do seletor de avaliacao */
 .estrela-cli {
     font-size: 30px;
     color: #d0d0d0;
@@ -1613,6 +1624,7 @@ header {
    TOPO MODERNO
    ============================================ */
 
+/* Topo moderno fixo (sticky) com busca sempre visivel */
 .topo-moderno {
     display: block;
     background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(30, 41, 59, 0.95));
@@ -1764,6 +1776,7 @@ header {
    BANNER PROMOCIONAL
    ============================================ */
 
+/* Faixa promocional colorida do inicio do site */
 .banner-promo {
     background: linear-gradient(120deg, #dc3545 0%, #ff6b6b 50%, #ff9100 100%);
     border-radius: 24px;
@@ -1896,6 +1909,7 @@ header {
    CATEGORIAS RÁPIDAS
    ============================================ */
 
+/* Barra horizontal de categorias com rolagem */
 .categorias-rapidas {
     display: flex;
     gap: 12px;
@@ -1982,6 +1996,7 @@ header {
     font-weight: 400;
 }
 
+/* Area dos filtros de busca */
 .filtros {
     display: flex;
     gap: 12px;
@@ -2151,6 +2166,7 @@ header {
     pointer-events: none;
 }
 
+/* Notificacao temporaria no canto da tela */
 .toast {
     background: rgba(17, 24, 39, 0.97);
     backdrop-filter: blur(15px);
@@ -2283,6 +2299,7 @@ header {
 }
 
 /* FORMULÁRIO RESPONSIVO */
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 600px) {
     .linha-form-avaliacao {
         flex-direction: column;
@@ -2304,6 +2321,7 @@ header {
     }
 }
 
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 768px) {
     .modal-produto {
         padding: 20px;
@@ -2328,6 +2346,7 @@ header {
         padding: 15px;
     }
 
+    /* Area dos filtros de busca */
     .filtros {
         gap: 10px;
     }
@@ -2646,6 +2665,7 @@ header {
 }
 
 /* RESPONSIVO DO CADASTRO */
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 768px) {
     .form-grupo-cadastro {
         flex-direction: column;

@@ -74,5 +74,6 @@ $('clearOrders').onclick=()=>{if(confirm('Apagar os pedidos deste navegador?')){
 aplicarDados();
 renderProducts();renderDrinks();renderGallery();renderCart();$('year').textContent=new Date().getFullYear();
 const last=localStorage.getItem(LAST_ORDER_KEY); if(last) renderTracking(last);
+// Executa uma funcao de tempos em tempos
 setInterval(()=>{orders=JSON.parse(localStorage.getItem(ORDERS_KEY)||'[]');const lastId=$('trackNumber').value.trim();if(lastId)renderTracking(lastId);},4000);
 

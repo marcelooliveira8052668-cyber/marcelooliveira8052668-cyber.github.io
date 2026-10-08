@@ -1,5 +1,7 @@
 ﻿/* Desenvolvido por Prof. Marcelo Oliveira */
+/* Reset basico: zera as margens e define o modelo de caixa */
 * { margin: 0; padding: 0; box-sizing: border-box; }
+/* Corpo da pagina: fundo, fonte e espacamento geral */
 body {
   background: #000;
   color: #fff;

@@ -5,6 +5,7 @@
    ============================================ */
 
 /* ============ BANCO DE PRODUTOS (50 PRODUTOS) ============ */
+// Banco de dados dos 50 produtos da loja
 const PRODUTOS = [
   {
     id: 1,
@@ -1075,6 +1076,7 @@ let notaSelecionada = 0;
 let fotoAvaliacaoBase64 = "";
 
 /* ============ TAXAS POR PLATAFORMA ============ */
+// Taxas por plataforma (loja local, Shopee e Mercado Livre)
 const TAXAS = {
   local: { taxa: 0.05, nome: "Loja Local" },
   shopee: { taxa: 0.14, nome: "Shopee" },
@@ -1082,6 +1084,7 @@ const TAXAS = {
 };
 
 /* ============ DESCONTOS POR PAGAMENTO ============ */
+// Formas de pagamento e o desconto de cada uma
 const PAGAMENTOS = {
   pix: { desconto: 0.05, nome: "PIX (5% de desconto)" },
   cartao: { desconto: 0, nome: "Cartão de Crédito (3x sem juros)" },
@@ -1090,6 +1093,7 @@ const PAGAMENTOS = {
 };
 
 /* ============ ENTREGAS ============ */
+// Opcoes de entrega, prazo e preco
 const ENTREGAS = {
   shopee: { custo: 0, prazo: "5 a 7 dias úteis", nome: "Shopee Entrega Rápida" },
   "mercado-livre": { custo: 19.9, prazo: "3 a 5 dias úteis", nome: "Mercado Livre Envio" },
@@ -1098,13 +1102,16 @@ const ENTREGAS = {
 };
 
 /* ============ MUDAR PLATAFORMA ============ */
+// Troca entre Loja Local, Shopee e Mercado Livre
 function mudarPlataforma(plataforma) {
   plataformaAtual = plataforma;
+  // Le ou grava dados no navegador
   localStorage.setItem("plataforma", plataforma);
   atualizarTela();
 }
 
 /* ============ RENDERIZAR PRODUTOS ============ */
+// Desenha os cards de produto na tela
 function renderizarProdutos(lista = PRODUTOS) {
   const catalogo = document.getElementById("catalogo-produtos");
   catalogo.innerHTML = "";
@@ -1149,7 +1156,9 @@ function renderizarProdutos(lista = PRODUTOS) {
 }
 
 /* ============ FORMATAR NÚMERO ============ */
+// Formata numeros grandes (ex.: 1.2 mil)
 function formatarNumero(num) {
+  // Condicao: o bloco so roda se for verdadeiro
   if (num >= 1000) {
     return (num / 1000).toFixed(1).replace(".", ",") + "k";
   }
@@ -1157,6 +1166,7 @@ function formatarNumero(num) {
 }
 
 /* ============ FILTRAR PRODUTOS ============ */
+// Aplica a busca e os filtros escolhidos pelo cliente
 function filtrarProdutos() {
   const busca = document.getElementById("busca-produtos").value.toLowerCase();
   const categoria = document.getElementById("filtro-categoria").value;
@@ -1170,12 +1180,18 @@ function filtrarProdutos() {
     return nomeMatch && categoriaMatch;
   });
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (faixaPreco !== "todos") {
     filtrados = filtrados.filter((p) => {
+      // Condicao: o bloco so roda se for verdadeiro
       if (faixaPreco === "0-50") return p.preco <= 50;
+      // Condicao: o bloco so roda se for verdadeiro
       if (faixaPreco === "50-100") return p.preco >= 50 && p.preco <= 100;
+      // Condicao: o bloco so roda se for verdadeiro
       if (faixaPreco === "100-500") return p.preco >= 100 && p.preco <= 500;
+      // Condicao: o bloco so roda se for verdadeiro
       if (faixaPreco === "500-1000") return p.preco >= 500 && p.preco <= 1000;
+      // Condicao: o bloco so roda se for verdadeiro
       if (faixaPreco === "1000-plus") return p.preco >= 1000;
       return true;
     });
@@ -1184,6 +1200,7 @@ function filtrarProdutos() {
   renderizarProdutos(filtrados);
 
   const contador = document.getElementById("totalResultados");
+  // Condicao: o bloco so roda se for verdadeiro
   if (contador) {
     contador.textContent = `(${filtrados.length} ${filtrados.length === 1 ? "produto encontrado" : "produtos encontrados"})`;
   }
@@ -1238,11 +1255,13 @@ function selecionarEntrega(el) {
 }
 
 /* ============ APLICAR CUPOM ============ */
+// Valida e aplica o cupom digitado
 function aplicarCupom() {
   const campo = document.getElementById("cupom");
   const status = document.getElementById("cupomStatus");
   const codigo = campo.value.trim().toUpperCase();
 
+  // Cupons de desconto validos
   const CUPONS = {
     PROMO10: 0.10,
     QUANTUM15: 0.15,
@@ -1250,12 +1269,14 @@ function aplicarCupom() {
     BEMVINDO5: 0.05,
   };
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (!codigo) {
     status.textContent = "Digite um código de cupom.";
     status.className = "cupom-status erro";
     return;
   }
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (CUPONS[codigo]) {
     cupomDesconto = CUPONS[codigo];
     cupomCodigo = codigo;
@@ -1273,6 +1294,7 @@ function aplicarCupom() {
 }
 
 /* ============ CALCULAR TOTAIS ============ */
+// Faz a conta dos valores do carrinho
 function calcularTotais() {
   const taxaPlataforma = TAXAS[plataformaAtual].taxa;
   const descontoPagamento = PAGAMENTOS[pagamentoSelecionado].desconto;
@@ -1288,6 +1310,7 @@ function calcularTotais() {
 }
 
 /* ============ ATUALIZAR RESUMO ============ */
+// Recalcula subtotal, taxas, desconto e total
 function atualizarResumo() {
   const { taxa, desconto, custoEntrega, valorFinal, taxaPlataforma } = calcularTotais();
 
@@ -1303,6 +1326,7 @@ function atualizarResumo() {
     `R$ ${valorFinal.toFixed(2).replace(".", ",")}`;
 
   const info = document.getElementById("infoParcelamento");
+  // Condicao: o bloco so roda se for verdadeiro
   if (pagamentoSelecionado === "cartao" && valorFinal > 0) {
     info.textContent = `ou 3x de R$ ${(valorFinal / 3).toFixed(2).replace(".", ",")} sem juros`;
   } else if (pagamentoSelecionado === "pix" && valorFinal > 0) {
@@ -1313,11 +1337,14 @@ function atualizarResumo() {
 }
 
 /* ============ ADICIONAR PRODUTO ============ */
+// Adiciona um produto ao carrinho
 function adicionar(id, qtd = 1) {
   const produto = [...PRODUTOS, ...produtosCadastrados].find((p) => p.id === id);
+  // Condicao: o bloco so roda se for verdadeiro
   if (!produto) return;
 
   const existente = carrinho.find((i) => i.id === id);
+  // Condicao: o bloco so roda se for verdadeiro
   if (existente) {
     existente.qtd = (existente.qtd || 1) + qtd;
   } else {
@@ -1335,6 +1362,7 @@ function adicionar(id, qtd = 1) {
 }
 
 /* ============ REMOVER ITEM ============ */
+// Remove um item do carrinho
 function removerItem(index) {
   const item = carrinho[index];
   total -= item.preco * (item.qtd || 1);
@@ -1343,7 +1371,9 @@ function removerItem(index) {
 }
 
 /* ============ FINALIZAR COMPRA ============ */
+// Conclui o pedido, salva o historico e zera o carrinho
 function finalizarCompra() {
+  // Condicao: o bloco so roda se for verdadeiro
   if (carrinho.length === 0) {
     toast("Carrinho vazio! Adicione produtos antes de finalizar.", "aviso");
     return;
@@ -1358,7 +1388,9 @@ function finalizarCompra() {
   lucroTotal += lucroVenda;
   gastoTotal += custoLoja;
 
+  // Le ou grava dados no navegador
   localStorage.setItem("lucroTotal", lucroTotal);
+  // Le ou grava dados no navegador
   localStorage.setItem("gastoTotal", gastoTotal);
 
   salvarPedido(valorFinal, lucroVenda);
@@ -1376,6 +1408,7 @@ function finalizarCompra() {
 }
 
 /* ============ SALVAR PEDIDO ============ */
+// Grava o pedido no navegador (localStorage)
 function salvarPedido(valorFinal, lucroVenda) {
   const pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
@@ -1390,6 +1423,7 @@ function salvarPedido(valorFinal, lucroVenda) {
     itens: carrinho.reduce((s, i) => s + (i.qtd || 1), 0),
   });
 
+  // Le ou grava dados no navegador
   localStorage.setItem("pedidos", JSON.stringify(pedidos));
   carregarPedidos();
 }
@@ -1419,6 +1453,7 @@ function carregarPedidos() {
 
 /* ============ LIMPAR HISTÓRICO ============ */
 function limparPedidos() {
+  // Condicao: o bloco so roda se for verdadeiro
   if (confirm("Deseja realmente limpar o histórico de pedidos?")) {
     localStorage.removeItem("pedidos");
     carregarPedidos();
@@ -1448,13 +1483,16 @@ function alternarCadastro() {
 /* CARREGAR FOTO DO PRODUTO */
 function carregarFoto(event) {
   const arquivo = event.target.files[0];
+  // Condicao: o bloco so roda se for verdadeiro
   if (!arquivo) return;
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (!arquivo.type.startsWith("image/")) {
     toast("Selecione um arquivo de imagem válido.", "erro");
     return;
   }
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (arquivo.size > 2 * 1024 * 1024) {
     toast("A imagem deve ter no máximo 2MB.", "erro");
     return;
@@ -1480,6 +1518,7 @@ function removerFoto() {
 }
 
 /* SALVAR PRODUTO */
+// Cadastra ou atualiza um produto (com upload de foto)
 function salvarProduto() {
   const nome = document.getElementById("cadNome").value.trim();
   const marca = document.getElementById("cadMarca").value.trim();
@@ -1493,26 +1532,31 @@ function salvarProduto() {
   const especificacoesTexto = document.getElementById("cadEspecificacoes").value.trim();
 
   // VALIDAÇÕES
+  // Condicao: o bloco so roda se for verdadeiro
   if (!nome) {
     toast("Preencha o nome do produto!", "erro");
     document.getElementById("cadNome").focus();
     return;
   }
+  // Condicao: o bloco so roda se for verdadeiro
   if (!marca) {
     toast("Preencha a marca do produto!", "erro");
     document.getElementById("cadMarca").focus();
     return;
   }
+  // Condicao: o bloco so roda se for verdadeiro
   if (!preco || preco <= 0) {
     toast("Informe um preço válido!", "erro");
     document.getElementById("cadPreco").focus();
     return;
   }
+  // Condicao: o bloco so roda se for verdadeiro
   if (!categoria) {
     toast("Selecione uma categoria!", "erro");
     document.getElementById("cadCategoria").focus();
     return;
   }
+  // Condicao: o bloco so roda se for verdadeiro
   if (!descricao) {
     toast("Preencha a descrição do produto!", "erro");
     document.getElementById("cadDescricao").focus();
@@ -1540,9 +1584,11 @@ function salvarProduto() {
     cadastrado: true,
   };
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (editandoId) {
     // EDITAR PRODUTO EXISTENTE
     const index = produtosCadastrados.findIndex((p) => p.id === editandoId);
+    // Condicao: o bloco so roda se for verdadeiro
     if (index !== -1) {
       produtosCadastrados[index] = produto;
     }
@@ -1554,6 +1600,7 @@ function salvarProduto() {
     toast("Produto cadastrado com sucesso! 🎉");
   }
 
+  // Le ou grava dados no navegador
   localStorage.setItem("produtosCadastrados", JSON.stringify(produtosCadastrados));
 
   limparFormulario();
@@ -1564,6 +1611,7 @@ function salvarProduto() {
 /* EDITAR PRODUTO */
 function editarProduto(id) {
   const produto = produtosCadastrados.find((p) => p.id === id);
+  // Condicao: o bloco so roda se for verdadeiro
   if (!produto) return;
 
   editandoId = id;
@@ -1581,6 +1629,7 @@ function editarProduto(id) {
 
   // Carregar foto
   fotoBase64 = produto.foto || "";
+  // Condicao: o bloco so roda se for verdadeiro
   if (fotoBase64) {
     document.getElementById("previewFoto").innerHTML =
       `<img src="${fotoBase64}" alt="Foto do produto">`;
@@ -1589,6 +1638,7 @@ function editarProduto(id) {
 
   // Abrir formulário se estiver fechado
   const form = document.getElementById("formCadastro");
+  // Condicao: o bloco so roda se for verdadeiro
   if (form.style.display === "none") {
     alternarCadastro();
   }
@@ -1599,9 +1649,11 @@ function editarProduto(id) {
 
 /* EXCLUIR PRODUTO CADASTRADO */
 function excluirProduto(id) {
+  // Condicao: o bloco so roda se for verdadeiro
   if (!confirm("Deseja realmente excluir este produto?")) return;
 
   produtosCadastrados = produtosCadastrados.filter((p) => p.id !== id);
+  // Le ou grava dados no navegador
   localStorage.setItem("produtosCadastrados", JSON.stringify(produtosCadastrados));
 
   renderizarProdutosCadastrados();
@@ -1632,6 +1684,7 @@ function renderizarProdutosCadastrados() {
 
   contador.textContent = produtosCadastrados.length;
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (produtosCadastrados.length === 0) {
     area.style.display = "none";
     return;
@@ -1712,16 +1765,19 @@ const COMENTARIOS_1_2 = [
 ];
 
 /* GERAR AVALIAÇÕES ALEATÓRIAS MAS DETERMINÍSTICAS */
+// Cria as avaliacoes de exemplo do produto
 function gerarAvaliacoes(produto) {
   const seed = produto.id;
   const qtdAvaliacoes = 6 + (seed % 9);
   const avaliacoes = [];
 
+  // Laco de repeticao: repete o bloco enquanto a condicao valer
   for (let i = 0; i < qtdAvaliacoes; i++) {
     const pseudoRandom = (seed * (i + 1) * 9301 + 49297) % 233280;
     const rnd = pseudoRandom / 233280;
 
     let estrelas;
+    // Condicao: o bloco so roda se for verdadeiro
     if (produto.avaliacao >= 4.7) {
       estrelas = rnd < 0.75 ? 5 : rnd < 0.92 ? 4 : 3;
     } else if (produto.avaliacao >= 4.5) {
@@ -1734,6 +1790,7 @@ function gerarAvaliacoes(produto) {
     const nome = NOMES_USUARIOS[nomeIndex];
 
     let comentario;
+    // Condicao: o bloco so roda se for verdadeiro
     if (estrelas >= 5) {
       comentario = COMENTARIOS_5[(seed + i) % COMENTARIOS_5.length];
     } else if (estrelas === 4) {
@@ -1766,8 +1823,10 @@ function gerarAvaliacoes(produto) {
 }
 
 /* ABRIR MODAL DO PRODUTO */
+// Abre a janela de detalhes do produto
 function abrirProduto(id) {
   const produto = [...PRODUTOS, ...produtosCadastrados].find((p) => p.id === id);
+  // Condicao: o bloco so roda se for verdadeiro
   if (!produto) return;
 
   produtoModalAtual = produto;
@@ -1779,6 +1838,7 @@ function abrirProduto(id) {
 
   /* Galeria de fotos: principal + geradas para demonstração */
   const fotos = [];
+  // Condicao: o bloco so roda se for verdadeiro
   if (produto.foto) fotos.push(produto.foto);
   fotos.push(null); // placeholder
   fotos.push(null); // placeholder
@@ -1865,6 +1925,7 @@ function abrirProduto(id) {
     tr.innerHTML = `<td>${chave}</td><td>${resto.join(":").trim() || chave}</td>`;
     tabela.appendChild(tr);
   });
+  // Condicao: o bloco so roda se for verdadeiro
   if (!produto.especificacoes || produto.especificacoes.length === 0) {
     tabela.innerHTML = `<tr><td>Marca</td><td>${produto.marca}</td></tr><tr><td>Categoria</td><td>${produto.categoria}</td></tr>`;
   }
@@ -1886,6 +1947,7 @@ function abrirProduto(id) {
 /* TROCAR FOTO NA GALERIA */
 function trocarFoto(foto, indice) {
   const fotoPrincipal = document.getElementById("fotoPrincipal");
+  // Condicao: o bloco so roda se for verdadeiro
   if (foto) {
     fotoPrincipal.innerHTML = `<img src="${foto}" alt="${produtoModalAtual.nome}">`;
   } else {
@@ -1897,6 +1959,7 @@ function trocarFoto(foto, indice) {
 }
 
 /* FECHAR MODAL */
+// Fecha a janela de detalhes
 function fecharProduto() {
   document.getElementById("modalProduto").classList.remove("aberto");
   document.body.style.overflow = "";
@@ -1904,13 +1967,16 @@ function fecharProduto() {
 }
 
 function fecharModalExterior(event) {
+  // Condicao: o bloco so roda se for verdadeiro
   if (event.target.id === "modalProduto") {
     fecharProduto();
   }
 }
 
 /* FECHAR COM ESC */
+// Evento global do documento
 document.addEventListener("keydown", (e) => {
+  // Condicao: o bloco so roda se for verdadeiro
   if (e.key === "Escape" && produtoModalAtual) fecharProduto();
 });
 
@@ -1924,6 +1990,7 @@ function mudarQuantidadeModal(delta) {
 
 /* ADICIONAR DO MODAL AO CARRINHO */
 function adicionarDoModal() {
+  // Condicao: o bloco so roda se for verdadeiro
   if (!produtoModalAtual) return;
   const qtd = parseInt(document.getElementById("modalQuantidade").value) || 1;
   adicionar(produtoModalAtual.id, qtd);
@@ -1938,6 +2005,7 @@ function comprarAgora() {
 }
 
 /* RENDERIZAR AVALIAÇÕES */
+// Desenha a lista de avaliacoes do produto
 function renderizarAvaliacoes(filtroEstrela) {
   const lista = document.getElementById("listaAvaliacoes");
   lista.innerHTML = "";
@@ -1946,6 +2014,7 @@ function renderizarAvaliacoes(filtroEstrela) {
     ? avaliacoesProdutoAtual.filter((a) => a.estrelas === filtroEstrela)
     : avaliacoesProdutoAtual;
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (filtradas.length === 0) {
     lista.innerHTML = `<p style="text-align:center; color:#adb5bd; padding:30px;">Nenhuma avaliação com essa nota.</p>`;
     return;
@@ -1992,20 +2061,25 @@ function filtrarAvaliacoes(estrela, botao) {
    ============================================ */
 
 /* CARREGAR AVALIAÇÕES REAIS SALVAS */
+// Le as avaliacoes reais guardadas no navegador
 function carregarAvaliacoesReais(produtoId) {
   const todas = JSON.parse(localStorage.getItem("avaliacoesReais")) || {};
   return todas[produtoId] || [];
 }
 
 /* SALVAR AVALIAÇÃO REAL */
+// Guarda a avaliacao real no navegador
 function salvarAvaliacaoReal(produtoId, avaliacao) {
   const todas = JSON.parse(localStorage.getItem("avaliacoesReais")) || {};
+  // Condicao: o bloco so roda se for verdadeiro
   if (!todas[produtoId]) todas[produtoId] = [];
   todas[produtoId].unshift(avaliacao);
+  // Le ou grava dados no navegador
   localStorage.setItem("avaliacoesReais", JSON.stringify(todas));
 }
 
 /* SELECIONAR ESTRELAS */
+// Marca a nota escolhida pelo cliente
 function selecionarEstrela(n) {
   notaSelecionada = n;
   document.querySelectorAll(".estrela-cli").forEach((estrela, index) => {
@@ -2025,13 +2099,16 @@ function selecionarEstrela(n) {
 /* CARREGAR FOTO DA AVALIAÇÃO */
 function carregarFotoAvaliacao(event) {
   const arquivo = event.target.files[0];
+  // Condicao: o bloco so roda se for verdadeiro
   if (!arquivo) return;
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (!arquivo.type.startsWith("image/")) {
     toast("Selecione um arquivo de imagem válido.", "erro");
     return;
   }
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (arquivo.size > 1.5 * 1024 * 1024) {
     toast("A foto deve ter no máximo 1,5MB.", "erro");
     return;
@@ -2056,23 +2133,28 @@ function removerFotoAvaliacao() {
 }
 
 /* ENVIAR AVALIAÇÃO */
+// Salva a avaliacao real enviada pelo cliente
 function enviarAvaliacao() {
+  // Condicao: o bloco so roda se for verdadeiro
   if (!produtoModalAtual) return;
 
   const nome = document.getElementById("nomeCliente").value.trim();
   const comentario = document.getElementById("comentarioCliente").value.trim();
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (!nome) {
     toast("Digite seu nome para avaliar!", "erro");
     document.getElementById("nomeCliente").focus();
     return;
   }
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (notaSelecionada === 0) {
     toast("Clique nas estrelas para dar uma nota!", "erro");
     return;
   }
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (comentario.length < 10) {
     toast("Escreva um comentário com pelo menos 10 caracteres.", "erro");
     document.getElementById("comentarioCliente").focus();
@@ -2130,6 +2212,7 @@ function enviarAvaliacao() {
 /* ============================================
    NOTIFICAÇÕES TOAST (no lugar de alert)
    ============================================ */
+// Mostra uma notificacao temporaria na tela
 function toast(mensagem, tipo = "sucesso") {
   const container = document.getElementById("toastContainer");
   const el = document.createElement("div");
@@ -2165,6 +2248,7 @@ function filtrarCategoria(categoria, botao) {
   document.querySelectorAll(".categorias-rapidas button").forEach((b) => {
     b.classList.remove("ativo");
   });
+  // Condicao: o bloco so roda se for verdadeiro
   if (botao) botao.classList.add("ativo");
 
   filtrarProdutos();
@@ -2175,14 +2259,17 @@ function filtrarCategoria(categoria, botao) {
 function cadastrarEmail() {
   const email = document.getElementById("emailNewsletter").value.trim();
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (!email || !email.includes("@") || !email.includes(".")) {
     toast("Digite um e-mail válido!", "erro");
     return;
   }
 
   const emails = JSON.parse(localStorage.getItem("emailsNewsletter")) || [];
+  // Condicao: o bloco so roda se for verdadeiro
   if (!emails.includes(email)) {
     emails.push(email);
+    // Le ou grava dados no navegador
     localStorage.setItem("emailsNewsletter", JSON.stringify(emails));
   }
 
@@ -2191,8 +2278,10 @@ function cadastrarEmail() {
 }
 
 /* BOTÃO VOLTAR AO TOPO */
+// Evento global do navegador
 window.addEventListener("scroll", function () {
   const btn = document.getElementById("btnTopo");
+  // Condicao: o bloco so roda se for verdadeiro
   if (window.scrollY > 400) {
     btn.classList.add("visivel");
   } else {
@@ -2204,10 +2293,12 @@ window.addEventListener("scroll", function () {
 let bannerIndex = 0;
 function rotacaoBanner() {
   const bolinhas = document.querySelectorAll(".banner-bolinhas .bolinha");
+  // Condicao: o bloco so roda se for verdadeiro
   if (bolinhas.length === 0) return;
   bannerIndex = (bannerIndex + 1) % bolinhas.length;
   bolinhas.forEach((b, i) => b.classList.toggle("ativa", i === bannerIndex));
 }
+// Executa uma funcao de tempos em tempos
 setInterval(rotacaoBanner, 3000);
 
 /* ============ INICIAR SISTEMA ============ */
@@ -2223,6 +2314,7 @@ window.onload = function () {
 
   /* Contador de caracteres do comentário de avaliação */
   const comentario = document.getElementById("comentarioCliente");
+  // Condicao: o bloco so roda se for verdadeiro
   if (comentario) {
     comentario.addEventListener("input", function () {
       document.getElementById("contadorCaracteres").textContent =

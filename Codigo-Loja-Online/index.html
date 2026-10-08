@@ -14,6 +14,7 @@
 <body>
 
     <!-- TOPO MODERNO -->
+    <!-- Cabecalho fixo no topo: logo, busca e botoes de acao -->
     <header class="topo-moderno">
         <div class="topo-linha1">
             <div class="logo">
@@ -40,6 +41,7 @@
     </header>
 
     <!-- BANNER PROMOCIONAL -->
+    <!-- Banner promocional principal com a oferta da semana -->
     <section class="banner-promo">
         <div class="banner-conteudo">
             <div class="banner-texto">
@@ -60,6 +62,7 @@
     </section>
 
     <!-- CATEGORIAS RÁPIDAS -->
+    <!-- Categorias rapidas: um clique ja filtra o catalogo -->
     <section class="categorias-rapidas">
         <button onclick="filtrarCategoria('todos', this)">✨<span>Todas</span></button>
         <button onclick="filtrarCategoria('eletronicos', this)">📱<span>Eletrônicos</span></button>
@@ -183,6 +186,7 @@
     </section>
 
     <!-- CATÁLOGO DE PRODUTOS -->
+    <!-- Cabecalho do catalogo: titulo e filtros de categoria/preco -->
     <div class="cabecalho-catalogo">
         <h2>🛍️ Nossos Produtos <span id="totalResultados"></span></h2>
         <div class="filtros">
@@ -237,6 +241,7 @@
         <div class="cupom-area">
             <div class="cupom-input">
                 <span class="icone-cupom">🎟️</span>
+                <!-- Campo para digitar o cupom de desconto -->
                 <input type="text" id="cupom" placeholder="Código do cupom (ex: PROMO10, QUANTUM15, LOJA20)">
                 <button onclick="aplicarCupom()">Aplicar</button>
             </div>
@@ -352,6 +357,7 @@
     </section>
 
     <!-- MODAL DE DETALHES DO PRODUTO -->
+    <!-- Janela (modal) que abre os detalhes de um produto -->
     <div class="modal-overlay" id="modalProduto" onclick="fecharModalExterior(event)">
         <div class="modal-produto">
             <button class="btn-fechar-modal" onclick="fecharProduto()">✖</button>
@@ -438,6 +444,7 @@
                     <!-- ESPECIFICAÇÕES -->
                     <div class="secao-modal">
                         <h3>⚙️ Especificações</h3>
+                        <!-- Tabela de dados -->
                         <table class="tabela-specs" id="modalEspecificacoes"></table>
                     </div>
                 </div>
@@ -469,6 +476,7 @@
 
                     <div class="linha-form-avaliacao">
                         <input type="text" id="nomeCliente" placeholder="Seu nome" maxlength="40">
+                        <!-- Seletor de estrelas (nota de 1 a 5) -->
                         <div class="selecao-estrelas" id="selecaoEstrelas">
                             <span class="estrela-cli" onclick="selecionarEstrela(1)">★</span>
                             <span class="estrela-cli" onclick="selecionarEstrela(2)">★</span>
@@ -479,6 +487,7 @@
                         </div>
                     </div>
 
+                    <!-- Campo de texto da avaliacao (ate 500 caracteres) -->
                     <textarea id="comentarioCliente" rows="3" maxlength="500"
                         placeholder="Conte sua experiência com o produto: qualidade, entrega, se atendeu às expectativas..."></textarea>
                     <div class="contador-caracteres" id="contadorCaracteres">0/500</div>
@@ -486,6 +495,7 @@
                     <div class="rodape-form-avaliacao">
                         <label class="btn-foto-avaliacao">
                             📷 Adicionar foto
+                            <!-- Upload de foto para a avaliacao -->
                             <input type="file" id="fotoAvaliacao" accept="image/*"
                                 onchange="carregarFotoAvaliacao(event)" style="display:none;">
                         </label>
@@ -522,6 +532,7 @@
     </section>
 
     <!-- SELOS DE CONFIANÇA -->
+    <!-- Selos de confianca: compra segura, frete e garantia -->
     <section class="selos-confianca">
         <div class="selo">
             <span>🔒</span>
@@ -551,6 +562,7 @@
     </section>
 
     <!-- NEWSLETTER -->
+    <!-- Newsletter para captar e-mails e gerar lista de cupons -->
     <section class="newsletter">
         <div class="newsletter-conteudo">
             <h3>📩 Receba ofertas em primeira mão</h3>
@@ -575,6 +587,7 @@
     </a>
 
     <!-- RODAPÉ -->
+    <!-- Rodape do site com os creditos -->
     <footer class="rodape">
         <div class="rodape-conteudo">
             <p class="rodape-titulo">Site feito pelo Prof. Marcelo Oliveira</p>

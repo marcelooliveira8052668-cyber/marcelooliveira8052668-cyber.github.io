@@ -32,20 +32,26 @@ btnCalcular.addEventListener('click', function() {
     const parada = document.getElementById('inputParada').value;
     const dest = document.getElementById('inputDestino').value;
 
+    // Condicao: o bloco so roda se for verdadeiro
     if (!orig || !parada || !dest) {
         alert("Preencha a Origem, a Parada e o Destino!");
         return;
     }
 
+    // Le ou grava dados no navegador
     localStorage.setItem('origTxt', orig);
+    // Le ou grava dados no navegador
     localStorage.setItem('paradaTxt', parada);
+    // Le ou grava dados no navegador
     localStorage.setItem('destTxt', dest);
 
     calcularRotaComParada(orig, parada, dest);
 });
 
 async function calcularRotaComParada(orig, parada, dest) {
+    // Tratamento de erro: evita que o site quebre
     try {
+        // Condicao: o bloco so roda se for verdadeiro
         if (controleRota) { mapa.removeControl(controleRota); }
 
         // Busca coordenadas na internet para os 3 pontos
@@ -53,6 +59,7 @@ async function calcularRotaComParada(orig, parada, dest) {
         const coordParada = await buscarCoordenada(parada);
         const coordDest = await buscarCoordenada(dest);
 
+        // Condicao: o bloco so roda se for verdadeiro
         if (!coordOrig || !coordParada || !coordDest) {
             alert("Não foi possível encontrar um dos destinos digitados. Confira a grafia.");
             return;
@@ -76,9 +83,11 @@ async function calcularRotaComParada(orig, parada, dest) {
 }
 
 async function buscarCoordenada(texto) {
+    // Tratamento de erro: evita que o site quebre
     try {
         const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(texto)}`);
         const dados = await res.json();
+        // Condicao: o bloco so roda se for verdadeiro
         if (dados && dados.length > 0) {
             return L.latLng(dados[0].lat, dados[0].lon);
         }
@@ -111,7 +120,9 @@ function exibirCustosViagem(km) {
     const btnGoogle = document.getElementById('linkGoogleMaps');
     const btnWaze = document.getElementById('linkWaze');
 
+    // Condicao: o bloco so roda se for verdadeiro
     if (btnGoogle) btnGoogle.href = urlGoogle;
+    // Condicao: o bloco so roda se for verdadeiro
     if (btnWaze) btnWaze.href = urlWaze;
 }
 
@@ -123,6 +134,7 @@ btnAdicionarGasto.addEventListener('click', function() {
     const r = parseFloat(document.getElementById('gastoRestaurante').value) || 0;
     const p = parseFloat(document.getElementById('gastoPosto').value) || 0;
 
+    // Condicao: o bloco so roda se for verdadeiro
     if (h === 0 && r === 0 && p === 0) {
         alert("Digite um valor em pelo menos um dos campos de gastos.");
         return;
@@ -131,6 +143,7 @@ btnAdicionarGasto.addEventListener('click', function() {
     const novoGastoItem = { hotel: h, restaurante: r, posto: p };
     listaDeGastosPlanilha.push(novoGastoItem);
 
+    // Le ou grava dados no navegador
     localStorage.setItem('listaGastosPlanilha', JSON.stringify(listaDeGastosPlanilha));
 
     document.getElementById('gastoHotel').value = "";
@@ -170,10 +183,14 @@ function buscarServico(tipo) {
     camadaServicos = [];
     const centro = mapa.getCenter();
     let nome = "", emoji = "";
+    // Condicao: o bloco so roda se for verdadeiro
     if(tipo==='restaurant'){nome="Restaurante"; emoji="🍽️";}
+    // Condicao: o bloco so roda se for verdadeiro
     if(tipo==='hotel'){nome="Hotel/Pousada"; emoji="🏨";}
+    // Condicao: o bloco so roda se for verdadeiro
     if(tipo==='gas_station'){nome="Posto de Gasolina"; emoji="⛽";}
 
+    // Laco de repeticao: repete o bloco enquanto a condicao valer
     for (let i = 0; i < 4; i++) {
         const lat = centro.lat + (Math.random() - 0.5) * 0.04;
         const lng = centro.lng + (Math.random() - 0.5) * 0.04;
@@ -192,6 +209,7 @@ function renderizarFotosGaleria() {
     const containerPreview = document.querySelector('.preview-container');
     containerPreview.innerHTML = ""; // Limpa a área antes de redesenhar
 
+    // Condicao: o bloco so roda se for verdadeiro
     if (listaDeFotosSalvas.length === 0) {
         containerPreview.innerHTML = '<p style="color: #64748b; font-size: 13px;">Nenhuma foto anexada ainda.</p>';
         return;
@@ -216,6 +234,7 @@ function renderizarFotosGaleria() {
 inputFoto.addEventListener('change', function(e) {
     const arquivos = e.target.files;
     
+    // Condicao: o bloco so roda se for verdadeiro
     if (arquivos) {
         // Laço de repetição para conseguir ler múltiplos arquivos de uma vez só
         Array.from(arquivos).forEach(arquivo => {
@@ -223,6 +242,7 @@ inputFoto.addEventListener('change', function(e) {
             reader.onload = function(event) {
                 // Converte a imagem física local em uma String de dados segura (Base64)
                 listaDeFotosSalvas.push(event.target.result);
+                // Le ou grava dados no navegador
                 localStorage.setItem('galeriaFotosViagem', JSON.stringify(listaDeFotosSalvas));
                 renderizarFotosGaleria();
             };
@@ -234,6 +254,7 @@ inputFoto.addEventListener('change', function(e) {
 // Remove apenas a foto que você clicar no botãozinho "X"
 function removerFotoIndividual(index) {
     listaDeFotosSalvas.splice(index, 1);
+    // Le ou grava dados no navegador
     localStorage.setItem('galeriaFotosViagem', JSON.stringify(listaDeFotosSalvas));
     renderizarFotosGaleria();
 }
@@ -253,6 +274,7 @@ function carregarDadosLocalStorage() {
     const o = localStorage.getItem('origTxt');
     const p = localStorage.getItem('paradaTxt');
     const d = localStorage.getItem('destTxt');
+    // Condicao: o bloco so roda se for verdadeiro
     if (o && p && d) {
         document.getElementById('inputOrigem').value = o;
         document.getElementById('inputParada').value = p;
@@ -262,6 +284,7 @@ function carregarDadosLocalStorage() {
 
     // 2. Carrega Planilha de Gastos
     const g = localStorage.getItem('listaGastosPlanilha');
+    // Condicao: o bloco so roda se for verdadeiro
     if (g) {
         listaDeGastosPlanilha = JSON.parse(g);
         renderizarTabelaPlanilha();
@@ -269,6 +292,7 @@ function carregarDadosLocalStorage() {
 
     // 3. Carrega a Galeria de Fotos Multiplas
     const fotos = localStorage.getItem('galeriaFotosViagem');
+    // Condicao: o bloco so roda se for verdadeiro
     if (fotos) {
         listaDeFotosSalvas = JSON.parse(fotos);
         renderizarFotosGaleria();
@@ -283,5 +307,6 @@ btnLimparTudo.addEventListener('click', function() {
     location.reload();
 });
 
+// Evento global do navegador
 window.addEventListener('load', inicializarMapa);
 

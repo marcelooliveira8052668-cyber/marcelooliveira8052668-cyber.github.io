@@ -27,7 +27,9 @@ const SECRET = path.join(PASTA_APP, "local-secret.js");
 function lerChaves() {
   let or = process.env.LINA_OPENROUTER_KEY || "";
   let gem = process.env.LINA_GEMINI_KEY || "";
+  // Condicao: o bloco so roda se for verdadeiro
   if ((!or && !gem) && fs.existsSync(SECRET)) {
+    // Tratamento de erro: evita que o site quebre
     try {
       const s = require(SECRET);
       or = (s && s.LINA_OPENROUTER_KEY) || "";
@@ -43,7 +45,9 @@ const CHAVES = lerChaves();
 /* ---------- helpers da IA ---------- */
 function montarConteudoGemini(historico) {
   const contents = [];
+  // Laco de repeticao: repete o bloco enquanto a condicao valer
   for (const item of historico) {
+    // Condicao: o bloco so roda se for verdadeiro
     if (!item || !item.pts) continue;
     contents.push({
       role: item.role === "model" ? "model" : "user",
@@ -54,7 +58,9 @@ function montarConteudoGemini(historico) {
 }
 function montarMensagensOpenAI(historico, systemPrompt) {
   const mensagens = [{ role: "system", content: systemPrompt }];
+  // Laco de repeticao: repete o bloco enquanto a condicao valer
   for (const item of historico) {
+    // Condicao: o bloco so roda se for verdadeiro
     if (!item || !item.pts) continue;
     const papel = item.role === "model" && !item.sys ? "assistant" : "user";
     mensagens.push({ role: papel, content: item.pts });
@@ -63,7 +69,9 @@ function montarMensagensOpenAI(historico, systemPrompt) {
 }
 function provedorDe(chave) {
   const k = String(chave || "").trim();
+  // Condicao: o bloco so roda se for verdadeiro
   if (/^AIza/i.test(k) || /^AQ/i.test(k)) return "gemini";
+  // Condicao: o bloco so roda se for verdadeiro
   if (/^sk-/i.test(k)) return "openrouter";
   return "";
 }
@@ -86,19 +94,25 @@ async function chamarGemini(historico, systemPrompt, temperatura, modelo, chave)
     signal: ctrl.signal,
   });
   const dados = await res.json().catch(() => ({}));
+  // Condicao: o bloco so roda se for verdadeiro
   if (!res.ok) {
     const msg = (dados.error && dados.error.message) || ("Erro " + res.status);
     throw new Error(String(msg).slice(0, 220));
   }
   let texto = "";
+  // Condicao: o bloco so roda se for verdadeiro
   if (dados.candidates && dados.candidates[0]) {
     const conteudo = dados.candidates[0].content;
+    // Condicao: o bloco so roda se for verdadeiro
     if (conteudo && conteudo.parts) {
+      // Laco de repeticao: repete o bloco enquanto a condicao valer
       for (const parte of conteudo.parts) {
+        // Condicao: o bloco so roda se for verdadeiro
         if (parte.text) texto += parte.text;
       }
     }
   }
+  // Condicao: o bloco so roda se for verdadeiro
   if (!texto) throw new Error("A IA retornou vazio.");
   return {
     texto: texto.trim(),
@@ -123,6 +137,7 @@ async function chamarOpenRouter(historico, systemPrompt, temperatura, modelo, ch
     signal: ctrl.signal,
   });
   const dados = await res.json().catch(() => ({}));
+  // Condicao: o bloco so roda se for verdadeiro
   if (!res.ok) {
     const msg = (dados.error && String(dados.error.message || dados.error)) ||
       ("Erro " + res.status);
@@ -130,6 +145,7 @@ async function chamarOpenRouter(historico, systemPrompt, temperatura, modelo, ch
   }
   const texto = (dados.choices && dados.choices[0] &&
     dados.choices[0].message && dados.choices[0].message.content) || "";
+  // Condicao: o bloco so roda se for verdadeiro
   if (!texto) throw new Error("A IA retornou vazio.");
   return {
     texto: texto.trim(),
@@ -139,6 +155,7 @@ async function chamarOpenRouter(historico, systemPrompt, temperatura, modelo, ch
 
 /* ---------- rota da IA ---------- */
 async function rotaIA(corpo) {
+  // Condicao: o bloco so roda se for verdadeiro
   if (!corpo || !Array.isArray(corpo.history) || corpo.history.length === 0) {
     const err = new Error("Envie o campo history (conversa).");
     err.status = 400;
@@ -150,6 +167,7 @@ async function rotaIA(corpo) {
 
   let provedor = "";
   let chave = "";
+  // Condicao: o bloco so roda se for verdadeiro
   if (pedido === "gemini" && CHAVES.gem) {
     provedor = "gemini";
     chave = CHAVES.gem;
@@ -173,6 +191,7 @@ async function rotaIA(corpo) {
   const modelo = String(corpo.model && corpo.model.trim() ?
     corpo.model : (provedor === "gemini" ? "gemini-3.5-flash" : "openai/gpt-4o-mini"));
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (provedor === "gemini") {
     return chamarGemini(corpo.history, sistema, temperatura, modelo, chave);
   }
@@ -194,8 +213,10 @@ const MIME = {
 };
 function servirArquivo(req, res) {
   let url = req.url.split("?")[0];
+  // Condicao: o bloco so roda se for verdadeiro
   if (url === "/") url = "/index.html";
   const alvo = path.normalize(path.join(PASTA_APP, url));
+  // Condicao: o bloco so roda se for verdadeiro
   if (!alvo.startsWith(PASTA_APP) || !fs.existsSync(alvo) || !fs.statSync(alvo).isFile()) {
     res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
     res.end("404 - paginação não encontrada");
@@ -214,15 +235,18 @@ const server = http.createServer(async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (req.method === "OPTIONS") {
     res.writeHead(204);
     res.end();
     return;
   }
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (req.method === "POST" && (req.url.startsWith("/api/") || req.url.startsWith("/lina"))) {
     let dados = "";
     for await (const bloco of req) dados += bloco;
+    // Tratamento de erro: evita que o site quebre
     try {
       const corpo = JSON.parse(dados || "{}");
       const r = await rotaIA(corpo);
@@ -235,6 +259,7 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (req.method === "GET" || req.method === "HEAD") {
     servirArquivo(req, res);
     return;

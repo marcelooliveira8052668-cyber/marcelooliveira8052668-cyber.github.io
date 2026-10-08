@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<!-- Menu de navegacao do site -->
 <header><div class="nav"><a class="logo" href="#inicio"><span id="brandName">BRASA</span> <b>BURGER</b></a><button id="menuBtn" aria-label="Abrir menu">☰</button><nav id="menu"><a href="#cardapio">Cardápio</a><a href="#acompanhar">Acompanhar</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a><button class="cart-nav" id="openCart">🛒 Carrinho <b id="cartCount">0</b></button></nav></div></header>
 <main>
 <section class="hero" id="inicio"><div class="heroText"><small id="heroTag">ARTESANAL • GRELHADO NA HORA • DELIVERY</small><h1 id="heroTitle">O hambúrguer que <em>merece sua fome.</em></h1><p id="heroDescription">Pão macio, carne suculenta, ingredientes selecionados e aquele sabor de brasa.</p><a class="btn red" href="#cardapio">Ver cardápio</a><button class="btn green" id="heroCart">🛒 Meu carrinho</button></div></section>
@@ -21,6 +22,7 @@
 <section class="cta"><small>FOME NÃO ESPERA</small><h2>Peça agora e acompanhe tudo.</h2><button class="btn white" id="ctaCart">🛒 Abrir carrinho</button></section>
 <section class="section contact" id="contato"><div class="contactgrid"><div><small>ONDE ESTAMOS</small><h2>Venha conhecer a <span id="contactBrand">Brasa.</span></h2><p>📍 <b>Endereço</b><br><span id="address"></span></p><p>📱 <b>WhatsApp</b><br><span id="phone"></span></p><p>🕐 <b>Horário</b><br><span id="hours"></span></p></div><iframe id="map" title="Mapa da localização" loading="lazy"></iframe></div></section>
 </main>
+<!-- Rodape do site com os creditos -->
 <footer><div class="footer"><div class="logo"><span id="footerBrand">BRASA</span> <b>BURGER</b><p id="footerDescription">Hambúrguer artesanal e sabor de verdade.</p></div><div><a href="#cardapio">Cardápio</a> · <a href="#acompanhar">Acompanhar pedido</a> · <a href="#contato">Contato</a></div></div><div class="copy">© <span id="year"></span> <span id="copyrightBrand">Brasa Burger</span>. Todos os direitos reservados.</div></footer>
 <a class="float" id="floatWhatsapp" target="_blank" aria-label="WhatsApp">💬</a><div class="toast" id="toast"></div>
 
@@ -28,6 +30,7 @@
 <div class="modal" id="cartModal" aria-hidden="true"><div class="modal-card cart-modal"><button class="close" data-close="cartModal">×</button><div class="modal-head"><div><small>SEU PEDIDO</small><h2>Meu carrinho</h2></div><span class="cart-badge" id="cartCountModal">0 itens</span></div><div id="cartItems"></div><div class="cart-empty" id="cartEmpty">Seu carrinho está vazio. Escolha algo delicioso no cardápio.</div><div class="cart-total"><span>Total</span><strong id="cartTotal">R$ 0,00</strong></div><button class="btn red full" id="checkoutBtn">Ir para pagamento</button></div></div>
 
 <!-- PAGAMENTO -->
+<!-- Formulario -->
 <div class="modal" id="paymentModal" aria-hidden="true"><div class="modal-card payment-modal"><button class="close" data-close="paymentModal">×</button><div class="modal-head"><div><small>FINALIZAÇÃO</small><h2>Pagamento</h2></div></div><div class="order-summary" id="paymentSummary"></div><form id="paymentForm"><label>Nome<input id="customerName" required placeholder="Nome do cliente"></label><label>WhatsApp<input id="customerPhone" required placeholder="(11) 99999-9999"></label><label>Tipo de entrega<select id="deliveryType"><option value="delivery">Entrega</option><option value="pickup">Retirada no balcão</option></select></label><label>Endereço de entrega<textarea id="customerAddress" rows="2" placeholder="Rua, número, bairro"></textarea></label><div class="payment-methods"><p>Forma de pagamento</p><label class="pay-option"><input type="radio" name="payment" value="pix" checked><span>PIX<small>Pagamento via PIX (modo demonstração)</small></span></label><label class="pay-option"><input type="radio" name="payment" value="card"><span>Cartão<small>Pagamento na entrega/maquininha</small></span></label><label class="pay-option"><input type="radio" name="payment" value="cash"><span>Dinheiro<small>Pagamento na entrega</small></span></label></div><button class="btn red full" type="submit">Confirmar pedido</button></form></div></div>
 
 <!-- PAINEL COZINHA / OPERACIONAL -->

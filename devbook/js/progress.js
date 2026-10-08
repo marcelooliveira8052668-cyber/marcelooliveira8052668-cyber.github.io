@@ -22,6 +22,7 @@ const Progress = (() => {
   let state;
 
   function load() {
+    // Tratamento de erro: evita que o site quebre
     try {
       const raw = localStorage.getItem(KEY);
       state = raw ? { ...defaults(), ...JSON.parse(raw) } : defaults();
@@ -30,6 +31,7 @@ const Progress = (() => {
   }
 
   function save() {
+    // Le ou grava dados no navegador
     localStorage.setItem(KEY, JSON.stringify(state));
   }
 
@@ -38,6 +40,7 @@ const Progress = (() => {
 
   function updateStreak() {
     const t = today();
+    // Condicao: o bloco so roda se for verdadeiro
     if (state.lastStudy === t) return;
     const yesterday = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
     state.streak = (state.lastStudy === yesterday) ? state.streak + 1 : 1;
@@ -61,6 +64,7 @@ const Progress = (() => {
 
   function levelInfo() {
     let idx = 0;
+    // Laco de repeticao: repete o bloco enquanto a condicao valer
     for (let i = 0; i < LEVELS.length; i++) if (state.xp >= LEVELS[i].at) idx = i;
     const cur = LEVELS[idx];
     const next = LEVELS[idx + 1] || null;
@@ -83,6 +87,7 @@ const Progress = (() => {
     save();
     checkBadges();
     const after = levelInfo().n;
+    // Condicao: o bloco so roda se for verdadeiro
     if (after > before) {
       toast(`🎉 Subiu para o nível ${after} — ${levelInfo().name}!`, "xp");
     } else if (reason) {
@@ -95,6 +100,7 @@ const Progress = (() => {
   function isDone(id) { return state.chaptersDone.includes(id); }
 
   function completeChapter(id) {
+    // Condicao: o bloco so roda se for verdadeiro
     if (isDone(id)) return false;
     state.chaptersDone.push(id);
     save();
@@ -105,12 +111,15 @@ const Progress = (() => {
   /* ─── Quiz ─── */
   function saveQuiz(id, correct, total) {
     const prev = state.quizzes[id];
+    // Condicao: o bloco so roda se for verdadeiro
     if (!prev || correct > prev.correct) {
       state.quizzes[id] = { correct, total };
+      // Condicao: o bloco so roda se for verdadeiro
       if (correct === total) state.perfectQuizzes++;
     }
     save();
     const gained = correct * 15;
+    // Condicao: o bloco so roda se for verdadeiro
     if (gained > 0) addXP(gained, `quiz: ${correct}/${total}`);
     checkBadges();
   }
@@ -123,12 +132,14 @@ const Progress = (() => {
 
   function getFlashState(key) {
     const s = state.seenFlashcards[key];
+    // Condicao: o bloco so roda se for verdadeiro
     if (!s) return { box: 0, due: 0 }; // box 0 = nunca vista
     return s;
   }
 
   function flashDue(chapterId, idx) {
     const s = getFlashState(flashKey(chapterId, idx));
+    // Condicao: o bloco so roda se for verdadeiro
     if (s.box === 0) return true;
     return Date.now() >= s.due;
   }
@@ -138,6 +149,7 @@ const Progress = (() => {
     const key = flashKey(chapterId, idx);
     const s = getFlashState(key);
     let box = s.box;
+    // Condicao: o bloco so roda se for verdadeiro
     if (quality === 0) box = 0;
     else if (quality === 1) box = Math.max(1, box);
     else box = Math.min(5, box + 1);
@@ -163,6 +175,7 @@ const Progress = (() => {
       flashReviews: state.flashReviews
     };
     BADGES.forEach(b => {
+      // Condicao: o bloco so roda se for verdadeiro
       if (!state.badges.includes(b.id) && b.check(snapshot)) {
         state.badges.push(b.id);
         save();
@@ -173,6 +186,7 @@ const Progress = (() => {
 
   /* ─── Reset ─── */
   function reset() {
+    // Condicao: o bloco so roda se for verdadeiro
     if (!confirm("Zerar todo o progresso, XP e conquistas?")) return;
     state = defaults();
     save();
@@ -191,9 +205,11 @@ const Progress = (() => {
     set("chaptersDoneEl", state.chaptersDone.length);
 
     const fill = document.getElementById("xpFill");
+    // Condicao: o bloco so roda se for verdadeiro
     if (fill) fill.style.width = lv.pct + "%";
 
     const avatar = document.getElementById("avatarEl");
+    // Condicao: o bloco so roda se for verdadeiro
     if (avatar) avatar.textContent = lv.n >= 8 ? "🧑‍🚀" : lv.n >= 5 ? "🧑‍💻" : "🌱";
   }
 
@@ -212,8 +228,10 @@ const Progress = (() => {
 })();
 
 /* ─── Toast helper (usado pelo Progress) ─── */
+// Mostra uma notificacao temporaria na tela
 function toast(msg, type = "info") {
   const zone = document.getElementById("toastZone");
+  // Condicao: o bloco so roda se for verdadeiro
   if (!zone) return;
   const el = document.createElement("div");
   el.className = "toast " + type;

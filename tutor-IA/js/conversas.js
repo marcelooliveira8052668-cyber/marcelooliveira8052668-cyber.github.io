@@ -97,6 +97,7 @@ window.TEMAS = [
 window.montarPrompt = function (perfil) {
   var nivel = null;
   (window.NIVEIS || []).forEach(function (n) { if (n.id === perfil.nivel) nivel = n; });
+  // Condicao: o bloco so roda se for verdadeiro
   if (!nivel) nivel = window.NIVEIS[0];
 
   var metas = (perfil.metas || []).map(function (m) {
@@ -106,6 +107,7 @@ window.montarPrompt = function (perfil) {
   }).join(", ") || "conversar com confiança";
 
   var regraIdioma;
+  // Condicao: o bloco so roda se for verdadeiro
   if (perfil.imersao) {
     regraIdioma = "MODO MERGULHO TOTAL: responda SEMPRE em inglês natural e completo. Use português SOMENTE na parte de correção (🔧) e em dicas rápidas quando o aluno travar.";
   } else {
@@ -113,9 +115,11 @@ window.montarPrompt = function (perfil) {
   }
 
   var cena = "";
+  // Condicao: o bloco so roda se for verdadeiro
   if (perfil.cena) {
     var c = null;
     (window.CENAS || []).forEach(function (x) { if (x.id === perfil.cena) c = x; });
+    // Condicao: o bloco so roda se for verdadeiro
     if (c) {
       cena = [
         "",
@@ -127,6 +131,7 @@ window.montarPrompt = function (perfil) {
   }
 
   var voc = "";
+  // Condicao: o bloco so roda se for verdadeiro
   if (perfil.palavras && perfil.palavras.length) {
     voc = "\nVOCABULÁRIO DO ALUNO (já aprendeu, pode usar e reforçar): " + perfil.palavras.slice(-60).join(", ") + ".";
   }
@@ -170,12 +175,14 @@ window.OFFLINE = {
     var t = String(texto || "").toLowerCase().replace(/[.!?]/g, "").trim();
 
     var f = function (lista) {
+      // Laco de repeticao: repete o bloco enquanto a condicao valer
       for (var i = 0; i < lista.length; i++) if (t.indexOf(lista[i]) !== -1) return true;
       return false;
     };
 
     var linhas = [];
 
+    // Condicao: o bloco so roda se for verdadeiro
     if (f(["olá", "ola", "oi", "bom dia", "boa tarde", "hey", "hello", "hi", "e ai", "e aí"])) {
       linhas.push("Oi! Que bom você estar aqui. 😊");
       linhas.push("Quando alguém te cumprimenta em inglês, você pode responder: **\"Hi! How are you?\"** — quer praticar agora?");

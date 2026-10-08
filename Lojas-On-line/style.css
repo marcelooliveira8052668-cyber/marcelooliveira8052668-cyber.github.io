@@ -1,4 +1,4 @@
-﻿/* Desenvolvido por Prof. Marcelo Oliveira */
+/* Reset basico: zera as margens e define o modelo de caixa */
 * {
     margin: 0;
     padding: 0;
@@ -6,6 +6,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Corpo da pagina: fundo, fonte e espacamento geral */
 body {
     background: #f4f6f9;
     padding: 30px;
@@ -24,6 +25,7 @@ h1 {
     margin: 0 auto;
 }
 
+/* Grade que organize os produtos */
 .produtos {
     flex: 2;
     display: grid;
@@ -132,4 +134,3 @@ button[onclick="limparCarrinho()"] {
 button[onclick="limparCarrinho()"]:hover {
     background: #c0392b !important;
 }
-

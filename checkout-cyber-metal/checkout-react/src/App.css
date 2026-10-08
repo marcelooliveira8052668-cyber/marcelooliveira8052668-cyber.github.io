@@ -16,12 +16,14 @@
 }
 
 /* --- Reset Básico --- */
+/* Reset basico: zera as margens e define o modelo de caixa */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* Corpo da pagina: fundo, fonte e espacamento geral */
 body {
   /* Fundo com tom escuro metálico */
   background: linear-gradient(135deg, #0f1115 0%, #1a1e24 100%);
@@ -247,6 +249,7 @@ button:disabled {
   font-weight: bold;
 }
 /* --- Correção para Tabelas Estourarem no Celular --- */
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 480px) {
   table {
     display: block;
@@ -263,6 +266,7 @@ h1, h2, h3, p, span, label {
 }
 
 /* Evita destaque cinza ao tocar nos elementos no celular */
+/* Reset basico: zera as margens e define o modelo de caixa */
 * {
   -webkit-tap-highlight-color: transparent;
 }
@@ -275,7 +279,9 @@ h1, h2, h3, p, span, label {
   box-sizing: border-box;
 }
 
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 480px) {
+  /* Corpo da pagina: fundo, fonte e espacamento geral */
   body {
     padding: 5px; /* Remove folgas exageradas nas pontas da tela do celular */
     align-items: flex-start; /* Evita cortes verticais se a página for longa */

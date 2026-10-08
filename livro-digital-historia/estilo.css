@@ -46,10 +46,12 @@ body.escuro{
   --c-risco: #e0b256;
 }
 
+/* Reset basico: zera as margens e define o modelo de caixa */
 *{ box-sizing: border-box; margin:0; padding:0; }
 
 html, body{ height:100%; }
 
+/* Corpo da pagina: fundo, fonte e espacamento geral */
 body{
   font-family: var(--fonte-texto);
   background:
@@ -774,10 +776,12 @@ body.sem-rolar{ overflow: hidden; }
 /* =============================================================
    RESPONSIVO
    ============================================================= */
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 900px){
   #palco{ padding: 0 52px; gap: 8px; }
 }
 
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 700px){
   #barra{ gap: 8px; padding: 0 8px; height: 50px; }
   #palco{ top: 50px; padding: 0 40px; gap: 6px; }
@@ -788,6 +792,7 @@ body.sem-rolar{ overflow: hidden; }
   #dica{ bottom: 54px; right: 10px; max-width: 220px; }
 }
 
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 480px){
   #palco{ padding: 0 34px; }
   #txtBusca{ font-size: 13px; }

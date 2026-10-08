@@ -11,6 +11,7 @@ export function useCarrinho() {
       // Verifica se o produto já está no carrinho
       const itemExistente = carrinhoAtual.find(item => item.id === produtoParaAdicionar.id);
 
+      // Condicao: o bloco so roda se for verdadeiro
       if (itemExistente) {
         // Se já existe, apenas aumenta a quantidade em +1
         return carrinhoAtual.map(item =>

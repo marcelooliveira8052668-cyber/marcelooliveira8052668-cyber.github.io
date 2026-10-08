@@ -3,6 +3,7 @@
    RESET
 =================================== */
 
+/* Reset basico: zera as margens e define o modelo de caixa */
 *{
     margin:0;
     padding:0;
@@ -28,6 +29,7 @@ html{
     scroll-behavior:smooth;
 }
 
+/* Corpo da pagina: fundo, fonte e espacamento geral */
 body{
 
     font-family:'Inter',sans-serif;
@@ -712,6 +714,7 @@ ul{
    RESPONSIVO
 =================================== */
 
+/* Ajuste de layout para telas menores (celular) */
 @media(max-width:900px){
 
     .hero h1{
@@ -722,6 +725,7 @@ ul{
 
 }
 
+/* Ajuste de layout para telas menores (celular) */
 @media(max-width:768px){
 
     #btn-mobile{

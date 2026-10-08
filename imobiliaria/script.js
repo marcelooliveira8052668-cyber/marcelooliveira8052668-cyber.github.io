@@ -41,6 +41,7 @@ btnFiltrar.addEventListener("click", () => {
         const precoImovel =
         Number(imovel.dataset.preco);
 
+        // Condicao: o bloco so roda se for verdadeiro
         if(
             tipo !== "all" &&
             !imovel.classList.contains(tipo)
@@ -48,19 +49,23 @@ btnFiltrar.addEventListener("click", () => {
             mostrar = false;
         }
 
+        // Condicao: o bloco so roda se for verdadeiro
         if(preco !== "all"){
 
             const limite =
             Number(preco);
 
+            // Condicao: o bloco so roda se for verdadeiro
             if(limite === 500){
 
+                // Condicao: o bloco so roda se for verdadeiro
                 if(precoImovel > 500){
                     mostrar = false;
                 }
 
             }else if(limite === 1000){
 
+                // Condicao: o bloco so roda se for verdadeiro
                 if(
                     precoImovel > 1000 ||
                     precoImovel <= 500
@@ -70,6 +75,7 @@ btnFiltrar.addEventListener("click", () => {
 
             }else if(limite === 2000){
 
+                // Condicao: o bloco so roda se for verdadeiro
                 if(precoImovel < 1000){
                     mostrar = false;
                 }
@@ -152,8 +158,10 @@ function fecharModalFuncao(){
    FECHAR AO CLICAR FORA
 ===================================== */
 
+// Evento global do navegador
 window.addEventListener("click", (e) => {
 
+    // Condicao: o bloco so roda se for verdadeiro
     if(e.target === modal){
 
         fecharModalFuncao();
@@ -167,8 +175,10 @@ window.addEventListener("click", (e) => {
    FECHAR COM ESC
 ===================================== */
 
+// Evento global do documento
 document.addEventListener("keydown", (e) => {
 
+    // Condicao: o bloco so roda se for verdadeiro
     if(e.key === "Escape"){
 
         fecharModalFuncao();
@@ -205,6 +215,7 @@ imagens.forEach(img => {
         imagem.src =
         img.src;
 
+        // Laco de repeticao: repete o bloco enquanto a condicao valer
         while(lightbox.firstChild){
 
             lightbox.removeChild(
@@ -237,6 +248,7 @@ new IntersectionObserver(
 
     entries.forEach(entry => {
 
+        // Condicao: o bloco so roda se for verdadeiro
         if(entry.isIntersecting){
 
             entry.target.classList.add(

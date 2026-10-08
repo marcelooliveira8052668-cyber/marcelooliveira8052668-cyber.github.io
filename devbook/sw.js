@@ -43,6 +43,7 @@ self.addEventListener("fetch", e => {
   const url = new URL(e.request.url);
 
   /* Requisições de navegação (páginas): network-first com fallback ao cache */
+  // Condicao: o bloco so roda se for verdadeiro
   if (e.request.mode === "navigate") {
     e.respondWith(
       fetch(e.request)
@@ -59,8 +60,10 @@ self.addEventListener("fetch", e => {
   /* Assets: cache-first */
   e.respondWith(
     caches.match(e.request).then(cached => {
+      // Condicao: o bloco so roda se for verdadeiro
       if (cached) return cached;
       return fetch(e.request).then(res => {
+        // Condicao: o bloco so roda se for verdadeiro
         if (res.ok && (url.origin === location.origin || url.hostname.includes("fonts.") || url.hostname.includes("unpkg"))) {
           const clone = res.clone();
           caches.open(CACHE).then(c => c.put(e.request, clone));
@@ -69,6 +72,7 @@ self.addEventListener("fetch", e => {
       });
     }).catch(() => {
       /* fallback para offline */
+      // Condicao: o bloco so roda se for verdadeiro
       if (e.request.destination === "image")
         return new Response("", { status: 504 });
     })

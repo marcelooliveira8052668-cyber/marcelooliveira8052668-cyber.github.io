@@ -50,8 +50,11 @@ let pac, ghosts;
 
 function buildGrid(){
   grid = MAP.map(row => [...row].map(c => {
+    // Condicao: o bloco so roda se for verdadeiro
     if (c === '#') return WALL;
+    // Condicao: o bloco so roda se for verdadeiro
     if (c === '.') { dotsLeft++; return DOT; }
+    // Condicao: o bloco so roda se for verdadeiro
     if (c === 'o') { dotsLeft++; return PELLET; }
     return EMPTY;
   }));
@@ -69,7 +72,9 @@ function resetPositions(){
 }
 
 function isWall(x,y){
+  // Condicao: o bloco so roda se for verdadeiro
   if (y<0||y>=ROWS) return true;
+  // Condicao: o bloco so roda se for verdadeiro
   if (x<0||x>=COLS) return false; // túnel lateral
   return grid[y][x] === WALL;
 }
@@ -93,23 +98,30 @@ function move(e){
   e.x += d.x * e.speed;
   e.y += d.y * e.speed;
   // wrap horizontal
+  // Condicao: o bloco so roda se for verdadeiro
   if (e.x < -0.5) e.x = COLS-0.5;
+  // Condicao: o bloco so roda se for verdadeiro
   if (e.x > COLS-0.5) e.x = -0.5;
 }
 
 function chooseGhostDir(g){
   const options = Object.keys(DIRS).filter(d => d!=='none' && !(d===OPP[g.dir]) && canGo(g.tileX,g.tileY,d));
+  // Condicao: o bloco so roda se for verdadeiro
   if (options.length===0) { g.dir = OPP[g.dir]; return; }
+  // Condicao: o bloco so roda se for verdadeiro
   if (g.frightened){
     g.dir = options[Math.floor(Math.random()*options.length)];
     return;
   }
   // 60% persegue o pacman, senão aleatório
+  // Condicao: o bloco so roda se for verdadeiro
   if (Math.random() < 0.6){
     let best = options[0], bestDist = Infinity;
+    // Laco de repeticao: repete o bloco enquanto a condicao valer
     for (const d of options){
       const nx = g.tileX + DIRS[d].x, ny = g.tileY + DIRS[d].y;
       const dist = (nx-pac.tileX)**2 + (ny-pac.tileY)**2;
+      // Condicao: o bloco so roda se for verdadeiro
       if (dist < bestDist){ bestDist = dist; best = d; }
     }
     g.dir = best;
@@ -119,20 +131,27 @@ function chooseGhostDir(g){
 }
 
 function update(){
+  // Condicao: o bloco so roda se for verdadeiro
   if (gameOver) return;
 
   // PACMAN
+  // Condicao: o bloco so roda se for verdadeiro
   if (atCenter(pac)){
     setCenter(pac);
+    // Condicao: o bloco so roda se for verdadeiro
     if (pac.nextDir !== 'none' && canGo(pac.tileX,pac.tileY,pac.nextDir)) pac.dir = pac.nextDir;
+    // Condicao: o bloco so roda se for verdadeiro
     if (pac.dir !== 'none' && !canGo(pac.tileX,pac.tileY,pac.dir)) pac.dir = 'none';
   }
+  // Condicao: o bloco so roda se for verdadeiro
   if (pac.dir !== 'none') move(pac);
   pac.mouth += 0.2;
 
   // come moedas
   const tx = Math.round(pac.x), ty = Math.round(pac.y);
+  // Condicao: o bloco so roda se for verdadeiro
   if (tx>=0 && tx<COLS && ty>=0 && ty<ROWS){
+    // Condicao: o bloco so roda se for verdadeiro
     if (grid[ty][tx] === DOT){ grid[ty][tx] = EMPTY; score+=10; dotsLeft--; }
     else if (grid[ty][tx] === PELLET){
       grid[ty][tx] = EMPTY; score+=50; dotsLeft--;
@@ -142,24 +161,31 @@ function update(){
   }
 
   // FANTASMAS
+  // Condicao: o bloco so roda se for verdadeiro
   if (frightTimer > 0){
     frightTimer--;
+    // Condicao: o bloco so roda se for verdadeiro
     if (frightTimer === 0) ghosts.forEach(g=> g.frightened=false);
   }
+  // Laco de repeticao: repete o bloco enquanto a condicao valer
   for (const g of ghosts){
+    // Condicao: o bloco so roda se for verdadeiro
     if (atCenter(g)){
       setCenter(g);
       chooseGhostDir(g);
     }
     move(g);
     // colisão
+    // Condicao: o bloco so roda se for verdadeiro
     if (Math.abs(g.x-pac.x)<0.6 && Math.abs(g.y-pac.y)<0.6){
+      // Condicao: o bloco so roda se for verdadeiro
       if (g.frightened && !g.eaten){
         score += 200;
         g.frightened = false;
         g.x = 9; g.y = 6; g.tileX = 9; g.tileY = 6; g.dir = 'up';
       } else {
         lives--;
+        // Condicao: o bloco so roda se for verdadeiro
         if (lives <= 0){ gameOver = true; document.getElementById('msg').textContent = 'Game Over! Pressione F5 para reiniciar'; }
         else resetPositions();
         return;
@@ -167,6 +193,7 @@ function update(){
     }
   }
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (dotsLeft === 0){
     level++;
     document.getElementById('msg').textContent = 'Nível ' + level + '!';
@@ -179,8 +206,10 @@ function draw(){
   ctx.fillStyle = '#000';
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
+  // Laco de repeticao: repete o bloco enquanto a condicao valer
   for (let y=0;y<ROWS;y++) for (let x=0;x<COLS;x++){
     const c = grid[y][x];
+    // Condicao: o bloco so roda se for verdadeiro
     if (c === WALL){
       ctx.fillStyle = '#2222ff';
       ctx.fillRect(x*TS+1, y*TS+1, TS-2, TS-2);
@@ -197,8 +226,11 @@ function draw(){
   const px = pac.x*TS+TS/2, py = pac.y*TS+TS/2;
   const m = (Math.sin(pac.mouth)*0.5+0.5)*0.25*Math.PI;
   let rot = 0;
+  // Condicao: o bloco so roda se for verdadeiro
   if (pac.dir==='left') rot = Math.PI;
+  // Condicao: o bloco so roda se for verdadeiro
   if (pac.dir==='up') rot = -Math.PI/2;
+  // Condicao: o bloco so roda se for verdadeiro
   if (pac.dir==='down') rot = Math.PI/2;
   ctx.fillStyle = '#ffff00';
   ctx.beginPath();
@@ -207,6 +239,7 @@ function draw(){
   ctx.fill();
 
   // fantasmas
+  // Laco de repeticao: repete o bloco enquanto a condicao valer
   for (const g of ghosts){
     const gx = g.x*TS+TS/2, gy = g.y*TS+TS/2;
     ctx.fillStyle = g.frightened ? (frightTimer<120 && Math.floor(frightTimer/10)%2 ? '#fff' : '#2121de') : g.color;
@@ -216,6 +249,7 @@ function draw(){
     ctx.lineTo(gx-TS/2+2, gy+TS/2-2);
     ctx.closePath(); ctx.fill();
     // olhos
+    // Condicao: o bloco so roda se for verdadeiro
     if (!g.frightened){
       ctx.fillStyle = '#fff';
       ctx.beginPath(); ctx.arc(gx-5, gy-2, 4, 0, Math.PI*2); ctx.fill();
@@ -229,6 +263,7 @@ function draw(){
   document.getElementById('score').textContent = score;
   document.getElementById('lives').textContent = lives;
 
+  // Condicao: o bloco so roda se for verdadeiro
   if (gameOver){
     ctx.fillStyle = 'rgba(0,0,0,0.6)';
     ctx.fillRect(0,0,canvas.width,canvas.height);
@@ -245,12 +280,15 @@ function loop(){
   requestAnimationFrame(loop);
 }
 
+// Evento global do documento
 document.addEventListener('keydown', e => {
   const k = e.key.toLowerCase();
+  // Condicao: o bloco so roda se for verdadeiro
   if (k==='arrowup'||k==='w') pac.nextDir='up';
   else if (k==='arrowdown'||k==='s') pac.nextDir='down';
   else if (k==='arrowleft'||k==='a') pac.nextDir='left';
   else if (k==='arrowright'||k==='d') pac.nextDir='right';
+  // Condicao: o bloco so roda se for verdadeiro
   if (k.startsWith('arrow')) e.preventDefault();
 });
 

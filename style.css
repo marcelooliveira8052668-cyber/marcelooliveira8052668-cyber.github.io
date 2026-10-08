@@ -20,6 +20,7 @@
   --sombra-forte: 0 12px 40px rgba(15, 23, 42, .12);
 }
 
+/* Reset basico: zera as margens e define o modelo de caixa */
 * {
   margin: 0;
   padding: 0;
@@ -30,6 +31,7 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Corpo da pagina: fundo, fonte e espacamento geral */
 body {
   font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
   background: var(--fundo);
@@ -184,6 +186,7 @@ body {
   margin-bottom: 28px;
 }
 
+/* Area dos filtros de busca */
 .filtros {
   display: flex;
   gap: 10px;
@@ -191,6 +194,7 @@ body {
   margin-bottom: 32px;
 }
 
+/* Area dos filtros de busca */
 .filtro {
   padding: 9px 18px;
   border: 1px solid var(--borda);
@@ -221,6 +225,7 @@ body {
   gap: 26px;
 }
 
+/* Card de produto: caixa com bordas arredondadas e sombra */
 .card {
   background: var(--branco);
   border: 1px solid var(--borda);
@@ -232,6 +237,7 @@ body {
   flex-direction: column;
 }
 
+/* Efeito ao passar o mouse no card (levanta o elemento) */
 .card:hover {
   transform: translateY(-6px);
   box-shadow: var(--sombra-forte);
@@ -545,6 +551,7 @@ body {
 }
 
 /* ============ RESPONSIVO ============ */
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 900px) {
   .hero__wrap {
     grid-template-columns: 1fr;
@@ -563,6 +570,7 @@ body {
   }
 }
 
+/* Ajuste de layout para telas menores (celular) */
 @media (max-width: 620px) {
   .topo__nav {
     gap: 16px;
