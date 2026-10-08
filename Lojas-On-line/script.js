@@ -1,8 +1,37 @@
+// ============================================================
+//  MODELO DE LOJA ONLINE
+//  Arquivo: script.js
+//  Autor: Prof. Marcelo Oliveira
+//
+//  COMO ESTE ARQUIVO FUNCIONA:
+//  1. As constantes no topo guardam os dados fixos (produtos,
+//     precos, opcoes de entrega e pagamento).
+//  2. Cada funcao esta documentada logo acima dela, com o que
+//     ela faz, quais parametros recebe e o que devolve.
+//  3. Os dados ficam salvos no navegador (localStorage), por isso
+//     o historico de pedidos e as avaliacoes continuam la depois
+//     que a pessoa fecha a pagina.
+//
+//  PARA ARRUMAR UM BUG:
+//  - Mensagem no console? Abra o F12 e veja o que aparece.
+//  - Dado nao salvou?  Verifique se usou localStorage.setItem.
+//  - Botao sem acao?   Confira se o id do HTML bate com o getElementById.
+//  ============================================================
 let carrinho = [];
 let totalBase = 0;
 
 // Adiciona o produto à lista e atualiza o total base
 // Adiciona um produto ao carrinho
+/**
+ * Adiciona um produto ao carrinho. Se ja existir, soma a quantidade.
+ *
+ * PARAMETROS:
+ *   - nome: veja o codigo abaixo
+ *   - preco: veja o codigo abaixo
+ *   - categoria: veja o codigo abaixo
+ *
+ * OBSERVACAO: id = numero do produto. quantidade = quantas unidades.
+ */
 function adicionar(nome, preco, categoria) {
     carrinho.push({ nome, preco, categoria });
     totalBase += preco;
@@ -20,15 +49,23 @@ function atualizarInterfaceCarrinho() {
         lista.appendChild(li);
     });
 
+    // Pega um elemento da pagina pelo id.
     document.getElementById("total").innerText = totalBase.toFixed(2);
 }
 
 // Faz os cálculos de impostos e descontos
 // Conclui o pedido, salva o historico e zera o carrinho
+/**
+ * Conclui o pedido: grava no historico, atualiza o financeiro e esvazia o carrinho.
+ *
+ * OBSERVACAO: Chamar so quando o cliente confirmar a compra.
+ */
 function finalizarCompra() {
     // Condicao: o bloco so roda se for verdadeiro
     if (carrinho.length === 0) {
+        // Mostra um aviso simples na tela. Atencao: em site pronto prefira um aviso bonito.
         alert("Adicione itens ao carrinho primeiro!");
+        // Sai da funcao aqui, devolvendo o valor informado.
         return;
     }
 
@@ -71,9 +108,13 @@ function exibirResultado(base, taxas, desc, final) {
     const divRes = document.getElementById("resultado");
     divRes.style.display = "block";
 
+    // Pega um elemento da pagina pelo id.
     document.getElementById("precoFinal").innerText = `Produtos: R$ ${base.toFixed(2)}`;
+    // Pega um elemento da pagina pelo id.
     document.getElementById("taxasFinal").innerText = `Impostos (+): R$ ${taxas.toFixed(2)}`;
+    // Pega um elemento da pagina pelo id.
     document.getElementById("descontoFinal").innerText = `Desconto (-): R$ ${desc.toFixed(2)}`;
+    // Pega um elemento da pagina pelo id.
     document.getElementById("valorTotalFinal").innerText = `Total a Pagar: R$ ${final.toFixed(2)}`;
 }
 
@@ -82,6 +123,8 @@ function limparCarrinho() {
     carrinho = [];
     totalBase = 0;
     atualizarInterfaceCarrinho();
+    // Pega um elemento da pagina pelo id.
     document.getElementById("resultado").style.display = "none";
+    // Mostra um aviso simples na tela. Atencao: em site pronto prefira um aviso bonito.
     alert("Carrinho limpo! Pode escolher novos produtos.");
 }

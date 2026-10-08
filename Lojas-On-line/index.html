@@ -1,3 +1,19 @@
+<!-- ============================================================
+     MODELO DE LOJA ONLINE
+     Arquivo: index.html
+     Autor: Prof. Marcelo Oliveira
+
+     COMO ESTE ARQUIVO FUNCIONA:
+     1. O HTML monta a estrutura (o que aparece na tela).
+     2. Cada secao esta comentada abaixo com o que ela faz.
+     3. Os ids e classes sao usados pelo CSS (aparencia) e pelo
+        JavaScript (comportamento) - se renomear, atualize la tambem.
+
+     PARA CORRIGIR UM PROBLEMA NESTA PAGINA:
+     - Texto trocado?   Procura por id="..." e altere aqui.
+     - Cor errada?      O estilo esta em style.css ou na pasta css/.
+     - Botao sem acao?  O onclick aponta para uma funcao do JS.
+     ============================================================ -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,30 +24,60 @@
 </head>
 <body>
 
+    <!-- ===== TITULO =====
+         Titulo da secao. O numero indica a importancia. -->
     <h1>Loja Online Profissional</h1>
 
+    <!-- ===== BLOCO =====
+         Caixa que agrupa conteudo. -->
     <div class="container">
         <!-- VITRINE DE PRODUTOS -->
+        <!-- ===== BLOCO =====
+             Caixa que agrupa conteudo. -->
         <div class="produtos">
+            <!-- ===== BLOCO =====
+                 Caixa que agrupa conteudo. -->
             <div class="produto">
+                <!-- ===== TITULO =====
+                     Titulo da secao. O numero indica a importancia. -->
                 <h3>Camiseta Premium</h3>
+                <!-- ===== PARAGRAFO =====
+                     Bloco de texto. -->
                 <p>R$ 59,90</p>
+                <!-- ===== BOTAO =====
+                     Clique aqui para disparar uma acao. -->
                 <button class="btn-add" onclick="adicionar('Camiseta Premium', 59.90, 'VESTUARIO')">
                     Adicionar
                 </button>
             </div>
 
+            <!-- ===== BLOCO =====
+                 Caixa que agrupa conteudo. -->
             <div class="produto">
+                <!-- ===== TITULO =====
+                     Titulo da secao. O numero indica a importancia. -->
                 <h3>Notebook Gamer</h3>
+                <!-- ===== PARAGRAFO =====
+                     Bloco de texto. -->
                 <p>R$ 3500,00</p>
+                <!-- ===== BOTAO =====
+                     Clique aqui para disparar uma acao. -->
                 <button class="btn-add" onclick="adicionar('Notebook Gamer', 3500, 'ELETRONICO')">
                     Adicionar
                 </button>
             </div>
 
+            <!-- ===== BLOCO =====
+                 Caixa que agrupa conteudo. -->
             <div class="produto">
+                <!-- ===== TITULO =====
+                     Titulo da secao. O numero indica a importancia. -->
                 <h3>Cesta de Alimentos</h3>
+                <!-- ===== PARAGRAFO =====
+                     Bloco de texto. -->
                 <p>R$ 89,90</p>
+                <!-- ===== BOTAO =====
+                     Clique aqui para disparar uma acao. -->
                 <button class="btn-add" onclick="adicionar('Cesta de Alimentos', 89.90, 'ALIMENTO')">
                     Adicionar
                 </button>
@@ -39,36 +85,65 @@
         </div>
 
         <!-- SEÇÃO DO CARRINHO -->
+        <!-- ===== BLOCO =====
+             Caixa que agrupa conteudo. -->
         <div class="carrinho">
+            <!-- ===== TITULO =====
+                 Titulo da secao. O numero indica a importancia. -->
             <h2>Seu Carrinho</h2>
+            <!-- ===== LISTA =====
+                 Lista de itens. -->
             <ul id="listaCarrinho"></ul>
 
+            <!-- ===== TRECHO =====
+                 Texto no meio de uma frase. -->
             <p class="total">Total Base: R$ <span id="total">0.00</span></p>
 
+            <!-- ===== ROTULO =====
+                 Nome do campo, para o usuario saber o que preencher. -->
             <label>Possui Cupom?</label>
+            <!-- ===== LISTA DE OPCOES =====
+                 Campo com opcoes para escolher. -->
             <select id="cupom">
                 <option value="nao">Não</option>
                 <option value="sim">Sim</option>
             </select>
 
+            <!-- ===== BOTAO =====
+                 Clique aqui para disparar uma acao. -->
             <button class="btn-finalizar" onclick="finalizarCompra()">
                 Finalizar Compra
             </button>
+<!-- ===== BOTAO =====
+     Clique aqui para disparar uma acao. -->
 <button onclick="limparCarrinho()" style="background: #e74c3c; color: white; margin-top: 10px;">
     Limpar Carrinho / Voltar
 </button>
 
             <!-- RECIBO FINAL -->
+            <!-- ===== BLOCO =====
+                 Caixa que agrupa conteudo. -->
             <div class="resultado" id="resultado">
+                <!-- ===== PARAGRAFO =====
+                     Bloco de texto. -->
                 <p id="precoFinal"></p>
+                <!-- ===== PARAGRAFO =====
+                     Bloco de texto. -->
                 <p id="taxasFinal"></p>
+                <!-- ===== PARAGRAFO =====
+                     Bloco de texto. -->
                 <p id="descontoFinal"></p>
                 <hr>
+                <!-- ===== PARAGRAFO =====
+                     Bloco de texto. -->
                 <p id="valorTotalFinal" style="font-weight: bold; color: #27ae60;"></p>
             </div>
         </div>
     </div>
 
     <script src="script.js"></script>
+
+    // O codigo JavaScript comeca aqui. Ele espera a pagina
+    // terminar de carregar antes de procurar os elementos.
 </body>
 </html>

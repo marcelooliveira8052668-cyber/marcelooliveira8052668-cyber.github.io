@@ -6,6 +6,14 @@
 const AUTOR = "Prof. Marcelo Oliveira";
 const USER_GITHUB = "marcelooliveira8052668-cyber";
 
+/* Projetos cujas fotos nao sao exibidas por conterem dados de
+   clientes reais (telefone, endereço, nome do estabelecimento).
+   O card recebe uma capa gerada com título, categoria e ícone. */
+const SEM_FOTO = {
+  "Gran-Forno-FINAL": { icone: "🍕", tom: "laranja" },
+  "Gran-Forno-site": { icone: "🍕", tom: "laranja" },
+};
+
 /* Lista de projetos com descrição e categoria */
 const PROJETOS = [
   { nome: "Codigo-Loja-Online", titulo: "Loja Online Completa", desc: "E-commerce completo com 50 produtos, carrinho futurista, cupons, formas de pagamento, entrega por Shopee/Mercado Livre e avaliações reais de clientes.", cat: "E-commerce", tags: ["HTML", "CSS", "JavaScript"] },
@@ -79,10 +87,19 @@ function renderizarCards(filtroAtivo = "Todos") {
     const card = document.createElement("article");
     card.className = "card";
     const urlGh = `https://github.com/${USER_GITHUB}/${p.nome}`;
+    const semFoto = SEM_FOTO[p.nome];
+    const capa = semFoto
+      ? `<div class="card__capa capa--${semFoto.tom}">
+           <span class="capa__icone">${semFoto.icone}</span>
+           <strong class="capa__titulo">${p.titulo}</strong>
+           <small class="capa__obs">Imagem omitida: dados do cliente</small>
+         </div>`
+      : `<img src="screenshots/${slug(p.nome)}" alt="Foto do projeto ${p.titulo}"
+             onerror="this.style.display='none'">`;
+
     card.innerHTML = `
       <div class="card__foto">
-        <img src="screenshots/${slug(p.nome)}" alt="Foto do projeto ${p.titulo}"
-             onerror="this.style.display='none'">
+        ${capa}
         <span class="card__tag">${p.cat}</span>
       </div>
       <div class="card__corpo">

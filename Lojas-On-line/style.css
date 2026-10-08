@@ -1,4 +1,23 @@
+/* ============================================================
+   MODELO DE LOJA ONLINE
+   Arquivo: style.css
+   Autor: Prof. Marcelo Oliveira
+
+   PARA ENTENDER O VISUAL:
+   - Cada bloco abaixo tem um comentario dizendo o que ele controla.
+   - As cores ficam nas variaveis do topo (:root). Troque la para
+     mudar a identidade visual do site inteiro de uma vez.
+   - @media no fim do arquivo cuida das telas menores (celular).
+
+   PARA MUDAR ALGUM COISA:
+   - Tamanho de letra  -> procure 'font-size'
+   - Espacamento      -> procure 'padding' ou 'margin'
+   - Cor de fundo     -> procure 'background'
+   - Borda arredondada-> procure 'border-radius'
+   ============================================================ */
 /* Reset basico: zera as margens e define o modelo de caixa */
+/* --- RESET ---
+   Zera as margens e define o modelo de caixa de todos os elementos. */
 * {
     margin: 0;
     padding: 0;
@@ -7,6 +26,8 @@
 }
 
 /* Corpo da pagina: fundo, fonte e espacamento geral */
+/* --- CORPO DA PAGINA ---
+   Define fundo, fonte e espacamento geral do site. */
 body {
     background: #f4f6f9;
     padding: 30px;
@@ -18,6 +39,8 @@ h1 {
     color: #2c3e50;
 }
 
+/* --- ESTILO DO SELETOR ---
+   Aplica as propriedades abaixo para os elementos que casam com este seletor. */
 .container {
     display: flex;
     gap: 30px;
@@ -26,6 +49,8 @@ h1 {
 }
 
 /* Grade que organize os produtos */
+/* --- ESTILO DO SELETOR ---
+   Aplica as propriedades abaixo para os elementos que casam com este seletor. */
 .produtos {
     flex: 2;
     display: grid;
@@ -33,6 +58,8 @@ h1 {
     gap: 20px;
 }
 
+/* --- ESTILO DO SELETOR ---
+   Aplica as propriedades abaixo para os elementos que casam com este seletor. */
 .produto {
     background: white;
     padding: 20px;
@@ -41,6 +68,8 @@ h1 {
     text-align: center;
 }
 
+/* --- ESTILO DO SELETOR ---
+   Aplica as propriedades abaixo para os elementos que casam com este seletor. */
 .produto p {
     margin: 10px 0;
     font-size: 18px;
@@ -58,15 +87,21 @@ button {
     transition: 0.3s;
 }
 
+/* --- ESTILO DO SELETOR ---
+   Aplica as propriedades abaixo para os elementos que casam com este seletor. */
 .btn-add {
     background: #27ae60;
     color: white;
 }
 
+/* --- ESTILO DO SELETOR ---
+   Aplica as propriedades abaixo para os elementos que casam com este seletor. */
 .btn-add:hover {
     background: #1e8449;
 }
 
+/* --- ESTILO DO SELETOR ---
+   Aplica as propriedades abaixo para os elementos que casam com este seletor. */
 .carrinho {
     flex: 1;
     background: white;
@@ -86,6 +121,8 @@ li {
     font-size: 14px;
 }
 
+/* --- ESTILO DO SELETOR ---
+   Aplica as propriedades abaixo para os elementos que casam com este seletor. */
 .total {
     font-size: 18px;
     margin: 20px 0;
@@ -105,11 +142,15 @@ select {
     border: 1px solid #ccc;
 }
 
+/* --- ESTILO DO SELETOR ---
+   Aplica as propriedades abaixo para os elementos que casam com este seletor. */
 .btn-finalizar {
     background: #2c3e50;
     color: white;
 }
 
+/* --- ESTILO DO SELETOR ---
+   Aplica as propriedades abaixo para os elementos que casam com este seletor. */
 .resultado {
     margin-top: 20px;
     background: #f8f9fa;
