@@ -1,72 +1,148 @@
 ﻿<!-- Desenvolvido por Prof. Marcelo Oliveira -->
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora iPhone Style</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">   
-    <style>
-        /* CSS Estilizado */
-        body { background: #f0f2f5; display: flex; justify-content: center; padding-top: 50px; }
-        .iphone-x { width: 300px; height: 600px; background: #333; border-radius: 40px; padding: 15px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        .screen { background: #000; width: 100%; height: 100%; border-radius: 25px; color: white; padding: 20px; display: flex; flex-direction: column; }
-        .area { width: 100%; height: 80px; background: transparent; border: none; color: white; font-size: 2.5rem; text-align: right; margin-top: 50px; }
-        .key { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px; }
-        button { width: 60px; height: 60px; border-radius: 50%; border: none; font-size: 1.2rem; background: #333; color: white; cursor: pointer; }
-        .btn-work { background: #a5a5a5; color: black; }
-        .btn-equal { background: #f39c12; }
-        .time { font-size: 0.8rem; text-align: center; }
-    </style>
+    <meta name="description" content="Calculadora científica com visual de iPhone: trigonometria, logaritmos, potências, fatorial, memória e histórico de cálculos.">
+    <meta name="author" content="Marcelo Oliveira">
+    <meta name="theme-color" content="#0b0d12">
+    <title>Calculadora iPhone Style · Científica</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0d12'/%3E%3Crect x='10' y='8' width='44' height='48' rx='10' fill='%2317191f' stroke='%2333363f' stroke-width='2'/%3E%3Crect x='15' y='13' width='34' height='14' rx='4' fill='%23000'/%3E%3Ctext x='45' y='24' font-family='sans-serif' font-size='11' fill='%23ff9f0a' text-anchor='end'%3E=%3C/text%3E%3Cg fill='%233a3e48'%3E%3Crect x='15' y='31' width='7' height='7' rx='2'/%3E%3Crect x='25' y='31' width='7' height='7' rx='2'/%3E%3Crect x='35' y='31' width='7' height='7' rx='2'/%3E%3Crect x='15' y='41' width='7' height='7' rx='2'/%3E%3Crect x='25' y='41' width='7' height='7' rx='2'/%3E%3C/g%3E%3Crect x='35' y='41' width='14' height='7' rx='2' fill='%23ff9f0a'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="iphone-x">
-    <div class="screen">
-        <div class="time" id="time"></div>
-        <!-- Formulario -->
-        <form class="calculator">
-            <input type="text" placeholder="0" name="displayResult" class="area" readonly/>
-            <div class="key">
-                <button type="button" class="btn-work" onclick="document.querySelector('.area').value=''">AC</button>
-                <button type="button" class="btn-work" onclick="makeNegative(displayResult.value)">+/-</button>
-                <button type="button" class="btn-work" onclick="calcNumbers('%')">%</button>
-                <button type="button" class="btn-work" onclick="calcNumbers('/')">/</button>
-                
-                <button type="button" onclick="calcNumbers('7')">7</button>
-                <button type="button" onclick="calcNumbers('8')">8</button>
-                <button type="button" onclick="calcNumbers('9')">9</button>
-                <button type="button" class="btn-work" onclick="calcNumbers('*')">x</button>
+<main class="palco">
 
-                <button type="button" onclick="calcNumbers('4')">4</button>
-                <button type="button" onclick="calcNumbers('5')">5</button>
-                <button type="button" onclick="calcNumbers('6')">6</button>
-                <button type="button" class="btn-work" onclick="calcNumbers('-')">-</button>
+    <!-- ===================== CELULAR ===================== -->
+    <div class="celular">
+        <div class="entelado" aria-hidden="true"></div>
 
-                <button type="button" onclick="calcNumbers('1')">1</button>
-                <button type="button" onclick="calcNumbers('2')">2</button>
-                <button type="button" onclick="calcNumbers('3')">3</button>
-                <button type="button" class="btn-work" onclick="calcNumbers('+')">+</button>
+        <div class="tela">
 
-                <button type="button" style="grid-column: span 2;" onclick="calcNumbers('0')">0</button>
-                <button type="button" onclick="calcNumbers('.')">.</button>
-                <button type="button" class="btn-equal" onclick="displayResult.value = eval(displayResult.value)">=</button>
+            <!-- Barra de status do iOS -->
+            <div class="status">
+                <span class="status__hora" id="relogio">--:--</span>
+                <span class="status__app">Calculadora</span>
+                <span class="status__rede" aria-hidden="true">
+                    <svg viewBox="0 0 18 12" width="16" height="11"><path d="M1 8.5a9.5 9.5 0 0 1 14 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4 10.5a5.6 5.6 0 0 1 8 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="12.4" r="1.4" fill="currentColor"/></svg>
+                    <svg viewBox="0 0 26 12" width="24" height="11"><rect x="0.8" y="1.4" width="20" height="9.2" rx="2.6" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".55"/><rect x="2.4" y="3" width="15" height="6" rx="1.4" fill="currentColor"/><path d="M22.6 4.4v3.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"/></svg>
+                </span>
             </div>
-        </form>
+
+            <!-- Barra de ferramentas -->
+            <div class="ferramentas">
+                <button type="button" class="pill pill--ativo" id="btnModo" aria-pressed="false"
+                        title="Alterna entre graus (DEG) e radianos (RAD)">DEG</button>
+                <button type="button" class="pill pill--desligado" id="btnMemoria" disabled
+                        title="Indicador da memória — clique para recolar o valor">M</button>
+                <button type="button" class="pill" id="btnHistorico" aria-expanded="false"
+                        aria-controls="historico" title="Abrir o histórico de cálculos">Histórico</button>
+            </div>
+
+            <!-- Display -->
+            <div class="display">
+                <div class="display__linha">
+                    <span class="display__expressao" id="expressao" aria-live="polite"></span>
+                    <button type="button" class="display__apagar" data-acao="apagar"
+                            aria-label="Apagar o último caractere" title="Apagar (Backspace)">&#9003;</button>
+                </div>
+                <output class="display__resultado" id="resultado" aria-live="polite" for="expressao">0</output>
+            </div>
+
+            <!-- Memória -->
+            <div class="faixa" role="group" aria-label="Memória da calculadora">
+                <button type="button" class="tecla tecla--faixa" data-acao="memoria-limpar" title="Limpar memória (MC)">MC</button>
+                <button type="button" class="tecla tecla--faixa" data-acao="memoria-recuperar" title="Recuperar memória (MR)">MR</button>
+                <button type="button" class="tecla tecla--faixa" data-acao="memoria-somar" title="Somar resultado à memória (M+)">M+</button>
+                <button type="button" class="tecla tecla--faixa" data-acao="memoria-subtrair" title="Subtrair resultado da memória (M−)">M−</button>
+                <button type="button" class="tecla tecla--faixa" data-acao="memoria-salvar" title="Guardar resultado na memória (MS)">MS</button>
+            </div>
+
+            <!-- Painel científico -->
+            <div class="cientifico" role="group" aria-label="Funções científicas">
+                <button type="button" class="tecla tecla--sci" data-ins="sin(">sin</button>
+                <button type="button" class="tecla tecla--sci" data-ins="cos(">cos</button>
+                <button type="button" class="tecla tecla--sci" data-ins="tan(">tan</button>
+                <button type="button" class="tecla tecla--sci" data-ins="ln(">ln</button>
+                <button type="button" class="tecla tecla--sci" data-ins="log(">log</button>
+
+                <button type="button" class="tecla tecla--sci" data-ins="&#8730;(" aria-label="Raiz quadrada">&#8730;</button>
+                <button type="button" class="tecla tecla--sci" data-ins="&#178;" aria-label="Ao quadrado">x&#178;</button>
+                <button type="button" class="tecla tecla--sci" data-ins="^" aria-label="Potência">x<sup>y</sup></button>
+                <button type="button" class="tecla tecla--sci" data-ins="&#960;" aria-label="Pi">&#960;</button>
+                <button type="button" class="tecla tecla--sci" data-ins="e" aria-label="Número de Euler">e</button>
+
+                <button type="button" class="tecla tecla--sci" data-ins="(" aria-label="Parêntese de abertura">(</button>
+                <button type="button" class="tecla tecla--sci" data-ins=")" aria-label="Parêntese de fechamento">)</button>
+                <button type="button" class="tecla tecla--sci" data-ins="&#8315;&#185;" aria-label="Inverso: um dividido por x">x<sup>-1</sup></button>
+                <button type="button" class="tecla tecla--sci" data-ins="!" aria-label="Fatorial">n!</button>
+                <button type="button" class="tecla tecla--sci" data-ins="10^" aria-label="Dez elevado a x">10<sup>x</sup></button>
+            </div>
+
+            <!-- Teclado principal (padrão iPhone) -->
+            <div class="principal" role="group" aria-label="Teclado numérico">
+                <button type="button" class="tecla tecla--clara" data-acao="limpar">AC</button>
+                <button type="button" class="tecla tecla--clara" data-acao="negativo" aria-label="Inverter sinal">±</button>
+                <button type="button" class="tecla tecla--clara" data-ins="%" aria-label="Porcentagem">%</button>
+                <button type="button" class="tecla tecla--operador" data-ins="/">&divide;</button>
+
+                <button type="button" class="tecla" data-ins="7">7</button>
+                <button type="button" class="tecla" data-ins="8">8</button>
+                <button type="button" class="tecla" data-ins="9">9</button>
+                <button type="button" class="tecla tecla--operador" data-ins="*">&times;</button>
+
+                <button type="button" class="tecla" data-ins="4">4</button>
+                <button type="button" class="tecla" data-ins="5">5</button>
+                <button type="button" class="tecla" data-ins="6">6</button>
+                <button type="button" class="tecla tecla--operador" data-ins="-">&minus;</button>
+
+                <button type="button" class="tecla" data-ins="1">1</button>
+                <button type="button" class="tecla" data-ins="2">2</button>
+                <button type="button" class="tecla" data-ins="3">3</button>
+                <button type="button" class="tecla tecla--operador" data-ins="+">+</button>
+
+                <button type="button" class="tecla tecla--zero" data-ins="0">0</button>
+                <button type="button" class="tecla" data-ins="." aria-label="Vírgula decimal">,</button>
+                <button type="button" class="tecla tecla--igual" data-acao="igual">=</button>
+            </div>
+
+            <!-- Histórico (painel sobreposto à tela) -->
+            <section class="historico" id="historico" hidden aria-label="Histórico de cálculos">
+                <header class="historico__topo">
+                    <h2>Histórico</h2>
+                    <div>
+                        <button type="button" class="historico__limpar" id="btnLimparHistorico">Limpar</button>
+                        <button type="button" class="historico__fechar" id="btnFecharHistorico"
+                                aria-label="Fechar histórico">&times;</button>
+                    </div>
+                </header>
+                <ol class="historico__lista" id="listaHistorico"></ol>
+                <p class="historico__vazio" id="historicoVazio">Nenhum cálculo ainda.</p>
+            </section>
+
+        </div>
+
+        <div class="ilha" aria-hidden="true"></div>
     </div>
-</div>
 
-<script>
-    // Atualiza o horário automaticamente
-    document.getElementById('time').textContent = new Date().getHours() + ":" + new Date().getMinutes();
+    <!-- ===================== LEGENDA ===================== -->
+    <aside class="legenda">
+        <h1>Calculadora <span>Científica</span></h1>
+        <p>Visual de iPhone com motor de cálculo próprio — <strong>sem <code>eval()</code></strong>, usando
+           tokenização, algoritmo <em>shunting-yard</em> e avaliação em notação polonesa reversa.</p>
+        <ul>
+            <li><b>TECLADO:</b> números, <code>+ - * / ^ ( )</code>, <kbd>Enter</kbd> calcula, <kbd>Esc</kbd> limpa</li>
+            <li><b>ABREVIACÕES:</b> <kbd>s</kbd> sin · <kbd>c</kbd> cos · <kbd>t</kbd> tan · <kbd>r</kbd> √ · <kbd>p</kbd> π</li>
+            <li><b>%</b> divide por 100 e, com <code>+</code>/<code>−</code>, aplica percentual relativo</li>
+            <li><b>MEMÓRIA:</b> MC limpa · MR recolhe · M+ soma · M− subtrai · MS guarda</li>
+        </ul>
+        <p class="legenda__rodape">Desenvolvido por <b>Prof. Marcelo Oliveira</b></p>
+    </aside>
 
-    function calcNumbers(n) { document.querySelector('.area').value += n; }
-    
-    function makeNegative(val) {
-        document.querySelector('.area').value = val.startsWith('-') ? val.substring(1) : '-' + val;
-    }
-</script>
+</main>
+
+<script src="script.js" defer></script>
 </body>
 </html>
-
