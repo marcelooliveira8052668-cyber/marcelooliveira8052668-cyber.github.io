@@ -1,0 +1,275 @@
+﻿<!-- Desenvolvido por Prof. Marcelo Oliveira -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fluency Academy | Inglês para iniciantes</title>
+    <meta
+      name="description"
+      content="Plataforma de inglês para iniciantes com módulos, vocabulário, pronúncia e exercícios práticos."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <div class="container nav-wrap">
+          <div class="brand">
+            <span class="brand-mark">F</span>
+            <span>Fluency Academy</span>
+          </div>
+
+          <nav class="menu" aria-label="Menu principal">
+            <a href="#inicio">Início</a>
+            <a href="#aulas">Aulas</a>
+            <a href="#vocabulario">Vocabulário</a>
+            <a href="#cards">Cards</a>
+            <a href="#exercicios">Exercícios</a>
+          </nav>
+
+          <button class="button primary small">Começar</button>
+        </div>
+      </header>
+
+      <main class="main-page">
+        <section id="inicio" class="hero">
+          <div class="container hero-grid">
+            <div class="hero-copy">
+              <span class="eyebrow">Método prático para iniciantes</span>
+              <h1>Aprenda inglês do dia a dia com clareza, ritmo e confiança.</h1>
+              <p>
+                Aulas curtas, frases úteis, vocabulário essencial e exercícios focados no seu
+                cotidiano para você começar a falar com naturalidade.
+              </p>
+
+              <div class="hero-actions">
+                <a href="#aulas" class="button primary">Começar agora</a>
+                <a href="#cards" class="button ghost">Explorar cards</a>
+              </div>
+
+              <div class="trust-row">
+                <div class="trust-item">
+                  <strong>500+</strong>
+                  <span>palavras</span>
+                </div>
+                <div class="trust-item">
+                  <strong>500+</strong>
+                  <span>frases</span>
+                </div>
+                <div class="trust-item">
+                  <strong>500+</strong>
+                  <span>exercícios</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-panel">
+              <div class="panel-badge">Progresso hoje</div>
+              <div class="hero-progress">
+                <div class="progress-top">
+                  <span class="label-soft">Nível iniciante</span>
+                  <strong id="progressText">35%</strong>
+                </div>
+                <div class="progress-bar">
+                  <span id="progressFill"></span>
+                </div>
+              </div>
+
+              <div class="mini-lessons">
+                <div class="mini-lesson active">
+                  <span>01</span>
+                  <div>
+                    <strong>Greetings</strong>
+                    <small>Saudações</small>
+                  </div>
+                </div>
+                <div class="mini-lesson">
+                  <span>02</span>
+                  <div>
+                    <strong>Daily Life</strong>
+                    <small>Rotina</small>
+                  </div>
+                </div>
+                <div class="mini-lesson">
+                  <span>03</span>
+                  <div>
+                    <strong>Future</strong>
+                    <small>Futuro</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-footer">
+                <div>
+                  <small>Próxima meta</small>
+                  <strong>Concluir 3 módulos</strong>
+                </div>
+                <button class="button ghost small">Continuar</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section feature-strip">
+          <div class="container feature-grid">
+            <article class="feature-card">
+              <span class="feature-icon">🎧</span>
+              <h3>Pronúncia real</h3>
+              <p>Escute a pronúncia em inglês e em português para treinar com clareza.</p>
+            </article>
+            <article class="feature-card">
+              <span class="feature-icon">📚</span>
+              <h3>Conteúdo do dia a dia</h3>
+              <p>Vocabulário e frases usadas em rotina, trabalho, família e viagens.</p>
+            </article>
+            <article class="feature-card">
+              <span class="feature-icon">✅</span>
+              <h3>Exercícios práticos</h3>
+              <p>Pratique do, did e will com frases curtas, objetivos e muito reforço.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section student-dashboard">
+          <div class="container dashboard-grid">
+            <div class="account-card">
+              <div class="account-header">
+                <span class="eyebrow alt">Aluno</span>
+                <button class="button ghost small" id="loginButton">Entrar</button>
+              </div>
+              <h3 id="welcomeName">Olá, estudante!</h3>
+              <form id="loginForm" class="login-form">
+                <label>
+                  Nome
+                  <input id="studentNameInput" type="text" placeholder="Digite seu nome" />
+                </label>
+                <label>
+                  Nível
+                  <select id="studentLevel">
+                    <option value="Iniciante">Iniciante</option>
+                    <option value="Básico">Básico</option>
+                    <option value="Intermediário">Intermediário</option>
+                  </select>
+                </label>
+                <button type="submit" class="button primary">Salvar perfil</button>
+              </form>
+            </div>
+
+            <div class="dashboard-cards">
+              <div class="mini-stat">
+                <span>Sequência</span>
+                <strong>12 dias</strong>
+              </div>
+              <div class="mini-stat">
+                <span>Palavras</span>
+                <strong>128</strong>
+              </div>
+              <div class="mini-stat">
+                <span>Metas</span>
+                <strong>3/5</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="aulas" class="section section-soft">
+          <div class="container">
+            <div class="section-heading">
+              <span class="eyebrow">Módulos</span>
+              <h2>Estrutura de aprendizagem</h2>
+            </div>
+            <div class="lesson-grid" id="lessonGrid"></div>
+            <div id="lessonPractice" class="lesson-practice hidden"></div>
+          </div>
+        </section>
+
+        <section id="vocabulario" class="section alt-bg">
+          <div class="container">
+            <div class="section-heading">
+              <span class="eyebrow">Vocabulário</span>
+              <h2>Palavras úteis do dia a dia</h2>
+            </div>
+            <div class="vocab-grid" id="vocabGrid"></div>
+          </div>
+        </section>
+
+        <section id="cards" class="section section-soft">
+          <div class="container">
+            <div class="section-heading">
+              <span class="eyebrow">Cards</span>
+              <h2>Conteúdo em cards interativos</h2>
+            </div>
+
+            <div class="card-tabs">
+              <button class="tab-button active" data-tab="words">Palavras</button>
+              <button class="tab-button" data-tab="questions">Perguntas</button>
+              <button class="tab-button" data-tab="autocomplete">Auto-complete</button>
+            </div>
+
+            <div id="wordCardsPanel" class="card-panel active"></div>
+            <div id="questionCardsPanel" class="card-panel"></div>
+            <div id="autocompletePanel" class="card-panel"></div>
+          </div>
+        </section>
+
+        <section id="exercicios" class="section alt-bg">
+          <div class="container">
+            <div class="section-heading">
+              <span class="eyebrow">Prática</span>
+              <h2>Banco de 500 exercícios em inglês</h2>
+            </div>
+
+            <div class="exercise-tools">
+              <div class="exercise-filters">
+                <button class="exercise-filter active" data-filter="all">Todos</button>
+                <button class="exercise-filter" data-filter="do">do</button>
+                <button class="exercise-filter" data-filter="did">did</button>
+                <button class="exercise-filter" data-filter="will">will</button>
+              </div>
+            </div>
+
+            <div id="exerciseList" class="exercise-list"></div>
+            <div class="exercise-actions">
+              <button id="loadMoreExercises" class="button ghost">Carregar mais</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section final-cta">
+          <div class="container cta-box">
+            <div>
+              <span class="eyebrow">Seu próximo passo</span>
+              <h2>Pratique todos os dias e veja seu inglês evoluir em poucas semanas.</h2>
+            </div>
+            <a href="#inicio" class="button primary">Começar hoje</a>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container footer-inner">
+          <p>Fluency Academy © 2026</p>
+          <p>Aprenda inglês de forma simples, prática e profissional.</p>
+        </div>
+      </footer>
+    </div>
+
+    <div id="contentModal" class="modal hidden" aria-hidden="true">
+      <div class="modal-backdrop" data-close="true"></div>
+      <div class="modal-card">
+        <button class="modal-close" id="closeModal">×</button>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+

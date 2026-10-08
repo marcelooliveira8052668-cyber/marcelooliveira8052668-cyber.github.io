@@ -1,0 +1,84 @@
+[
+  {
+    "id": 1,
+    "empresa": "Tech Solutions",
+    "cargo": "Desenvolvedor Front-End Júnior",
+    "requisitos": ["HTML", "CSS", "JavaScript"],
+    "salario": 3500,
+    "modalidade": "Remoto"
+  },
+  {
+    "id": 2,
+    "empresa": "Inova Web",
+    "cargo": "Desenvolvedor React Jr",
+    "requisitos": ["HTML", "CSS", "JavaScript", "React"],
+    "salario": 4000,
+    "modalidade": "Híbrido"
+  },
+  {
+    "id": 3,
+    "empresa": "Data Corp",
+    "cargo": "Estagiário Front-End",
+    "requisitos": ["HTML", "CSS"],
+    "salario": 1800,
+    "modalidade": "Presencial"
+  },
+  {
+    "id": 4,
+    "empresa": "Creative Studio",
+    "cargo": "Dev Front-End",
+    "requisitos": ["HTML", "CSS", "JavaScript", "Git"],
+    "salario": 3800,
+    "modalidade": "Remoto"
+  },
+
+    {
+        "id": 1,
+        "empresa": "Tech Solutions",
+        "cargo": "Dev Front-End Junior",
+        "requisitos": ["HTML", "CSS", "JavaScript", "React"],
+        "salario": "R$ 3.500",
+        "modalidade": "Remoto"
+    },
+    {
+        "id": 2,
+        "empresa": "Inova Web",
+        "cargo": "Desenvolvedor React Jr",
+        "requisitos": ["JavaScript", "React", "Redux"],
+        "salario": "R$ 4.200",
+        "modalidade": "Remoto"
+    },
+    {
+        "id": 3,
+        "empresa": "Data Corp",
+        "cargo": "Estagiário Front-End",
+        "requisitos": ["HTML", "CSS"],
+        "salario": "R$ 1.500",
+        "modalidade": "Presencial"
+    },
+    {
+        "id": 4,
+        "empresa": "Creative Studio",
+        "cargo": "Web Designer & Dev",
+        "requisitos": ["HTML", "CSS", "Figma"],
+        "salario": "R$ 3.000",
+        "modalidade": "Híbrido"
+    },
+    {
+        "id": 5,
+        "empresa": "NextLevel Code",
+        "cargo": "Desenvolvedor Pleno",
+        "requisitos": ["HTML", "CSS", "JavaScript", "React", "TypeScript", "Node.js"],
+        "salario": "R$ 7.000",
+        "modalidade": "Remoto"
+    },
+    {
+        "id": 6,
+        "empresa": "Startup Growth",
+        "cargo": "Frontend Developer",
+        "requisitos": ["HTML", "CSS", "JavaScript", "Vue.js"],
+        "salario": "R$ 4.500",
+        "modalidade": "Remoto"
+    }
+]
+

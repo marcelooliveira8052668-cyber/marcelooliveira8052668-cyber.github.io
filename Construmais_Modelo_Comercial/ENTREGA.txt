@@ -1,0 +1,16 @@
+CHECKLIST DE ENTREGA
+[ ] Dados do cliente
+[ ] Logo
+[ ] Fotos
+[ ] Produtos e preços
+[ ] Estoque inicial
+[ ] WhatsApp
+[ ] Endereço
+[ ] Horários
+[ ] Formas de pagamento
+[ ] Região de entrega
+[ ] Teste no celular
+[ ] Teste no computador
+[ ] Teste do carrinho
+[ ] Teste do checkout
+[ ] Domínio/hospedagem

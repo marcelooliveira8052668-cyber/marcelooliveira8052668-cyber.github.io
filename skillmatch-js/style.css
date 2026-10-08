@@ -1,0 +1,18 @@
+﻿/* Desenvolvido por Prof. Marcelo Oliveira */
+body {
+  font-family: Arial;
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 20px;
+}
+
+h1 {
+  color: #38bdf8;
+}
+
+#saida {
+  background: #020617;
+  padding: 15px;
+  border-radius: 8px;
+  white-space: pre-wrap;
+}

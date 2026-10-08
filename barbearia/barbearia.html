@@ -1,0 +1,192 @@
+﻿<!-- Desenvolvido por Prof. Marcelo Oliveira -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FUTURE CUT - Barbearia do Futuro</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Poppins', sans-serif; background: #0a0a0f; color: #eee; }
+  h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; width: 100%; background: rgba(10,10,15,.9); backdrop-filter: blur(10px); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 100; border-bottom: 2px solid #ff4d00; }
+  nav .logo { font-family: 'Bebas Neue'; font-size: 28px; color: #ff4d00; }
+  nav ul { display: flex; gap: 20px; list-style: none; }
+  nav a { color: #eee; text-decoration: none; font-size: 14px; text-transform: uppercase; transition: .3s; }
+  nav a:hover { color: #ff4d00; }
+
+  /* HERO BANNER */
+  header { height: 100vh; background: linear-gradient(rgba(0,0,0,.5), rgba(10,10,15,.95)), url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1600') center/cover; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  header h1 { font-size: 80px; color: #fff; text-shadow: 0 0 30px #ff4d00; }
+  header h1 span { color: #ff4d00; }
+  header p { font-size: 20px; margin: 15px 0 30px; color: #ccc; }
+  .btn { background: #ff4d00; color: #fff; padding: 14px 35px; border: none; font-size: 16px; cursor: pointer; text-transform: uppercase; border-radius: 30px; transition: .3s; text-decoration: none; display: inline-block; }
+  .btn:hover { background: #fff; color: #ff4d00; transform: scale(1.05); }
+
+  section { padding: 80px 5%; }
+  h2 { font-size: 45px; text-align: center; margin-bottom: 10px; color: #ff4d00; }
+  .sub { text-align: center; color: #aaa; margin-bottom: 45px; }
+
+  /* SERVIÇOS CARDS */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+  .card { background: #15151f; border-radius: 15px; overflow: hidden; cursor: pointer; transition: .3s; border: 1px solid #222; }
+  .card:hover { transform: translateY(-10px); border-color: #ff4d00; box-shadow: 0 10px 30px rgba(255,77,0,.3); }
+  .card img { width: 100%; height: 220px; object-fit: cover; }
+  .card .body { padding: 20px; }
+  .card h3 { font-size: 24px; }
+  .card .price { color: #ff4d00; font-size: 22px; font-weight: bold; margin: 8px 0; }
+  .card p { color: #999; font-size: 14px; }
+
+  /* MODAL */
+  .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.9); z-index: 200; justify-content: center; align-items: center; }
+  .modal.active { display: flex; }
+  .modal-content { background: #15151f; padding: 30px; border-radius: 15px; max-width: 800px; width: 90%; max-height: 85vh; overflow: auto; }
+  .modal-content .photos { display: flex; gap: 10px; margin: 15px 0; }
+  .modal-content .photos img { width: 33%; border-radius: 10px; }
+  .close { float: right; font-size: 30px; cursor: pointer; color: #ff4d00; }
+
+  /* PACOTES */
+  .packages { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+  .pkg { background: linear-gradient(135deg, #1a1a2e, #15151f); padding: 30px; border-radius: 15px; border: 2px solid #ff4d00; text-align: center; }
+  .pkg h3 { font-size: 28px; margin-bottom: 10px; }
+  .pkg .price { font-size: 35px; color: #ff4d00; margin: 15px 0; }
+
+  /* GALERIA */
+  .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+  .gallery img { width: 100%; height: 250px; object-fit: cover; border-radius: 10px; transition: .3s; }
+  .gallery img:hover { transform: scale(1.03); }
+
+  /* MAPA + CONTATO */
+  .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  iframe { width: 100%; height: 350px; border: 0; border-radius: 15px; }
+
+  footer { text-align: center; padding: 30px; background: #05050a; color: #666; border-top: 1px solid #ff4d00; }
+
+  /* WHATSAPP FLUTUANTE */
+  .wpp { position: fixed; bottom: 25px; right: 25px; background: #25D366; color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; text-decoration: none; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,.4); transition: .3s; }
+  .wpp:hover { transform: scale(1.1); }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 50px; }
+    nav ul { display: none; }
+    .contact { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">✂ FUTURE CUT</div>
+  <ul>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#pacotes">Pacotes</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<header>
+  <h1>FUTURE <span>CUT</span></h1>
+  <p>A barbearia do futuro está aqui. Estilo, tecnologia e atitude.</p>
+  <a href="#servicos" class="btn">Agendar Agora</a>
+</header>
+
+<section id="servicos">
+  <h2>NOSSOS CORTES</h2>
+  <p class="sub">Clique em um card para ver 3 fotos e agendar</p>
+  <div class="cards">
+    <div class="card" onclick="openModal('Degradê Navalhado','R$ 60',['https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=400','https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=400','https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=400'])">
+      <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=500" alt="Degradê">
+      <div class="body"><h3>Degradê Navalhado</h3><div class="price">R$ 60</div><p>Acabamento perfeito com navalha.</p></div>
+    </div>
+    <div class="card" onclick="openModal('Corte Social','R$ 50',['https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=400','https://images.unsplash.com/photo-1621605815841-aa84c5a7a07e?w=400','https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=400'])">
+      <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=500" alt="Social">
+      <div class="body"><h3>Corte Social</h3><div class="price">R$ 50</div><p>Elegância para o dia a dia.</p></div>
+    </div>
+    <div class="card" onclick="openModal('Barba Completa','R$ 40',['https://images.unsplash.com/photo-1621605815841-aa84c5a7a07e?w=400','https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=400','https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=400'])">
+      <img src="https://images.unsplash.com/photo-1621605815841-aa84c5a7a07e?w=500" alt="Barba">
+      <div class="body"><h3>Barba Completa</h3><div class="price">R$ 40</div><p>Barba alinhada e hidratada.</p></div>
+    </div>
+    <div class="card" onclick="openModal('Corte + Barba','R$ 90',['https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=400','https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=400','https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=400'])">
+      <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=500" alt="Combo">
+      <div class="body"><h3>Combo Corte + Barba</h3><div class="price">R$ 90</div><p>O pacote completo.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pacotes" style="background:#0f0f17;">
+  <h2>PACOTES DE BELEZA</h2>
+  <p class="sub">Para homens e mulheres</p>
+  <div class="packages">
+    <div class="pkg">
+      <h3>PACOTE MASCULINO</h3>
+      <div class="price">R$ 120</div>
+      <p>Corte + Barba + Sobrancelha + Lavagem</p>
+      <a href="https://wa.me/5511999999999?text=Olá!%20Quero%20o%20Pacote%20Masculino" class="btn" style="margin-top:15px;">Agendar</a>
+    </div>
+    <div class="pkg">
+      <h3>PACOTE FEMININO</h3>
+      <div class="price">R$ 150</div>
+      <p>Corte + Hidratação + Escova + Sobrancelha</p>
+      <a href="https://wa.me/5511999999999?text=Olá!%20Quero%20o%20Pacote%20Feminino" class="btn" style="margin-top:15px;">Agendar</a>
+    </div>
+  </div>
+</section>
+
+<section id="galeria">
+  <h2>NOSSO ESPAÇO</h2>
+  <p class="sub">Ambiente moderno e climatizado</p>
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=500">
+    <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=500">
+    <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=500">
+    <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=500">
+  </div>
+</section>
+
+<section id="contato" style="background:#0f0f17;">
+  <h2>ONDE ESTAMOS</h2>
+  <p class="sub">Venha nos visitar</p>
+  <div class="contact">
+    <div>
+      <h3 style="color:#ff4d00;margin-bottom:15px;">Future Cut Barbearia</h3>
+      <p>📍 Av. Paulista, 1000 - São Paulo/SP</p>
+      <p style="margin:10px 0;">📞 (11) 99999-9999</p>
+      <p>🕐 Seg-Sáb: 9h às 21h</p>
+      <a href="https://wa.me/5511999999999" class="btn" style="margin-top:20px;">WhatsApp</a>
+    </div>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.197!2d-46.654!3d-23.561!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xa9637aa76f5d38e!2sAv.%20Paulista!5e0!3m2!1spt-BR!2sbr!4v1630000000000!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+</section>
+
+<footer>© 2026 Future Cut Barbearia - A barbearia do futuro</footer>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3 id="mTitle"></h3>
+    <div class="price" id="mPrice" style="color:#ff4d00;font-size:24px;"></div>
+    <div class="photos" id="mPhotos"></div>
+    <a id="mBtn" href="#" class="btn">Agendar no WhatsApp</a>
+  </div>
+</div>
+
+<a href="https://wa.me/5511999999999" class="wpp">💬</a>
+
+<script>
+  function openModal(title, price, photos) {
+    document.getElementById('mTitle').innerText = title;
+    document.getElementById('mPrice').innerText = price;
+    document.getElementById('mPhotos').innerHTML = photos.map(p => `<img src="${p}">`).join('');
+    document.getElementById('mBtn').href = 'https://wa.me/5511999999999?text=Olá!%20Quero%20agendar:%20' + encodeURIComponent(title);
+    document.getElementById('modal').classList.add('active');
+  }
+  function closeModal() { document.getElementById('modal').classList.remove('active'); }
+</script>
+
+</body>
+</html>
+

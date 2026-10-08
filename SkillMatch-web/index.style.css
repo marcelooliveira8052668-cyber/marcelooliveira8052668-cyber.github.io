@@ -1,0 +1,82 @@
+﻿/* Desenvolvido por Prof. Marcelo Oliveira */
+/* Reset básico para manter consistência */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #d7f335;
+    color: #333;
+    padding: 20px;
+}
+
+/* Header e Navegação */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Formulário estilizado */
+#form-perfil {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+label { display: block; margin: 10px 0 5px; font-weight: bold; }
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover { background-color: #219150; }
+
+/* Grid de cards (Flexbox) */
+#container-vagas {
+    display: flex;
+    flex-wrap: wrap; /* Faz os cards irem para a linha debaixo se necessário */
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.card-vaga {
+    background: rgb(120, 197, 241);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 5px solid #27ae60;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 300px; /* Largura ideal para celular e desktop */
+    transition: transform 0.2s;
+}
+
+.card-vaga:hover { transform: translateY(-5px); }
+
+/* Responsividade (Media Query) */
+@media (min-width: 768px) {
+    body { padding: 40px; }
+    .card-vaga { width: 45%; }
+}

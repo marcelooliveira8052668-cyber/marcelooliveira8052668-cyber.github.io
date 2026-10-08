@@ -1,0 +1,244 @@
+﻿<!-- Desenvolvido por Prof. Marcelo Oliveira -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Jogo da Velha - Contra o Computador</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+.menu-modo {
+    margin: 15px 0;
+}
+
+.menu-modo button {
+    background-color: #ddd;
+    color: #333;
+    border: 1px solid #999;
+}
+
+.menu-modo button.ativo {
+    background-color: #333;
+    color: white;
+    border-color: #333;
+}
+
+.tabuleiro {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 5px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.celula {
+    width: 100px;
+    height: 100px;
+    background: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #333;
+    user-select: none;
+}
+
+.celula:hover {
+    background: #ddd;
+}
+
+#mensagem {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #555;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Jogo da Velha</h1>
+
+<div class="menu-modo">
+    <button id="btnPvP" onclick="mudarModo('pvp')">Dois Jogadores</button>
+    <button id="btnPvC" onclick="mudarModo('pvc')" class="ativo">Contra o Computador</button>
+</div>
+
+<div class="tabuleiro" id="tabuleiro"></div>
+
+<div id="mensagem">Sua vez (X)</div>
+
+<button onclick="reiniciar()">Reiniciar</button>
+
+<script>
+let jogadorAtual = "X";
+let jogoAtivo = true;
+let estado = ["", "", "", "", "", "", "", "", ""];
+let modoContraPc = true; // Inicia contra o computador por padrão
+
+const combinacoesVitoria = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
+];
+
+const tabuleiro = document.getElementById("tabuleiro");
+const mensagem = document.getElementById("mensagem");
+
+function mudarModo(modo) {
+    modoContraPc = (modo === 'pvc');
+    document.getElementById('btnPvP').classList.toggle('ativo', !modoContraPc);
+    document.getElementById('btnPvC').classList.toggle('ativo', modoContraPc);
+    reiniciar();
+}
+
+function criarTabuleiro() {
+    tabuleiro.innerHTML = "";
+    estado.forEach((valor, index) => {
+        const celula = document.createElement("div");
+        celula.classList.add("celula");
+        celula.dataset.index = index;
+        celula.innerText = valor;
+        celula.addEventListener("click", clicarCelula);
+        tabuleiro.appendChild(celula);
+    });
+}
+
+function clicarCelula(e) {
+    const index = e.target.dataset.index;
+
+    if (estado[index] !== "" || !jogoAtivo) return;
+    if (modoContraPc && jogadorAtual === "O") return; // Impede clique do usuário na vez do PC
+
+    fazerJogada(index, jogadorAtual);
+
+    if (jogoAtivo && modoContraPc && jogadorAtual === "O") {
+        mensagem.innerText = "Vez do Computador...";
+        setTimeout(jogadaComputador, 500); // Pequeno atraso para parecer natural
+    }
+}
+
+function fazerJogada(index, jogador) {
+    estado[index] = jogador;
+    const celula = tabuleiro.children[index];
+    celula.innerText = jogador;
+
+    verificarVencedor();
+
+    if (jogoAtivo) {
+        jogadorAtual = jogadorAtual === "X" ? "O" : "X";
+        mensagem.innerText = modoContraPc && jogadorAtual === "O" ? "Vez do Computador..." : `Vez do Jogador (${jogadorAtual})`;
+    }
+}
+
+function jogadaComputador() {
+    if (!jogoAtivo) return;
+
+    // 1. Tenta vencer se houver uma oportunidade
+    let index = encontrarJogadaVencedora("O");
+    
+    // 2. Se não, bloqueia se o jogador (X) estiver prestes a vencer
+    if (index === null) {
+        index = encontrarJogadaVencedora("X");
+    }
+
+    // 3. Se não houver urgência, escolhe uma casa vazia aleatória
+    if (index === null) {
+        let vazias = [];
+        estado.forEach((val, i) => {
+            if (val === "") vazias.push(i);
+        });
+        if (vazias.length > 0) {
+            index = vazias[Math.floor(Math.random() * vazias.length)];
+        }
+    }
+
+    if (index !== null) {
+        fazerJogada(index, "O");
+    }
+}
+
+function encontrarJogadaVencedora(jogador) {
+    for (let combinacao of combinacoesVitoria) {
+        const [a, b, c] = combinacao;
+        let valores = [estado[a], estado[b], estado[c]];
+        
+        // Se duas casas do jogador forem iguais e a terceira estiver vazia, retorna a vazia
+        if (valores.filter(v => v === jogador).length === 2 && valores.includes("")) {
+            if (estado[a] === "") return a;
+            if (estado[b] === "") return b;
+            if (estado[c] === "") return c;
+        }
+    }
+    return null;
+}
+
+function verificarVencedor() {
+    let rodouVitoria = false;
+
+    for (let combinacao of combinacoesVitoria) {
+        const [a, b, c] = combinacao;
+        if (
+            estado[a] &&
+            estado[a] === estado[b] &&
+            estado[a] === estado[c]
+        ) {
+            mensagem.innerText = "Jogador " + jogadorAtual + " venceu!";
+            jogoAtivo = false;
+            rodouVitoria = true;
+            break;
+        }
+    }
+
+    if (!rodouVitoria && !estado.includes("")) {
+        mensagem.innerText = "Empate!";
+        jogoAtivo = false;
+    }
+}
+
+function reiniciar() {
+    estado = ["", "", "", "", "", "", "", "", ""];
+    jogadorAtual = "X";
+    jogoAtivo = true;
+    mensagem.innerText = "Sua vez (X)";
+    criarTabuleiro();
+}
+
+criarTabuleiro();
+</script>
+
+</body>
+</html>
+

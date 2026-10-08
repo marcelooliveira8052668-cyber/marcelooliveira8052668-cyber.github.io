@@ -1,0 +1,1112 @@
+﻿/* Desenvolvido por Prof. Marcelo Oliveira */
+/* =====================================================
+   STUDIO BELLA
+   CSS PROFISSIONAL
+===================================================== */
+
+:root {
+
+    --primary: #b76e79;
+    --primary-dark: #8f4e59;
+
+    --dark: #21191b;
+    --dark-2: #302225;
+
+    --cream: #faf6f4;
+    --white: #ffffff;
+
+    --text: #5d5355;
+    --border: #eadfe1;
+
+    --shadow: 0 15px 40px rgba(0,0,0,.08);
+
+    --radius: 18px;
+
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    font-family: "DM Sans", sans-serif;
+
+    color: var(--text);
+
+    background: var(--white);
+
+    line-height: 1.7;
+
+}
+
+
+img {
+    width: 100%;
+    display: block;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.container {
+
+    width: min(1120px, 92%);
+
+    margin: auto;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    z-index: 1000;
+
+    background: rgba(255,255,255,.94);
+
+    backdrop-filter: blur(15px);
+
+    border-bottom: 1px solid rgba(0,0,0,.05);
+
+}
+
+
+.nav {
+
+    height: 78px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.logo {
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 1.7rem;
+
+    font-weight: 700;
+
+    color: var(--dark);
+
+}
+
+
+.logo span {
+    color: var(--primary);
+}
+
+
+nav {
+
+    display: flex;
+
+    gap: 28px;
+
+}
+
+
+nav a {
+
+    font-size: .92rem;
+
+    font-weight: 600;
+
+    transition: .3s;
+
+}
+
+
+nav a:hover {
+    color: var(--primary);
+}
+
+
+.menu-btn {
+
+    display: none;
+
+    border: none;
+
+    background: none;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    position: relative;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(31,20,22,.86),
+            rgba(31,20,22,.45),
+            rgba(31,20,22,.15)
+        ),
+
+        url("https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+
+}
+
+
+.hero-content {
+
+    width: min(1120px,92%);
+
+    margin: auto;
+
+    color: white;
+
+}
+
+
+.eyebrow,
+.section-label {
+
+    color: var(--primary);
+
+    text-transform: uppercase;
+
+    letter-spacing: 3px;
+
+    font-size: .78rem;
+
+    font-weight: 700;
+
+    margin-bottom: 14px;
+
+}
+
+
+.hero .eyebrow {
+    color: #f4c7ce;
+}
+
+
+.hero h1 {
+
+    max-width: 700px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(3rem, 7vw, 6rem);
+
+    line-height: 1.05;
+
+    margin-bottom: 25px;
+
+}
+
+
+.hero h1 span {
+    color: #eeb5bf;
+}
+
+
+.hero-text {
+
+    max-width: 570px;
+
+    font-size: 1.1rem;
+
+    color: #f3eeee;
+
+    margin-bottom: 35px;
+
+}
+
+
+.hero-buttons {
+
+    display: flex;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+}
+
+
+/* =====================================================
+   BOTÕES
+===================================================== */
+
+.btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 14px 25px;
+
+    border-radius: 50px;
+
+    font-weight: 700;
+
+    transition: .3s;
+
+}
+
+
+.btn-primary {
+
+    background: var(--primary);
+
+    color: white;
+
+}
+
+
+.btn-primary:hover {
+
+    background: var(--primary-dark);
+
+    transform: translateY(-3px);
+
+}
+
+
+.btn-outline {
+
+    border: 1px solid rgba(255,255,255,.7);
+
+    color: white;
+
+}
+
+
+.btn-outline:hover {
+
+    background: white;
+
+    color: var(--dark);
+
+}
+
+
+.btn-light {
+
+    background: white;
+
+    color: var(--dark);
+
+}
+
+
+.btn-light:hover {
+    transform: translateY(-3px);
+}
+
+
+/* =====================================================
+   SEÇÕES
+===================================================== */
+
+.section {
+
+    padding: 100px 0;
+
+}
+
+
+.section-heading {
+
+    text-align: center;
+
+    max-width: 650px;
+
+    margin: 0 auto 55px;
+
+}
+
+
+.section-heading h2,
+.about-text h2,
+.contact-info h2 {
+
+    font-family: "Playfair Display", serif;
+
+    color: var(--dark);
+
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+
+    line-height: 1.15;
+
+    margin-bottom: 15px;
+
+}
+
+
+.section-heading h2 span,
+.about-text h2 span,
+.contact-info h2 span {
+
+    color: var(--primary);
+
+}
+
+
+/* =====================================================
+   SOBRE
+===================================================== */
+
+.about {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 70px;
+
+    align-items: center;
+
+}
+
+
+.about-image {
+
+    border-radius: 25px;
+
+    overflow: hidden;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.about-image img {
+
+    height: 600px;
+
+    object-fit: cover;
+
+}
+
+
+.about-text > p:not(.section-label) {
+
+    margin-bottom: 18px;
+
+}
+
+
+.about-items {
+
+    display: flex;
+
+    gap: 35px;
+
+    margin-top: 35px;
+
+}
+
+
+.about-items div {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.about-items strong {
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 2rem;
+
+    color: var(--primary);
+
+}
+
+
+.about-items span {
+
+    font-size: .85rem;
+
+}
+
+
+/* =====================================================
+   SERVIÇOS
+===================================================== */
+
+.services-section {
+
+    background: var(--cream);
+
+}
+
+
+.services-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(4,1fr);
+
+    gap: 20px;
+
+}
+
+
+.service-card {
+
+    background: white;
+
+    padding: 35px 25px;
+
+    border-radius: var(--radius);
+
+    box-shadow: 0 5px 25px rgba(0,0,0,.04);
+
+    transition: .3s;
+
+}
+
+
+.service-card:hover {
+
+    transform: translateY(-8px);
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.service-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    display: grid;
+
+    place-items: center;
+
+    background: #f7e5e8;
+
+    border-radius: 50%;
+
+    font-size: 1.4rem;
+
+    margin-bottom: 22px;
+
+}
+
+
+.service-card h3 {
+
+    font-family: "Playfair Display", serif;
+
+    color: var(--dark);
+
+    font-size: 1.5rem;
+
+    margin-bottom: 10px;
+
+}
+
+
+.service-card strong {
+
+    display: block;
+
+    color: var(--primary);
+
+    margin-top: 20px;
+
+}
+
+
+/* =====================================================
+   GALERIA
+===================================================== */
+
+.gallery {
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 18px;
+
+}
+
+
+.gallery-item {
+
+    height: 300px;
+
+    overflow: hidden;
+
+    border-radius: 15px;
+
+    cursor: pointer;
+
+}
+
+
+.gallery-item img {
+
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: .5s;
+
+}
+
+
+.gallery-item:hover img {
+
+    transform: scale(1.08);
+
+}
+
+
+/* =====================================================
+   DEPOIMENTOS
+===================================================== */
+
+.testimonials {
+
+    background: var(--cream);
+
+}
+
+
+.testimonial-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 22px;
+
+}
+
+
+.testimonial {
+
+    background: white;
+
+    padding: 32px;
+
+    border-radius: var(--radius);
+
+    box-shadow: 0 5px 20px rgba(0,0,0,.04);
+
+}
+
+
+.stars {
+
+    color: #d49a35;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.testimonial p {
+
+    margin-bottom: 20px;
+
+}
+
+
+.testimonial strong {
+    color: var(--dark);
+}
+
+
+/* =====================================================
+   CTA
+===================================================== */
+
+.cta {
+
+    padding: 90px 20px;
+
+    text-align: center;
+
+    color: white;
+
+    background:
+
+        linear-gradient(
+            rgba(116,55,65,.9),
+            rgba(116,55,65,.9)
+        ),
+
+        url("https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1800&q=80")
+        center/cover;
+
+}
+
+
+.cta p {
+
+    text-transform: uppercase;
+
+    letter-spacing: 3px;
+
+    font-size: .8rem;
+
+}
+
+
+.cta h2 {
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(2.5rem,5vw,4rem);
+
+    margin: 10px 0 30px;
+
+}
+
+
+/* =====================================================
+   CONTATO
+===================================================== */
+
+.contact {
+
+    display: grid;
+
+    grid-template-columns: .8fr 1.2fr;
+
+    gap: 60px;
+
+    align-items: center;
+
+}
+
+
+.contact-item {
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-top: 28px;
+
+}
+
+
+.contact-item > div:first-child {
+
+    width: 45px;
+
+    height: 45px;
+
+    background: #f7e5e8;
+
+    border-radius: 50%;
+
+    display: grid;
+
+    place-items: center;
+
+}
+
+
+.contact-item strong {
+    color: var(--dark);
+}
+
+
+.contact-item p {
+    margin: 0;
+}
+
+
+.map {
+
+    height: 450px;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.map iframe {
+
+    width: 100%;
+
+    height: 100%;
+
+    border: 0;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+
+    background: var(--dark);
+
+    color: #d8ccce;
+
+}
+
+
+.footer {
+
+    padding: 50px 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+}
+
+
+.footer .logo {
+    color: white;
+}
+
+
+.footer p {
+    margin-top: 10px;
+}
+
+
+.social {
+
+    display: flex;
+
+    gap: 20px;
+
+    align-items: center;
+
+}
+
+
+.social a:hover {
+    color: white;
+}
+
+
+.copyright {
+
+    text-align: center;
+
+    padding: 20px;
+
+    border-top: 1px solid rgba(255,255,255,.1);
+
+    font-size: .85rem;
+
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+.whatsapp {
+
+    position: fixed;
+
+    right: 22px;
+
+    bottom: 22px;
+
+    width: 58px;
+
+    height: 58px;
+
+    border-radius: 50%;
+
+    background: #25d366;
+
+    color: white;
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 25px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,.2);
+
+    z-index: 999;
+
+    transition: .3s;
+
+}
+
+
+.whatsapp:hover {
+
+    transform: scale(1.1);
+
+}
+
+
+/* =====================================================
+   LIGHTBOX
+===================================================== */
+
+.lightbox {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.9);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 2000;
+
+    padding: 30px;
+
+}
+
+
+.lightbox.active {
+    display: flex;
+}
+
+
+.lightbox img {
+
+    max-width: 900px;
+
+    max-height: 85vh;
+
+    object-fit: contain;
+
+    border-radius: 10px;
+
+}
+
+
+#closeLightbox {
+
+    position: absolute;
+
+    top: 25px;
+
+    right: 30px;
+
+    background: none;
+
+    border: none;
+
+    color: white;
+
+    font-size: 45px;
+
+    cursor: pointer;
+
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media (max-width: 900px) {
+
+    nav {
+
+        position: absolute;
+
+        top: 78px;
+
+        left: 0;
+
+        width: 100%;
+
+        background: white;
+
+        display: none;
+
+        flex-direction: column;
+
+        padding: 25px;
+
+        box-shadow: var(--shadow);
+
+    }
+
+
+    nav.active {
+        display: flex;
+    }
+
+
+    .menu-btn {
+        display: block;
+    }
+
+
+    .services-grid {
+
+        grid-template-columns: repeat(2,1fr);
+
+    }
+
+
+    .about,
+    .contact {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .testimonial-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .gallery {
+
+        grid-template-columns: repeat(2,1fr);
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .section {
+        padding: 70px 0;
+    }
+
+
+    .hero {
+
+        min-height: 90vh;
+
+    }
+
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+
+    .services-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .gallery {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .gallery-item {
+
+        height: 350px;
+
+    }
+
+
+    .about-image img {
+
+        height: 420px;
+
+    }
+
+
+    .about-items {
+
+        gap: 20px;
+
+        flex-wrap: wrap;
+
+    }
+
+
+    .footer {
+
+        flex-direction: column;
+
+    }
+
+
+    .social {
+
+        flex-wrap: wrap;
+
+    }
+
+}

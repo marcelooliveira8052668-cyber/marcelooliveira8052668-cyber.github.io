@@ -1,0 +1,7 @@
+# Nunca suba a chave da API para o GitHub
+js/chave.js
+local-secret.js
+
+# Sistema / cache
+.DS_Store
+Thumbs.db

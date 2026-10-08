@@ -1,0 +1,135 @@
+﻿<!-- Desenvolvido por Prof. Marcelo Oliveira -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planejador de Roteiros e Planilha de Férias</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+</head>
+<body>
+
+    <header>
+        <h1>Planejador de Férias & Roteiros</h1>
+        <p>Monte seu itinerário com paradas, busque serviços e controle sua planilha de gastos</p>
+    </header>
+
+    <main class="container">
+        
+        <section class="card">
+            <h2>🚗 Definir Roteiro da Viagem</h2>
+            <div class="formulario-rota">
+                <div class="campo">
+                    <label>📍 Ponto de Partida (Origem):</label>
+                    <input type="text" id="inputOrigem" placeholder="Origem" value="">
+                </div>
+                <div class="campo">
+                    <label>💤 Parada para Dormir (Intermediário):</label>
+                    <input type="text" id="inputParada" placeholder="Paradas" value="">
+                </div>
+                <div class="campo">
+                    <label>🏁 Destino Final (Chegada):</label>
+                    <input type="text" id="inputDestino" placeholder="Destino" value="">
+                </div>
+                <button id="btnCalcular" class="btn-sucesso">🚀 Calcular Rota Completa</button>
+            </div>
+
+            <div id="painelCustos" class="painel-custos" style="display: none;">
+                <h3>📊 Estimativa de Transporte (Trajeto Total)</h3>
+                <table class="tabela-financeira">
+                    <tr>
+                        <td><strong>Distância Total:</strong></td>
+                        <td id="txtDistancia">-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>⛽ Gasolina Estimada:</strong></td>
+                        <td id="txtGasolina" class="valor-gasto">-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🛣️ Pedágios Estimados:</strong></td>
+                        <td id="txtPedagio" class="valor-gasto">-</td>
+                    </tr>
+                </table>
+
+                <div class="botoes-externos" style="display: flex; gap: 10px; margin-top: 15px;">
+                    <a id="linkGoogleMaps" target="_blank" class="btn-externo btn-google">🗺️ Abrir no Google Maps</a>
+                    <a id="linkWaze" target="_blank" class="btn-externo btn-waze">🚙 Abrir no Waze</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🗺️ Mapa e Serviços no Caminho</h2>
+            <p class="instrucoes">Use os botões para marcar serviços perto do centro atual do mapa:</p>
+            <div class="botoes-servicos">
+                <button onclick="buscarServico('hotel')" class="btn-servico">🏨 Buscar Hotéis</button>
+                <button onclick="buscarServico('restaurant')" class="btn-servico">🍽️ Buscar Restaurantes</button>
+                <button onclick="buscarServico('gas_station')" class="btn-servico">⛽ Buscar Postos</button>
+            </div>
+            <div id="mapa"></div>
+        </section>
+
+        <section class="card">
+            <h2>💰 Planilha de Gastos Diários das Férias</h2>
+            <p class="instrucoes">Insira o que você gastou no dia para alimentar sua planilha automática:</p>
+            
+            <div class="formulario-gastos">
+                <div class="grupo-inputs">
+                    <input type="number" id="gastoHotel" placeholder="R$ Hotel / Pernoite">
+                    <input type="number" id="gastoRestaurante" placeholder="R$ Restaurante / Alimentação">
+                    <input type="number" id="gastoPosto" placeholder="R$ Posto / Combustível">
+                </div>
+                <button id="btnAdicionarGasto" class="btn-gasto">➕ Lançar Gastos do Dia</button>
+            </div>
+
+            <div class="extrato-gastos">
+                <h3>📋 Histórico de Lançamentos</h3>
+                <table class="tabela-planilha">
+                    <thead>
+                        <tr>
+                            <th>Dia</th>
+                            <th>🏨 Hotel</th>
+                            <th>🍽️ Rest.</th>
+                            <th>⛽ Posto</th>
+                            <th>Total Dia</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoTabelaGastos">
+                        </tbody>
+                    <tfoot>
+                        <tr class="linha-total-geral">
+                            <td colspan="4"><strong>💰 TOTAL ACUMULADO NAS FÉRIAS:</strong></td>
+                            <td id="txtTotalGeral">R$ 0,00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>📷 Lembranças da Rota</h2>
+            <div class="upload-area">
+                <label for="inputFoto" class="btn-upload">📁 Anexar Foto</label>
+                <input type="file" id="inputFoto" accept="image/*" style="display: none;">
+                <button id="btnLimparFoto" class="btn-danger-outline">Remover</button>
+            </div>
+            <div class="preview-container">
+                <img id="areaFoto" src="" alt="Sua foto aparecerá aqui" style="display: none;">
+            </div>
+        </section>
+
+        <section class="card card-danger">
+            <h2>🛠️ Resetar Aplicativo</h2>
+            <button id="btnLimparTudo" class="btn-danger">🗑️ Limpar Roteiro e Planilha de Gastos</button>
+        </section>
+
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+

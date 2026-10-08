@@ -1,0 +1,335 @@
+﻿<!-- Desenvolvido por Prof. Marcelo Oliveira -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Kids & Startup Lab - Áudio Interativo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>🌐 GlobalTalk Lab</h1>
+        <p>Pratique situações reais do dia a dia, trabalho e viagens com áudio nativo!</p>
+    </header>
+
+    <main class="container">
+
+    <!-- ======================================================== -->
+    <!-- QUADRINHO 1: A ROTINA DE ESTUDOS DO DIA A DIA            -->
+    <!-- ======================================================== -->
+    <section class="card comic-box">
+        <div class="comic-header">
+            <h2>💬 Quadrinho 1: A Rotina de Estudos</h2>
+            <span class="comic-badge">Cotidiano</span>
+        </div>
+        
+        <div class="image-container">
+            <!-- Imagem de uma pessoa estudando em casa/no computador -->
+            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600" alt="Pessoa estudando em casa">
+            <span class="image-caption">Cenário: Praticando inglês todos os dias após o trabalho.</span>
+        </div>
+
+        <div class="story-content">
+            <div class="audio-row">
+                <p class="english-sentence" id="sentence-1">"I study English every day after work."</p>
+                <button class="btn-audio" onclick="falarTexto('I study English every day after work.')" title="Ouvir pronúncia">🔊 Ouvir</button>
+            </div>
+            <p class="translation-hint">💡 **Tradução:** Eu estudo inglês todo dia depois do trabalho.</p>
+            <p class="pronunciation-guide">🗣️ **Pronúncia:** *ái stâ-di íng-glîsh év-ri dêi áf-tûr uôrk.*</p>
+        </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- QUADRINHO 2: PEDINDO AJUDA NO TRABALHO / COMPUTADOR      -->
+    <!-- ======================================================== -->
+    <section class="card comic-box">
+        <div class="comic-header">
+            <h2>💬 Quadrinho 2: No Trabalho / Tecnologia</h2>
+            <span class="comic-badge">Profissional</span>
+        </div>
+
+        <div class="image-container">
+            <!-- Imagem de tecnologia / dúvidas no computador -->
+            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600" alt="Reunião ou trabalho no computador">
+            <span class="image-caption">Cenário: Tirando dúvidas em uma ferramenta de trabalho.</span>
+        </div>
+
+        <div class="story-content">
+            <div class="audio-row">
+                <p class="english-sentence" id="sentence-2">"Can you help me fix this error on the screen?"</p>
+                <button class="btn-audio" onclick="falarTexto('Can you help me fix this error on the screen?')" title="Ouvir pronúncia">🔊 Ouvir</button>
+            </div>
+            <p class="translation-hint">💡 **Tradução:** Você pode me ajudar a consertar este erro na tela?</p>
+            <p class="pronunciation-guide">🗣️ **Pronúncia:** *kên iu hélp mi fíks ðis ér-ôr ôn ðê skriín?*</p>
+        </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- MÓDULO: 33 EXPRESSÕES PRÁTICAS EM BLOCOS (SANFONA)       -->
+    <!-- ======================================================== -->
+    <section class="card comic-box">
+        <div class="comic-header">
+            <h2>🔹 Expressões Práticas para Fluência</h2>
+            <span class="comic-badge">Avançado</span>
+        </div>
+        <p style="margin-bottom: 15px; font-size: 14px; color: #64748b;">
+            Clique em cada bloco abaixo para abrir e explorar as expressões divididas por categorias. Use os botões de áudio para treinar!
+        </p>
+
+        <!-- Container Estilo Sanfona -->
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+
+            <!-- Bloco 1 -->
+            <details style="background: #1e293b; color: #f1f5f9; border-radius: 8px; border: 1px solid #334155; overflow: hidden;">
+                <summary style="padding: 15px; cursor: pointer; font-weight: bold; font-size: 15px; background: #0f172a; outline: none;">
+                    🔹 Cumprimentos e interações básicas
+                </summary>
+                <div style="padding: 15px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #334155;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>1️⃣ How’s it going?</strong> → Como vão as coisas?</div>
+                        <button onclick="falarTexto('How is it going?')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>2️⃣ Long time no see.</strong> → Quanto tempo!</div>
+                        <button onclick="falarTexto('Long time no see.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>3️⃣ Nice to meet you.</strong> → Prazer em conhecer.</div>
+                        <button onclick="falarTexto('Nice to meet you.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>4️⃣ What have you been up to?</strong> → O que você tem feito?</div>
+                        <button onclick="falarTexto('What have you been up to?')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>5️⃣ Take care.</strong> → Se cuida.</div>
+                        <button onclick="falarTexto('Take care.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Bloco 2 -->
+            <details style="background: #1e293b; color: #f1f5f9; border-radius: 8px; border: 1px solid #334155; overflow: hidden;">
+                <summary style="padding: 15px; cursor: pointer; font-weight: bold; font-size: 15px; background: #0f172a; outline: none;">
+                    🔹 Concordando e discordando
+                </summary>
+                <div style="padding: 15px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #334155;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>6️⃣ That makes sense.</strong> → Isso faz sentido.</div>
+                        <button onclick="falarTexto('That makes sense.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>7️⃣ I couldn’t agree more.</strong> → Concordo totalmente.</div>
+                        <button onclick="falarTexto('I couldn’t agree more.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>8️⃣ I see your point, but…</strong> → Entendo seu ponto, mas…</div>
+                        <button onclick="falarTexto('I see your point, but…')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>9️⃣ That’s not how I see it.</strong> → Não é assim que eu vejo.</div>
+                        <button onclick="falarTexto('That’s not how I see it.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>🔟 Don’t get me wrong, but…</strong> → Não me entenda mal, mas…</div>
+                        <button onclick="falarTexto('Don’t get me wrong, but…')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Bloco 3 -->
+            <details style="background: #1e293b; color: #f1f5f9; border-radius: 8px; border: 1px solid #334155; overflow: hidden;">
+                <summary style="padding: 15px; cursor: pointer; font-weight: bold; font-size: 15px; background: #0f172a; outline: none;">
+                    🔹 Organizando a conversa
+                </summary>
+                <div style="padding: 15px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #334155;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>11️⃣ By the way…</strong> → A propósito…</div>
+                        <button onclick="falarTexto('By the way…')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>12️⃣ The thing is…</strong> → A questão é…</div>
+                        <button onclick="falarTexto('The thing is…')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>13️⃣ At the end of the day…</strong> → No fim das contas…</div>
+                        <button onclick="falarTexto('At the end of the day…')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>14️⃣ Let’s get to the point.</strong> → Vamos direto ao ponto.</div>
+                        <button onclick="falarTexto('Let’s get to the point.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>15️⃣ Long story short…</strong> → Resumindo…</div>
+                        <button onclick="falarTexto('Long story short…')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Bloco 4 -->
+            <details style="background: #1e293b; color: #f1f5f9; border-radius: 8px; border: 1px solid #334155; overflow: hidden;">
+                <summary style="padding: 15px; cursor: pointer; font-weight: bold; font-size: 15px; background: #0f172a; outline: none;">
+                    🔹 Expressando opinião
+                </summary>
+                <div style="padding: 15px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #334155;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>16️⃣ As far as I’m concerned…</strong> → No que me diz respeito…</div>
+                        <button onclick="falarTexto('As far as I’m concerned…')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>17️⃣ From my point of view…</strong> → Do meu ponto de vista…</div>
+                        <button onclick="falarTexto('From my point of view…')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>18️⃣ If you ask me…</strong> → Se você quer saber…</div>
+                        <button onclick="falarTexto('If you ask me…')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>19️⃣ The way I see it…</strong> → Do jeito que eu vejo…</div>
+                        <button onclick="falarTexto('The way I see it…')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>20️⃣ For what it’s worth…</strong> → Pelo menos / Se servir de consolo…</div>
+                        <button onclick="falarTexto('For what it’s worth…')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Bloco 5 -->
+            <details style="background: #1e293b; color: #f1f5f9; border-radius: 8px; border: 1px solid #334155; overflow: hidden;">
+                <summary style="padding: 15px; cursor: pointer; font-weight: bold; font-size: 15px; background: #0f172a; outline: none;">
+                    🔹 Situações do dia a dia
+                </summary>
+                <div style="padding: 15px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #334155;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>21️⃣ I’m not really into that.</strong> → Não sou muito fã disso.</div>
+                        <button onclick="falarTexto('I’m not really into that.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>22️⃣ I’m running late.</strong> → Estou atrasado.</div>
+                        <button onclick="falarTexto('I’m running late.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>23️⃣ It slipped my mind.</strong> → Eu esqueci completamente.</div>
+                        <button onclick="falarTexto('It slipped my mind.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>24️⃣ It’s not worth it.</strong> → Não vale a pena.</div>
+                        <button onclick="falarTexto('It’s not worth it.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>25️⃣ Better late than never.</strong> → Antes tarde do que nunca.</div>
+                        <button onclick="falarTexto('Better late than never.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Bloco 6 -->
+            <details style="background: #1e293b; color: #f1f5f9; border-radius: 8px; border: 1px solid #334155; overflow: hidden;">
+                <summary style="padding: 15px; cursor: pointer; font-weight: bold; font-size: 15px; background: #0f172a; outline: none;">
+                    🔹 Trabalho e estudos
+                </summary>
+                <div style="padding: 15px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #334155;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>26️⃣ I’ll get back to you on that.</strong> → Depois eu te retorno sobre isso.</div>
+                        <button onclick="falarTexto('I’ll get back to you on that.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>27️⃣ Let’s call it a day.</strong> → Vamos encerrar por aqui.</div>
+                        <button onclick="falarTexto('Let’s call it a day.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>28️⃣ Can you give me a quick update?</strong> → Pode me atualizar rapidamente?</div>
+                        <button onclick="falarTexto('Can you give me a quick update?')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>29️⃣ We’re short on time.</strong> → Estamos com pouco tempo.</div>
+                        <button onclick="falarTexto('We’re short on time.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>30️⃣ That’s beside the point.</strong> → Isso não vem ao caso.</div>
+                        <button onclick="falarTexto('That’s beside the point.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Bloco 7 -->
+            <details style="background: #1e293b; color: #f1f5f9; border-radius: 8px; border: 1px solid #334155; overflow: hidden;">
+                <summary style="padding: 15px; cursor: pointer; font-weight: bold; font-size: 15px; background: #0f172a; outline: none;">
+                    🔹 Conversas mais naturais
+                </summary>
+                <div style="padding: 15px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #334155;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>31️⃣ You can’t go wrong with…</strong> → Não tem erro com…</div>
+                        <button onclick="falarTexto('You can’t go wrong with…')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>32️⃣ It’s up to you.</strong> → Você decide.</div>
+                        <button onclick="falarTexto('It’s up to you.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #334155; padding: 10px; border-radius: 6px;">
+                        <div><strong>33️⃣ You took the words right out of my mouth.</strong> → Você disse exatamente o que eu ia dizer.</div>
+                        <button onclick="falarTexto('You took the words right out of my mouth.')" style="background: #0ea5e9; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">🔊 Ouvir</button>
+                    </div>
+                </div>
+            </details>
+
+        </div>
+    </section>
+
+    <!-- ======================================================== -->
+        <!-- MÓDULO EXTRA: DICIONÁRIO E FRASES DO COTIDIANO (150 ITENS) -->
+        <!-- ======================================================== -->
+        <section class="card comic-box">
+            <div class="comic-header">
+                <h2>📚 Glossário & Frases do Dia a Dia</h2>
+                <span class="comic-badge">Essencial</span>
+            </div>
+            <p style="margin-bottom: 15px; font-size: 14px; color: #64748b;">
+                Explore abaixo uma seleção profissional com 100 palavras e 50 frases indispensáveis para dominar o inglês prático do cotidiano. Clique em ouvir para treinar!
+            </p>
+
+            <!-- Abas para alternar entre Palavras e Frases -->
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <button onclick="mostrarSecao('palavras')" id="btn-tab-palavras" style="flex: 1; background-color: #0ea5e9;">100 Palavras do Dia</button>
+                <button onclick="mostrarSecao('frases')" id="btn-tab-frases" style="flex: 1; background-color: #64748b;">50 Frases do Dia</button>
+            </div>
+
+            <!-- Container onde a lista dinâmica será gerada -->
+            <div id="glossario-container" style="max-height: 400px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 5px;">
+                <!-- O JavaScript vai injetar os itens aqui de forma limpa -->
+            </div>
+        </section>
+
+        <section class="card quiz-box">
+            <h2>🎯 Pratique o que aprendeu (Desafios)</h2>
+            
+            <div id="quiz-container">
+                <p id="question-text" class="question">Carregando pergunta...</p>
+                
+                <button onclick="toggleTranslation()" class="btn-translate">🌐 Ver Tradução da Pergunta</button>
+                <p id="translation-box" class="translation-hidden">A tradução aparecerá aqui...</p>
+
+                <div class="options" id="options-box"></div>
+            </div>
+
+            <div id="result-box" class="hidden">
+                <p id="feedback-text"></p>
+                <button onclick="nextQuestion()" class="btn-next">Próxima Pergunta ➔</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Plataforma interativa com síntese de voz nativa. 💡</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

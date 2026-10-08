@@ -1,0 +1,588 @@
+﻿<!-- Desenvolvido por Prof. Marcelo Oliveira -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Loja Online - Mercado & Shopee</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- TOPO MODERNO -->
+    <header class="topo-moderno">
+        <div class="topo-linha1">
+            <div class="logo">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 21v2h-2v-2h-4v2H8v-2H5v2H3v-2h2V7h14v14zM5 13h14v2H5v-2zm4-8h6v2h-6V5z"/>
+                </svg>
+                <span>Minha Loja</span>
+            </div>
+            <div class="topo-acoes">
+                <select id="selector-plataforma" onchange="mudarPlataforma(this.value)">
+                    <option value="local">🏪 Loja Local</option>
+                    <option value="shopee">🟠 Shopee</option>
+                    <option value="mercado-livre">🟡 Mercado Livre</option>
+                </select>
+                <a href="#carrinho-futurista" class="btn-carrinho-topo" onclick="rolarCarrinho()">
+                    🛒 <span class="contador-topo" id="contadorCarrinho">0</span>
+                </a>
+            </div>
+        </div>
+        <div class="busca-topo">
+            <input type="text" id="busca-produtos" placeholder="🔍 O que você procura hoje? Notebook, celular, roupas...">
+            <button type="button" onclick="filtrarProdutos()">Buscar</button>
+        </div>
+    </header>
+
+    <!-- BANNER PROMOCIONAL -->
+    <section class="banner-promo">
+        <div class="banner-conteudo">
+            <div class="banner-texto">
+                <span class="banner-tag">🔥 OFERTA DA SEMANA</span>
+                <h2>Até <span class="destaque-neon">50% OFF</span> em centenas de produtos</h2>
+                <p>Frete grátis via Shopee • Entrega pelo Mercado Livre • Pagamento com PIX com desconto extra</p>
+                <button class="btn-banner" onclick="rolarCatalogo()">Ver Ofertas Agora →</button>
+            </div>
+            <div class="banner-icones">
+                <span>📱</span><span>💻</span><span>👟</span><span>🎧</span>
+            </div>
+        </div>
+        <div class="banner-bolinhas">
+            <span class="bolinha ativa"></span>
+            <span class="bolinha"></span>
+            <span class="bolinha"></span>
+        </div>
+    </section>
+
+    <!-- CATEGORIAS RÁPIDAS -->
+    <section class="categorias-rapidas">
+        <button onclick="filtrarCategoria('todos', this)">✨<span>Todas</span></button>
+        <button onclick="filtrarCategoria('eletronicos', this)">📱<span>Eletrônicos</span></button>
+        <button onclick="filtrarCategoria('vestuario', this)">👕<span>Vestuário</span></button>
+        <button onclick="filtrarCategoria('alimentos', this)">🛒<span>Alimentos</span></button>
+        <button onclick="filtrarCategoria('moveis', this)">🪑<span>Móveis</span></button>
+        <button onclick="filtrarCategoria('beleza', this)">💄<span>Beleza</span></button>
+        <button onclick="filtrarCategoria('esportes', this)">⚽<span>Esportes</span></button>
+        <button onclick="filtrarCategoria('brinquedos', this)">🎮<span>Brinquedos</span></button>
+        <button onclick="filtrarCategoria('automotivo', this)">🚗<span>Automotivo</span></button>
+    </section>
+
+    <!-- ÁREA DE CADASTRO DE PRODUTOS -->
+    <section class="cadastro-produto">
+        <h2 class="titulo-cadastro" onclick="alternarCadastro()">
+            ➕ Cadastrar Novo Produto
+            <span class="seta-cadastro" id="setaCadastro">▼</span>
+        </h2>
+
+        <div class="formulario-cadastro" id="formCadastro" style="display: none;">
+
+            <div class="form-grupo-cadastro">
+                <!-- FOTO DO PRODUTO -->
+                <div class="area-foto">
+                    <label>Foto do Produto:</label>
+                    <div class="preview-foto" id="previewFoto" onclick="document.getElementById('fotoProduto').click()">
+                        <span>📷<br>Clique para enviar a foto</span>
+                    </div>
+                    <input type="file" id="fotoProduto" accept="image/*" onchange="carregarFoto(event)" style="display: none;">
+                    <button type="button" class="btn-remover-foto" onclick="removerFoto()" style="display: none;">
+                        Remover Foto
+                    </button>
+                </div>
+
+                <!-- CAMPOS DO PRODUTO -->
+                <div class="campos-produto">
+                    <div class="campo-linha">
+                        <div class="campo">
+                            <label>Nome do Produto *</label>
+                            <input type="text" id="cadNome" placeholder="Ex: Smartphone Samsung Galaxy">
+                        </div>
+                        <div class="campo">
+                            <label>Marca *</label>
+                            <input type="text" id="cadMarca" placeholder="Ex: Samsung">
+                        </div>
+                    </div>
+
+                    <div class="campo-linha">
+                        <div class="campo">
+                            <label>Preço (R$) *</label>
+                            <input type="number" id="cadPreco" placeholder="Ex: 99.90" step="0.01" min="0">
+                        </div>
+                        <div class="campo">
+                            <label>Preço Original (R$)</label>
+                            <input type="number" id="cadPrecoOriginal" placeholder="Ex: 149.90" step="0.01" min="0">
+                        </div>
+                        <div class="campo">
+                            <label>Categoria *</label>
+                            <select id="cadCategoria">
+                                <option value="">Selecione...</option>
+                                <option value="eletronicos">Eletrônicos</option>
+                                <option value="vestuario">Vestuário</option>
+                                <option value="alimentos">Alimentos</option>
+                                <option value="moveis">Móveis</option>
+                                <option value="beleza">Beleza</option>
+                                <option value="esportes">Esportes</option>
+                                <option value="jardinagem">Jardinagem</option>
+                                <option value="brinquedos">Brinquedos</option>
+                                <option value="automotivo">Automotivo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="campo-linha">
+                        <div class="campo">
+                            <label>Avaliação (1 a 5)</label>
+                            <input type="number" id="cadAvaliacao" placeholder="Ex: 4.8" step="0.1" min="1" max="5" value="4.5">
+                        </div>
+                        <div class="campo">
+                            <label>Quantidade Vendida</label>
+                            <input type="number" id="cadVendidos" placeholder="Ex: 500" min="0" value="0">
+                        </div>
+                        <div class="campo">
+                            <label>Frete</label>
+                            <select id="cadFrete">
+                                <option value="Frete grátis">Frete grátis</option>
+                                <option value="Frete a calcular">Frete a calcular</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <label>Descrição Completa do Produto *</label>
+                        <textarea id="cadDescricao" rows="3" placeholder="Descreva tudo sobre o produto: características, materiais, benefícios, diferenciais..."></textarea>
+                    </div>
+
+                    <div class="campo">
+                        <label>Especificações Técnicas (uma por linha)</label>
+                        <textarea id="cadEspecificacoes" rows="4" placeholder="Ex:&#10;Processador: Intel Core i5&#10;Memória: 8GB RAM&#10;Tela: 15.6 polegadas"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="botoes-cadastro">
+                <button type="button" class="btn-salvar" onclick="salvarProduto()">
+                    💾 Salvar Produto
+                </button>
+                <button type="button" class="btn-cancelar" onclick="limparFormulario()">
+                    ✖ Cancelar
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- LISTA DE PRODUTOS CADASTRADOS PELO CLIENTE -->
+    <section class="produtos-cadastrados" id="areaProdutosCadastrados" style="display: none;">
+        <h2>📦 Meus Produtos Cadastrados (<span id="contadorCadastrados">0</span>)</h2>
+        <div class="lista-cadastrados" id="listaCadastrados">
+            <!-- Produtos cadastrados aparecem aqui -->
+        </div>
+    </section>
+
+    <!-- CATÁLOGO DE PRODUTOS -->
+    <div class="cabecalho-catalogo">
+        <h2>🛍️ Nossos Produtos <span id="totalResultados"></span></h2>
+        <div class="filtros">
+            <select id="filtro-categoria">
+                <option value="todos">Todas as categorias</option>
+                <option value="eletronicos">Eletrônicos</option>
+                <option value="vestuario">Vestuário</option>
+                <option value="alimentos">Alimentos</option>
+                <option value="moveis">Móveis</option>
+                <option value="beleza">Beleza</option>
+                <option value="esportes">Esportes</option>
+                <option value="brinquedos">Brinquedos</option>
+                <option value="automotivo">Automotivo</option>
+            </select>
+            <select id="filtro-preco">
+                <option value="todos">💰 Preço: todos</option>
+                <option value="0-50">Até R$ 50</option>
+                <option value="50-100">R$ 50 - R$ 100</option>
+                <option value="100-500">R$ 100 - R$ 500</option>
+                <option value="500-1000">R$ 500 - R$ 1.000</option>
+                <option value="1000-plus">Acima de R$ 1.000</option>
+            </select>
+        </div>
+    </div>
+    <section class="produtos" id="catalogo-produtos">
+        <!-- Produtos serão inseridos via JavaScript -->
+    </section>
+
+    <!-- CARRINHO -->
+    <section class="carrinho-futurista">
+        <div class="carrinho-header">
+            <div class="carrinho-titulo">
+                <span class="icone-neon">🛒</span>
+                <h2>Carrinho <span class="neon-text">Quantum</span></h2>
+            </div>
+            <div class="carrinho-badge">
+                <span id="contadorCarrinho">0</span> itens
+            </div>
+        </div>
+
+        <!-- LISTA DE ITENS -->
+        <div class="carrinho-itens">
+            <ul id="listaCarrinho"></ul>
+            <div class="carrinho-vazio" id="carrinhoVazio">
+                <span>🛸</span>
+                <p>Seu carrinho está vazio</p>
+                <small>Adicione produtos para começar</small>
+            </div>
+        </div>
+
+        <!-- CUPOM DE DESCONTO -->
+        <div class="cupom-area">
+            <div class="cupom-input">
+                <span class="icone-cupom">🎟️</span>
+                <input type="text" id="cupom" placeholder="Código do cupom (ex: PROMO10, QUANTUM15, LOJA20)">
+                <button onclick="aplicarCupom()">Aplicar</button>
+            </div>
+            <div class="cupom-status" id="cupomStatus"></div>
+        </div>
+
+        <!-- PAGAMENTO -->
+        <div class="secao-futura">
+            <h3><span>💳</span> Forma de Pagamento</h3>
+            <div class="opcoes-pagamento">
+                <label class="opcao-pagamento ativo" data-valor="pix" onclick="selecionarPagamento(this)">
+                    <input type="radio" name="pagamento" value="pix" checked>
+                    <span class="opcao-icone">⚡</span>
+                    <span class="opcao-info">
+                        <strong>PIX</strong>
+                        <small>5% de desconto</small>
+                    </span>
+                </label>
+                <label class="opcao-pagamento" data-valor="cartao" onclick="selecionarPagamento(this)">
+                    <input type="radio" name="pagamento" value="cartao">
+                    <span class="opcao-icone">💳</span>
+                    <span class="opcao-info">
+                        <strong>Cartão</strong>
+                        <small>3x sem juros</small>
+                    </span>
+                </label>
+                <label class="opcao-pagamento" data-valor="boleto" onclick="selecionarPagamento(this)">
+                    <input type="radio" name="pagamento" value="boleto">
+                    <span class="opcao-icone">📄</span>
+                    <span class="opcao-info">
+                        <strong>Boleto</strong>
+                        <small>Sem desconto</small>
+                    </span>
+                </label>
+                <label class="opcao-pagamento" data-valor="dinheiro" onclick="selecionarPagamento(this)">
+                    <input type="radio" name="pagamento" value="dinheiro">
+                    <span class="opcao-icone">💵</span>
+                    <span class="opcao-info">
+                        <strong>Dinheiro</strong>
+                        <small>10% de desconto</small>
+                    </span>
+                </label>
+            </div>
+        </div>
+
+        <!-- ENTREGA -->
+        <div class="secao-futura">
+            <h3><span>🚀</span> Entrega</h3>
+            <div class="opcoes-entrega">
+                <label class="opcao-entrega ativo" data-valor="shopee" onclick="selecionarEntrega(this)">
+                    <input type="radio" name="entrega" value="shopee" checked>
+                    <span class="opcao-icone">🟠</span>
+                    <span class="opcao-info">
+                        <strong>Shopee Entrega Rápida</strong>
+                        <small>Grátis • 5 a 7 dias úteis</small>
+                    </span>
+                </label>
+                <label class="opcao-entrega" data-valor="mercado-livre" onclick="selecionarEntrega(this)">
+                    <input type="radio" name="entrega" value="mercado-livre">
+                    <span class="opcao-icone">🟡</span>
+                    <span class="opcao-info">
+                        <strong>Mercado Livre Envio</strong>
+                        <small>R$ 19,90 • 3 a 5 dias úteis</small>
+                    </span>
+                </label>
+                <label class="opcao-entrega" data-valor="correios" onclick="selecionarEntrega(this)">
+                    <input type="radio" name="entrega" value="correios">
+                    <span class="opcao-icone">📬</span>
+                    <span class="opcao-info">
+                        <strong>Correios (via CEP)</strong>
+                        <small>R$ 24,90 • 7 a 15 dias úteis</small>
+                    </span>
+                </label>
+                <label class="opcao-entrega" data-valor="retirada" onclick="selecionarEntrega(this)">
+                    <input type="radio" name="entrega" value="retirada">
+                    <span class="opcao-icone">🏪</span>
+                    <span class="opcao-info">
+                        <strong>Retirada na Loja</strong>
+                        <small>Grátis • Hoje mesmo</small>
+                    </span>
+                </label>
+            </div>
+        </div>
+
+        <!-- RESUMO -->
+        <div class="resumo-futuro">
+            <div class="linha-resumo">
+                <span>Subtotal</span>
+                <span id="precoFinal">R$ 0,00</span>
+            </div>
+            <div class="linha-resumo">
+                <span>Taxa da plataforma</span>
+                <span id="taxasFinal">R$ 0,00</span>
+            </div>
+            <div class="linha-resumo desconto">
+                <span>Desconto</span>
+                <span id="descontoFinal">- R$ 0,00</span>
+            </div>
+            <div class="linha-resumo entrega-valor">
+                <span>Entrega</span>
+                <span id="entregaValor">Grátis</span>
+            </div>
+            <div class="linha-total">
+                <span>Total</span>
+                <span id="valorTotalFinal">R$ 0,00</span>
+            </div>
+            <div class="parcelamento" id="infoParcelamento"></div>
+        </div>
+
+        <button class="btn-finalizar-futurista" onclick="finalizarCompra()">
+            <span>⚡</span> Finalizar Compra
+        </button>
+    </section>
+
+    <!-- MODAL DE DETALHES DO PRODUTO -->
+    <div class="modal-overlay" id="modalProduto" onclick="fecharModalExterior(event)">
+        <div class="modal-produto">
+            <button class="btn-fechar-modal" onclick="fecharProduto()">✖</button>
+
+            <div class="modal-conteudo">
+                <!-- GALERIA DE FOTOS -->
+                <div class="galeria-produto">
+                    <div class="foto-principal" id="fotoPrincipal">
+                        <!-- Foto principal aparece aqui -->
+                    </div>
+                    <div class="miniaturas" id="miniaturasFotos">
+                        <!-- Miniaturas das fotos -->
+                    </div>
+                </div>
+
+                <!-- INFORMAÇÕES DO PRODUTO -->
+                <div class="info-produto">
+                    <div class="info-topo">
+                        <span class="tag-categoria" id="modalCategoria"></span>
+                        <div class="selo-frete" id="modalFrete"></div>
+                    </div>
+
+                    <h2 id="modalNome"></h2>
+                    <div class="marca-modal" id="modalMarca"></div>
+
+                    <div class="nota-modal">
+                        <div class="estrelas" id="modalEstrelas"></div>
+                        <span class="nota-numero" id="modalNota"></span>
+                        <span class="divider">|</span>
+                        <span class="vendidos-modal" id="modalVendidos"></span>
+                        <span class="divider">|</span>
+                        <span class="avaliacoes-modal" id="modalQtdAvaliacoes"></span>
+                    </div>
+
+                    <div class="precos-modal">
+                        <span class="preco-atual" id="modalPreco"></span>
+                        <span class="preco-antigo" id="modalPrecoOriginal"></span>
+                        <span class="desconto-modal" id="modalDesconto"></span>
+                    </div>
+
+                    <div class="caixa-envio">
+                        <span>📦</span>
+                        <div>
+                            <strong>Envio</strong>
+                            <p id="modalEnvio"></p>
+                        </div>
+                    </div>
+
+                    <div class="caixa-pagamento-modal">
+                        <strong>💳 Pagamento aceito:</strong>
+                        <div class="selos-pagamento">
+                            <span>⚡ PIX (5% off)</span>
+                            <span>💳 Cartão 3x</span>
+                            <span>📄 Boleto</span>
+                            <span>💵 Dinheiro (10% off)</span>
+                        </div>
+                    </div>
+
+                    <div class="quantidade-modal">
+                        <label>Quantidade:</label>
+                        <div class="controle-quantidade">
+                            <button onclick="mudarQuantidadeModal(-1)">−</button>
+                            <input type="number" id="modalQuantidade" value="1" min="1" max="99">
+                            <button onclick="mudarQuantidadeModal(1)">+</button>
+                        </div>
+                        <span class="estoque" id="modalEstoque"></span>
+                    </div>
+
+                    <div class="botoes-modal">
+                        <button class="btn-carrinho-modal" onclick="adicionarDoModal()">
+                            🛒 Adicionar ao Carrinho
+                        </button>
+                        <button class="btn-comprar-modal" onclick="comprarAgora()">
+                            ⚡ Comprar Agora
+                        </button>
+                    </div>
+
+                    <!-- DESCRIÇÃO -->
+                    <div class="secao-modal">
+                        <h3>📋 Descrição do Produto</h3>
+                        <p class="descricao-modal" id="modalDescricao"></p>
+                    </div>
+
+                    <!-- ESPECIFICAÇÕES -->
+                    <div class="secao-modal">
+                        <h3>⚙️ Especificações</h3>
+                        <table class="tabela-specs" id="modalEspecificacoes"></table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AVALIAÇÕES -->
+            <div class="secao-avaliacoes">
+                <div class="cabecalho-avaliacoes">
+                    <h3>⭐ Avaliações dos Clientes</h3>
+                    <div class="resumo-nota">
+                        <div class="nota-grande" id="notaGrande"></div>
+                        <div class="estrelas-grandes" id="estrelasGrandes"></div>
+                        <div class="total-avaliacoes" id="totalAvaliacoes"></div>
+                    </div>
+                </div>
+                <div class="filtros-avaliacao">
+                    <button class="filtro-estrelas ativo" onclick="filtrarAvaliacoes(0, this)">Todas</button>
+                    <button class="filtro-estrelas" onclick="filtrarAvaliacoes(5, this)">★★★★★ (5)</button>
+                    <button class="filtro-estrelas" onclick="filtrarAvaliacoes(4, this)">★★★★ (4)</button>
+                    <button class="filtro-estrelas" onclick="filtrarAvaliacoes(3, this)">★★★ (3)</button>
+                </div>
+
+                <!-- FORMULÁRIO DE AVALIAÇÃO DO CLIENTE -->
+                <div class="form-avaliacao">
+                    <div class="form-avaliacao-topo">
+                        <h4>✍️ Avalie este produto</h4>
+                        <span class="dica-form">Sua opinião ajuda outros compradores</span>
+                    </div>
+
+                    <div class="linha-form-avaliacao">
+                        <input type="text" id="nomeCliente" placeholder="Seu nome" maxlength="40">
+                        <div class="selecao-estrelas" id="selecaoEstrelas">
+                            <span class="estrela-cli" onclick="selecionarEstrela(1)">★</span>
+                            <span class="estrela-cli" onclick="selecionarEstrela(2)">★</span>
+                            <span class="estrela-cli" onclick="selecionarEstrela(3)">★</span>
+                            <span class="estrela-cli" onclick="selecionarEstrela(4)">★</span>
+                            <span class="estrela-cli" onclick="selecionarEstrela(5)">★</span>
+                            <span class="nota-selecionada" id="notaSelecionada">Clique nas estrelas</span>
+                        </div>
+                    </div>
+
+                    <textarea id="comentarioCliente" rows="3" maxlength="500"
+                        placeholder="Conte sua experiência com o produto: qualidade, entrega, se atendeu às expectativas..."></textarea>
+                    <div class="contador-caracteres" id="contadorCaracteres">0/500</div>
+
+                    <div class="rodape-form-avaliacao">
+                        <label class="btn-foto-avaliacao">
+                            📷 Adicionar foto
+                            <input type="file" id="fotoAvaliacao" accept="image/*"
+                                onchange="carregarFotoAvaliacao(event)" style="display:none;">
+                        </label>
+                        <span class="preview-foto-avaliacao" id="previewFotoAvaliacao"></span>
+                        <button class="btn-publicar-avaliacao" onclick="enviarAvaliacao()">
+                            ⭐ Publicar Avaliação
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lista-avaliacoes" id="listaAvaliacoes"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PEDIDOS -->
+    <section class="pedidos">
+        <h2>Meus Pedidos</h2>
+        <ul id="listaPedidos"></ul>
+        <button onclick="limparPedidos()">Limpar Histórico</button>
+    </section>
+
+    <!-- FINANCEIRO -->
+    <section class="financeiro">
+        <h2>Financeiro da Loja</h2>
+        <p>
+            <strong>Lucro Total:</strong> 
+            R$ <span id="lucroTotal">0.00</span>
+        </p>
+        <p>
+            <strong>Gasto Total:</strong> 
+            R$ <span id="gastoTotal">0.00</span>
+        </p>
+    </section>
+
+    <!-- SELOS DE CONFIANÇA -->
+    <section class="selos-confianca">
+        <div class="selo">
+            <span>🔒</span>
+            <strong>Compra 100% Segura</strong>
+            <small>Seus dados protegidos</small>
+        </div>
+        <div class="selo">
+            <span>🚚</span>
+            <strong>Frete Grátis</strong>
+            <small>Shopee e Mercado Livre</small>
+        </div>
+        <div class="selo">
+            <span>↩️</span>
+            <strong>7 Dias para Devolver</strong>
+            <small>Sem custo adicional</small>
+        </div>
+        <div class="selo">
+            <span>💳</span>
+            <strong>PIX com 5% OFF</strong>
+            <small>Aprovação imediata</small>
+        </div>
+        <div class="selo">
+            <span>⭐</span>
+            <strong>Avaliação 4.8</strong>
+            <small>Mais de 10 mil clientes</small>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter">
+        <div class="newsletter-conteudo">
+            <h3>📩 Receba ofertas em primeira mão</h3>
+            <p>Cadastre seu e-mail e ganhe <strong>10% de desconto</strong> na primeira compra com o cupom <strong>BEMVINDO5</strong></p>
+        </div>
+        <div class="newsletter-form">
+            <input type="email" id="emailNewsletter" placeholder="Seu melhor e-mail">
+            <button onclick="cadastrarEmail()">Quero meus cupons</button>
+        </div>
+    </section>
+
+    <!-- NOTIFICAÇÕES TOAST -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- BOTÃO VOLTAR AO TOPO -->
+    <button class="btn-topo" id="btnTopo" onclick="window.scrollTo({top:0, behavior:'smooth'})">⬆️</button>
+
+    <!-- BOTÃO WHATSAPP -->
+    <a href="https://wa.me/5500000000000?text=Olá! Gostaria de ajuda com uma compra."
+        target="_blank" class="btn-whatsapp" title="Fale conosco no WhatsApp">
+        💬
+    </a>
+
+    <!-- RODAPÉ -->
+    <footer class="rodape">
+        <div class="rodape-conteudo">
+            <p class="rodape-titulo">Site feito pelo Prof. Marcelo Oliveira</p>
+            <p class="rodape-direitos">© Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

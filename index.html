@@ -1,0 +1,107 @@
+﻿<!-- Desenvolvido por Prof. Marcelo Oliveira -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio - Prof. Marcelo Oliveira</title>
+  <meta name="description" content="Portfólio de projetos front-end de Prof. Marcelo Oliveira. Lojas online, jogos, sistemas e sites Clerk.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="container topo__wrap">
+      <div class="topo__logo">
+        <span class="logo__icone">&nbsp;</span>
+        <span class="logo__txt">Prof. Marcelo Oliveira</span>
+      </div>
+      <nav class="topo__nav">
+        <a href="#projetos">Projetos</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero__wrap">
+      <div class="hero__texto">
+        <h1>Portfólio de <span class="destaque">Projetos Front-End</span></h1>
+        <p>Repositório organizado com projetos desenvolvidos ao longo da jornada como desenvolvedor front-end: lojas online, sistemas, jogos, plataformas de estudo e sites institucionais. Clique em um card para ver o código-fonte.</p>
+        <a class="btn" href="https://github.com/marcelooliveira8052668-cyber" target="_blank" rel="noopener">Ver GitHub</a>
+      </div>
+      <div class="hero__codigo">
+        <pre><code>&lt;div class="projeto"&gt;
+  &lt;h2&gt;Desenvolvido por&lt;/h2&gt;
+  &lt;p&gt;Prof. Marcelo Oliveira&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="projetos" id="projetos">
+    <div class="container">
+      <h2 class="titulo">Meus Projetos <span class="contador" id="totalProj"></span></h2>
+      <p class="subtitulo">Clique em <strong>&quot;Ver C&oacute;digo&quot;</strong> no card para abrir o c&oacute;digo-fonte completo do projeto.</p>
+      <div class="filtros" id="filtros"></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="sobre" id="sobre">
+    <div class="container sobre__wrap">
+      <div class="sobre__card">
+        <h3>Sobre este portfólio</h3>
+        <p>Este portfólio re&uacute;ne projetos front-end prontos, com screenshots reais de cada site e c&oacute;digo-fonte completo para consulta.</p>
+        <p>Todos os arquivos possuem cabe&ccedil;alho de autoria: <strong>Desenvolvido por Prof. Marcelo Oliveira</strong>.</p>
+      </div>
+      <div class="sobre__card">
+        <h3>Como visualizar o c&oacute;digo</h3>
+        <p>Clique em <strong>&quot;Ver C&oacute;digo&quot;</strong> no card do projeto para abrir o visualizador. L&aacute; voc&ecirc; navega entre os arquivos HTML, CSS, JS e JSX.</p>
+        <p>Tamb&eacute;m &eacute; poss&iacute;vel abrir o reposit&oacute;rio completo pelo bot&atilde;o <strong>GitHub</strong> do card.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contato" id="contato">
+    <div class="container contato__wrap">
+      <h2>Contato</h2>
+      <div class="contato__links">
+        <a href="mailto:seuemail@exemplo.com">&#128231; E-mail: seuemail@exemplo.com</a>
+        <a href="https://www.linkedin.com/in/seuperfil" target="_blank" rel="noopener">&#128188; LinkedIn: linkedin.com/in/seuperfil</a>
+        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener">&#128172; WhatsApp: (11) 99999-9999</a>
+        <a href="https://github.com/marcelooliveira8052668-cyber" target="_blank" rel="noopener">&#128025; GitHub: marcelooliveira8052668-cyber</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="rodape">
+    <div class="container">
+      <p>&copy; 2026 Prof. Marcelo Oliveira. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal__overlay" id="modalOverlay"></div>
+    <div class="modal__conteudo" role="dialog" aria-modal="true">
+      <div class="modal__cabecalho">
+        <h3 id="modalTitulo">Visualizador de C&oacute;digo</h3>
+        <div class="modal__acoes">
+          <a id="btnGitHub" target="_blank" rel="noopener" class="btn btn--ghost">Abrir no GitHub</a>
+          <button id="btnFechar" class="btn btn--ghost">Fechar</button>
+        </div>
+      </div>
+      <div class="modal__corpo">
+        <aside class="modal__arvore" id="arvore"></aside>
+        <main class="modal__codigo">
+          <pre><code id="codigo"></code></pre>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

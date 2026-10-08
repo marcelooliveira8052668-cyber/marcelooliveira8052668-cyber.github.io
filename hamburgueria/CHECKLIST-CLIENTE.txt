@@ -1,0 +1,23 @@
+CHECKLIST ANTES DE ENTREGAR
+
+[ ] Nome da empresa
+[ ] Logo/nome no cabeçalho
+[ ] WhatsApp testado
+[ ] Telefone conferido
+[ ] Endereço conferido
+[ ] Mapa apontando para o local correto
+[ ] Horário conferido
+[ ] Produtos conferidos
+[ ] Preços conferidos
+[ ] Fotos reais do cliente
+[ ] Link iFood testado
+[ ] Link Keeta testado, se usado
+[ ] Link 99Food testado, se usado
+[ ] Instagram testado
+[ ] Facebook testado, se usado
+[ ] Site testado no celular
+[ ] Site testado no computador
+[ ] Menu mobile testado
+[ ] Botões de pedido testados
+[ ] Ortografia revisada
+[ ] Cliente aprovou textos e fotos

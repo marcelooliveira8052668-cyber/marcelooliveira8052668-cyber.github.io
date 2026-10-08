@@ -1,0 +1,3767 @@
+﻿<!-- Desenvolvido por Prof. Marcelo Oliveira -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Comanda Fácil - Sistema de Comandas</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f1ed;
+            color: #2b211b;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+        }
+
+        /* ================================
+           LOGIN
+        ================================= */
+
+        #telaLogin {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #3a2116, #6a4028);
+            padding: 20px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+
+        .login-box h1 {
+            text-align: center;
+            color: #6a4028;
+            margin-bottom: 10px;
+        }
+
+        .login-box p {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #777;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .btn-principal {
+            width: 100%;
+            padding: 14px;
+            background: #6a4028;
+            color: white;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-principal:hover {
+            background: #3a2116;
+        }
+
+        /* ================================
+           SISTEMA
+        ================================= */
+
+        #sistema {
+            display: none;
+            min-height: 100vh;
+        }
+
+        #sistema.ativo {
+            display: block;
+        }
+
+        header {
+            background: #3a2116;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            font-size: 22px;
+        }
+
+        .header-botoes {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .header-botoes button {
+            padding: 10px 13px;
+            border-radius: 8px;
+            background: #c99a4a;
+            color: white;
+            font-weight: bold;
+        }
+
+        .header-botoes button:hover {
+            background: #a97d35;
+        }
+
+        .header-botoes .btn-sair {
+            background: #a83232;
+        }
+
+        /* ================================
+           TELAS
+        ================================= */
+
+        main {
+            padding: 25px;
+        }
+
+        .tela {
+            display: none;
+        }
+
+        .tela.ativa {
+            display: block;
+        }
+
+        .titulo-tela {
+            margin-bottom: 20px;
+        }
+
+        .titulo-tela h2 {
+            color: #3a2116;
+            margin-bottom: 5px;
+        }
+
+        .titulo-tela p {
+            color: #777;
+        }
+
+        /* ================================
+           COMANDAS
+        ================================= */
+
+        .comanda-nova {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .comanda-nova input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            font-size: 17px;
+        }
+
+        .comanda-nova button {
+            width: 100%;
+            padding: 14px;
+            background: #6a4028;
+            color: white;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .lista-comandas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .card-comanda {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .card-comanda h3 {
+            color: #6a4028;
+            margin-bottom: 10px;
+        }
+
+        .card-comanda p {
+            margin-bottom: 6px;
+        }
+
+        .card-comanda button {
+            margin-top: 12px;
+            width: 100%;
+            padding: 11px;
+            background: #6a4028;
+            color: white;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* ================================
+           PRODUTOS
+        ================================= */
+
+        .categorias {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .categorias button {
+            padding: 10px 15px;
+            border-radius: 20px;
+            background: #ddd;
+            color: #333;
+        }
+
+        .categorias button.ativo {
+            background: #6a4028;
+            color: white;
+        }
+
+        .produtos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .produto {
+            background: white;
+            padding: 18px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .produto h3 {
+            margin-bottom: 8px;
+        }
+
+        .produto .preco {
+            color: #6a4028;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .produto button {
+            width: 100%;
+            padding: 10px;
+            background: #c99a4a;
+            color: white;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* ================================
+           COMANDA ATUAL
+        ================================= */
+
+        .topo-comanda {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .topo-comanda h2 {
+            color: #6a4028;
+        }
+
+        .comanda-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .produtos-area,
+        .resumo-comanda {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .item-comanda {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            gap: 10px;
+        }
+
+        .controles-quantidade {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .controles-quantidade button {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            background: #6a4028;
+            color: white;
+        }
+
+        .total-comanda {
+            font-size: 24px;
+            font-weight: bold;
+            color: #6a4028;
+            margin: 20px 0;
+        }
+
+        .botoes-comanda {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .botoes-comanda button {
+            padding: 12px 15px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .btn-cozinha {
+            background: #d97706;
+        }
+
+        .btn-voltar {
+            background: #777;
+        }
+
+        .btn-finalizar {
+            background: #238636;
+        }
+
+        /* ================================
+           COZINHA
+        ================================= */
+
+        .cozinha-lista {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 18px;
+        }
+
+        .pedido-cozinha {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 6px solid #d97706;
+        }
+
+        .pedido-cozinha.pronto {
+            border-left-color: #238636;
+        }
+
+        .pedido-cozinha h3 {
+            color: #6a4028;
+            margin-bottom: 10px;
+        }
+
+        .pedido-cozinha ul {
+            margin: 10px 0 15px 20px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .status.preparo {
+            background: #fff1cc;
+            color: #8a5a00;
+        }
+
+        .status.pronto {
+            background: #d8f3dc;
+            color: #176b2c;
+        }
+
+        .pedido-cozinha button {
+            width: 100%;
+            padding: 11px;
+            border-radius: 8px;
+            background: #238636;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* ================================
+           CAIXA
+        ================================= */
+
+        .caixa-resumo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .card-caixa {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .card-caixa h3 {
+            color: #777;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .card-caixa .valor {
+            font-size: 25px;
+            font-weight: bold;
+            color: #6a4028;
+        }
+
+        .card-caixa.principal {
+            background: #6a4028;
+            color: white;
+        }
+
+        .card-caixa.principal h3,
+        .card-caixa.principal .valor {
+            color: white;
+        }
+
+        .fechamento-caixa {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .fechamento-caixa h2 {
+            color: #6a4028;
+            margin-bottom: 20px;
+        }
+
+        .fechamento-linha {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .fechamento-linha:last-child {
+            border-bottom: none;
+        }
+
+        .fechamento-linha strong {
+            color: #6a4028;
+        }
+
+        .botao-imprimir {
+            margin-top: 20px;
+            width: 100%;
+            padding: 14px;
+            background: #238636;
+            color: white;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .botao-imprimir:hover {
+            background: #176b2c;
+        }
+
+        .historico-caixa {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .historico-caixa h2 {
+            color: #6a4028;
+            margin-bottom: 15px;
+        }
+
+        .venda {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+
+        .venda:last-child {
+            border-bottom: none;
+        }
+
+        .venda-topo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .venda-topo strong {
+            color: #6a4028;
+        }
+
+        .venda-total {
+            font-size: 18px;
+            font-weight: bold;
+            color: #238636;
+        }
+
+        .venda-info {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .venda-itens {
+            margin: 8px 0 0 20px;
+            color: #555;
+        }
+
+        .sem-vendas {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        .btn-voltar-caixa {
+            padding: 12px 20px;
+            border-radius: 8px;
+            background: #777;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* ================================
+           MODAIS
+        ================================= */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .modal.ativo {
+            display: flex;
+        }
+
+        .modal-conteudo {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .modal-conteudo h2 {
+            color: #6a4028;
+            margin-bottom: 20px;
+        }
+
+        .modal-conteudo input,
+        .modal-conteudo select {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .modal-botoes {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-botoes button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .btn-confirmar {
+            background: #238636;
+            color: white;
+        }
+
+        .btn-cancelar {
+            background: #777;
+            color: white;
+        }
+
+        /* ================================
+           IMPRESSÃO
+        ================================= */
+
+        @media print {
+
+            body {
+                background: white;
+            }
+
+            #telaLogin,
+            header,
+            .btn-voltar-caixa,
+            .historico-caixa,
+            .botao-imprimir {
+                display: none !important;
+            }
+
+            #sistema {
+                display: block;
+            }
+
+            main {
+                padding: 0;
+            }
+
+            #telaCaixa {
+                display: block !important;
+            }
+
+            .titulo-tela {
+                text-align: center;
+            }
+
+            .titulo-tela h2 {
+                font-size: 24px;
+            }
+
+            .caixa-resumo {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .fechamento-caixa {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+
+            .card-caixa {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+
+            .card-caixa.principal {
+                background: white;
+                color: black;
+            }
+
+            .card-caixa.principal h3,
+            .card-caixa.principal .valor {
+                color: black;
+            }
+
+        }
+
+        /* ================================
+           RESPONSIVO
+        ================================= */
+
+        @media (max-width: 800px) {
+
+            .comanda-layout {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .header-botoes {
+                justify-content: center;
+            }
+
+            main {
+                padding: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- =========================================
+         LOGIN
+    ========================================== -->
+
+    <section id="telaLogin">
+
+        <div class="login-box">
+
+            <h1>📋 COMANDA FÁCIL</h1>
+
+            <p>Sistema de Comandas</p>
+
+            <input
+                type="text"
+                id="usuario"
+                placeholder="Usuário"
+            >
+
+            <input
+                type="password"
+                id="senha"
+                placeholder="Senha"
+            >
+
+            <button
+                class="btn-principal"
+                onclick="fazerLogin()"
+            >
+                ENTRAR
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         SISTEMA
+    ========================================== -->
+
+    <section id="sistema">
+
+        <header>
+
+            <h1>📋 COMANDA FÁCIL</h1>
+
+            <div class="header-botoes">
+
+                <button onclick="abrirCozinha()">
+                    🍳 COZINHA
+                </button>
+
+                <button onclick="abrirCaixa()">
+                    💰 CAIXA
+                </button>
+
+                <button onclick="abrirCadastroFuncionario()">
+                    👤 FUNCIONÁRIOS
+                </button>
+
+                <button onclick="abrirCadastroProduto()">
+                    🍔 PRODUTOS
+                </button>
+
+                <button
+                    class="btn-sair"
+                    onclick="sair()"
+                >
+                    SAIR
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <main>
+
+            <!-- =================================
+                 TELA DE COMANDAS
+            ================================== -->
+
+            <section
+                id="telaComandas"
+                class="tela ativa"
+            >
+
+                <div class="titulo-tela">
+
+                    <h2>Comandas</h2>
+
+                    <p>
+                        Abra uma nova comanda ou continue uma já aberta.
+                    </p>
+
+                </div>
+
+
+                <div class="comanda-nova">
+
+                    <input
+                        type="text"
+                        id="numeroComanda"
+                        placeholder="Digite o número da comanda"
+                    >
+
+                    <button onclick="iniciarComanda()">
+                        + NOVA COMANDA
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="listaComandas"
+                    class="lista-comandas"
+                ></div>
+
+            </section>
+
+
+            <!-- =================================
+                 TELA DA COMANDA
+            ================================== -->
+
+            <section
+                id="telaComanda"
+                class="tela"
+            >
+
+                <div class="topo-comanda">
+
+                    <h2>
+                        Comanda
+                        <span id="numeroComandaAtual"></span>
+                    </h2>
+
+                    <p id="funcionarioComanda"></p>
+
+                </div>
+
+
+                <div class="comanda-layout">
+
+                    <div class="produtos-area">
+
+                        <div class="categorias">
+
+                            <button
+                                class="ativo"
+                                onclick="filtrarProdutos('todos', this)"
+                            >
+                                Todos
+                            </button>
+
+                            <button
+                                onclick="filtrarProdutos('bebidas', this)"
+                            >
+                                Bebidas
+                            </button>
+
+                            <button
+                                onclick="filtrarProdutos('lanches', this)"
+                            >
+                                Lanches
+                            </button>
+
+                            <button
+                                onclick="filtrarProdutos('pizzas', this)"
+                            >
+                                Pizzas
+                            </button>
+
+                            <button
+                                onclick="filtrarProdutos('padaria', this)"
+                            >
+                                Padaria
+                            </button>
+
+                            <button
+                                onclick="filtrarProdutos('doces', this)"
+                            >
+                                Doces
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="listaProdutos"
+                            class="produtos"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="resumo-comanda">
+
+                        <h2>🧾 Resumo</h2>
+
+                        <div id="itensComanda"></div>
+
+                        <div class="total-comanda">
+
+                            Total:
+                            R$
+                            <span id="totalComanda">
+                                0.00
+                            </span>
+
+                        </div>
+
+
+                        <div class="botoes-comanda">
+
+                            <button
+                                class="btn-cozinha"
+                                onclick="enviarParaCozinha()"
+                            >
+                                👨‍🍳 ENVIAR PARA COZINHA
+                            </button>
+
+                            <button
+                                class="btn-voltar"
+                                onclick="voltarParaComandas()"
+                            >
+                                ← VOLTAR
+                            </button>
+
+                            <button
+                                class="btn-finalizar"
+                                onclick="finalizarComanda()"
+                            >
+                                💰 FINALIZAR
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================
+                 TELA DA COZINHA
+            ================================== -->
+
+            <section
+                id="telaCozinha"
+                class="tela"
+            >
+
+                <div class="titulo-tela">
+
+                    <h2>
+                        🍳 Cozinha
+                    </h2>
+
+                    <p>
+
+                        Pedidos enviados para preparo.
+
+                        Ativos:
+
+                        <strong id="contadorCozinha">
+                            0
+                        </strong>
+
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="listaCozinha"
+                    class="cozinha-lista"
+                ></div>
+
+
+                <br>
+
+
+                <button
+                    class="btn-voltar-caixa"
+                    onclick="voltarDaCozinha()"
+                >
+                    ← VOLTAR
+                </button>
+
+            </section>
+
+
+            <!-- =================================
+                 TELA DO CAIXA
+            ================================== -->
+
+            <section
+                id="telaCaixa"
+                class="tela"
+            >
+
+                <div class="titulo-tela">
+
+                    <h2>
+                        💰 Caixa
+                    </h2>
+
+                    <p>
+                        Resumo das vendas realizadas hoje.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="btn-voltar-caixa"
+                    onclick="voltarDoCaixa()"
+                >
+                    ← VOLTAR
+                </button>
+
+
+                <div class="caixa-resumo">
+
+                    <div class="card-caixa principal">
+
+                        <h3>
+                            TOTAL VENDIDO HOJE
+                        </h3>
+
+                        <div class="valor">
+
+                            R$
+
+                            <span id="caixaTotal">
+                                0,00
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-caixa">
+
+                        <h3>
+                            COMANDAS FINALIZADAS
+                        </h3>
+
+                        <div class="valor">
+
+                            <span id="caixaQuantidade">
+                                0
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-caixa">
+
+                        <h3>
+                            💵 DINHEIRO
+                        </h3>
+
+                        <div class="valor">
+
+                            R$
+
+                            <span id="caixaDinheiro">
+                                0,00
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-caixa">
+
+                        <h3>
+                            📱 PIX
+                        </h3>
+
+                        <div class="valor">
+
+                            R$
+
+                            <span id="caixaPix">
+                                0,00
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-caixa">
+
+                        <h3>
+                            💳 DÉBITO
+                        </h3>
+
+                        <div class="valor">
+
+                            R$
+
+                            <span id="caixaDebito">
+                                0,00
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-caixa">
+
+                        <h3>
+                            💳 CRÉDITO
+                        </h3>
+
+                        <div class="valor">
+
+                            R$
+
+                            <span id="caixaCredito">
+                                0,00
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="fechamento-caixa">
+
+                    <h2>
+                        📊 Fechamento do Caixa
+                    </h2>
+
+
+                    <div class="fechamento-linha">
+
+                        <span>
+                            Data
+                        </span>
+
+                        <strong id="fechamentoData">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="fechamento-linha">
+
+                        <span>
+                            Total de vendas
+                        </span>
+
+                        <strong id="fechamentoQuantidade">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="fechamento-linha">
+
+                        <span>
+                            Dinheiro
+                        </span>
+
+                        <strong>
+                            R$
+                            <span id="fechamentoDinheiro">
+                                0,00
+                            </span>
+                        </strong>
+
+                    </div>
+
+
+                    <div class="fechamento-linha">
+
+                        <span>
+                            Pix
+                        </span>
+
+                        <strong>
+                            R$
+                            <span id="fechamentoPix">
+                                0,00
+                            </span>
+                        </strong>
+
+                    </div>
+
+
+                    <div class="fechamento-linha">
+
+                        <span>
+                            Cartão de Débito
+                        </span>
+
+                        <strong>
+                            R$
+                            <span id="fechamentoDebito">
+                                0,00
+                            </span>
+                        </strong>
+
+                    </div>
+
+
+                    <div class="fechamento-linha">
+
+                        <span>
+                            Cartão de Crédito
+                        </span>
+
+                        <strong>
+                            R$
+                            <span id="fechamentoCredito">
+                                0,00
+                            </span>
+                        </strong>
+
+                    </div>
+
+
+                    <div class="fechamento-linha">
+
+                        <span>
+                            TOTAL DO DIA
+                        </span>
+
+                        <strong>
+                            R$
+                            <span id="fechamentoTotal">
+                                0,00
+                            </span>
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        class="botao-imprimir"
+                        onclick="imprimirFechamento()"
+                    >
+                        🖨️ IMPRIMIR FECHAMENTO
+                    </button>
+
+                </div>
+
+
+                <div class="historico-caixa">
+
+                    <h2>
+                        📋 Últimas vendas
+                    </h2>
+
+                    <div id="listaVendas"></div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </section>
+
+
+    <!-- =========================================
+         MODAL FINALIZAÇÃO
+    ========================================== -->
+
+    <div
+        id="modalFinalizacao"
+        class="modal"
+    >
+
+        <div class="modal-conteudo">
+
+            <h2>
+                💰 Finalizar Comanda
+            </h2>
+
+            <p style="margin-bottom: 15px;">
+
+                Escolha a forma de pagamento:
+
+            </p>
+
+
+            <select id="formaPagamento">
+
+                <option value="Dinheiro">
+                    Dinheiro
+                </option>
+
+                <option value="Pix">
+                    Pix
+                </option>
+
+                <option value="Cartão de Débito">
+                    Cartão de Débito
+                </option>
+
+                <option value="Cartão de Crédito">
+                    Cartão de Crédito
+                </option>
+
+            </select>
+
+
+            <div class="modal-botoes">
+
+                <button
+                    class="btn-cancelar"
+                    onclick="fecharModalFinalizacao()"
+                >
+                    CANCELAR
+                </button>
+
+                <button
+                    class="btn-confirmar"
+                    onclick="confirmarFinalizacao()"
+                >
+                    CONFIRMAR
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         MODAL FUNCIONÁRIO
+    ========================================== -->
+
+    <div
+        id="modalFuncionario"
+        class="modal"
+    >
+
+        <div class="modal-conteudo">
+
+            <h2>
+                👤 Cadastrar Funcionário
+            </h2>
+
+
+            <input
+                type="text"
+                id="novoNomeFuncionario"
+                placeholder="Nome completo"
+            >
+
+
+            <input
+                type="text"
+                id="novoUsuarioFuncionario"
+                placeholder="Usuário"
+            >
+
+
+            <input
+                type="password"
+                id="novaSenhaFuncionario"
+                placeholder="Senha"
+            >
+
+
+            <select id="tipoFuncionario">
+
+                <option value="funcionario">
+                    Funcionário
+                </option>
+
+                <option value="admin">
+                    Administrador
+                </option>
+
+            </select>
+
+
+            <div class="modal-botoes">
+
+                <button
+                    class="btn-cancelar"
+                    onclick="fecharCadastroFuncionario()"
+                >
+                    CANCELAR
+                </button>
+
+                <button
+                    class="btn-confirmar"
+                    onclick="cadastrarFuncionario()"
+                >
+                    CADASTRAR
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         MODAL PRODUTO
+    ========================================== -->
+
+    <div
+        id="modalProduto"
+        class="modal"
+    >
+
+        <div class="modal-conteudo">
+
+            <h2>
+                🍔 Cadastrar Produto
+            </h2>
+
+
+            <input
+                type="text"
+                id="novoNomeProduto"
+                placeholder="Nome do produto"
+            >
+
+
+            <input
+                type="number"
+                id="novoPrecoProduto"
+                placeholder="Preço"
+                step="0.01"
+            >
+
+
+            <select id="novaCategoriaProduto">
+
+                <option value="bebidas">
+                    Bebidas
+                </option>
+
+                <option value="lanches">
+                    Lanches
+                </option>
+
+                <option value="pizzas">
+                    Pizzas
+                </option>
+
+                <option value="padaria">
+                    Padaria
+                </option>
+
+                <option value="doces">
+                    Doces
+                </option>
+
+            </select>
+
+
+            <div class="modal-botoes">
+
+                <button
+                    class="btn-cancelar"
+                    onclick="fecharCadastroProduto()"
+                >
+                    CANCELAR
+                </button>
+
+                <button
+                    class="btn-confirmar"
+                    onclick="cadastrarProduto()"
+                >
+                    CADASTRAR
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* ========================================
+           FUNCIONÁRIOS
+        ======================================== */
+
+        let funcionarios =
+            JSON.parse(
+                localStorage.getItem(
+                    "granFornoFuncionarios"
+                )
+            ) || [
+
+                {
+                    nome: "Administrador",
+                    usuario: "admin",
+                    senha: "1234",
+                    tipo: "admin"
+                }
+
+            ];
+
+
+        let funcionarioLogado = null;
+
+
+        /* ========================================
+           COMANDAS
+        ======================================== */
+
+        let comandas =
+            JSON.parse(
+                localStorage.getItem(
+                    "granFornoComandas"
+                )
+            ) || [];
+
+
+        let numeroComandaAtual = null;
+
+        let itensComanda = [];
+
+
+        /* ========================================
+           PRODUTOS
+        ======================================== */
+
+        const produtosPadrao = [
+
+            {
+                nome: "Coca-Cola",
+                preco: 6,
+                categoria: "bebidas"
+            },
+
+            {
+                nome: "Suco de Laranja",
+                preco: 7,
+                categoria: "bebidas"
+            },
+
+            {
+                nome: "X-Burger",
+                preco: 15,
+                categoria: "lanches"
+            },
+
+            {
+                nome: "Pizza Calabresa",
+                preco: 35,
+                categoria: "pizzas"
+            },
+
+            {
+                nome: "Pão Francês",
+                preco: 1,
+                categoria: "padaria"
+            },
+
+            {
+                nome: "Bolo de Chocolate",
+                preco: 8,
+                categoria: "doces"
+            }
+
+        ];
+
+
+        let produtosCadastrados =
+            JSON.parse(
+                localStorage.getItem(
+                    "granFornoProdutos"
+                )
+            ) || [];
+
+
+        /* ========================================
+           VENDAS
+        ======================================== */
+
+        let vendas =
+            JSON.parse(
+                localStorage.getItem(
+                    "granFornoVendas"
+                )
+            ) || [];
+
+
+        /* ========================================
+           LOGIN
+        ======================================== */
+
+        function fazerLogin() {
+
+            const usuario =
+                document
+                .getElementById("usuario")
+                .value
+                .trim();
+
+
+            const senha =
+                document
+                .getElementById("senha")
+                .value
+                .trim();
+
+
+            const funcionario =
+                funcionarios.find(function(item) {
+
+                    return (
+                        item.usuario === usuario &&
+                        item.senha === senha
+                    );
+
+                });
+
+
+            if (!funcionario) {
+
+                alert(
+                    "Usuário ou senha incorretos."
+                );
+
+                return;
+
+            }
+
+
+            funcionarioLogado =
+                funcionario;
+
+
+            document
+                .getElementById("telaLogin")
+                .style.display = "none";
+
+
+            document
+                .getElementById("sistema")
+                .classList.add("ativo");
+
+
+            mostrarComandasAbertas();
+
+        }
+
+
+        function sair() {
+
+            funcionarioLogado = null;
+
+
+            document
+                .getElementById("sistema")
+                .classList.remove("ativo");
+
+
+            document
+                .getElementById("telaLogin")
+                .style.display = "flex";
+
+
+            document
+                .getElementById("usuario")
+                .value = "";
+
+
+            document
+                .getElementById("senha")
+                .value = "";
+
+        }
+
+
+        /* ========================================
+           FUNCIONÁRIOS
+        ======================================== */
+
+        function abrirCadastroFuncionario() {
+
+            if (
+                !funcionarioLogado ||
+                funcionarioLogado.tipo !== "admin"
+            ) {
+
+                alert(
+                    "Apenas administradores podem cadastrar funcionários."
+                );
+
+                return;
+
+            }
+
+
+            document
+                .getElementById("modalFuncionario")
+                .classList.add("ativo");
+
+        }
+
+
+        function fecharCadastroFuncionario() {
+
+            document
+                .getElementById("modalFuncionario")
+                .classList.remove("ativo");
+
+        }
+
+
+        function cadastrarFuncionario() {
+
+            const nome =
+                document
+                .getElementById("novoNomeFuncionario")
+                .value
+                .trim();
+
+
+            const usuario =
+                document
+                .getElementById("novoUsuarioFuncionario")
+                .value
+                .trim();
+
+
+            const senha =
+                document
+                .getElementById("novaSenhaFuncionario")
+                .value
+                .trim();
+
+
+            const tipo =
+                document
+                .getElementById("tipoFuncionario")
+                .value;
+
+
+            if (
+                !nome ||
+                !usuario ||
+                !senha
+            ) {
+
+                alert(
+                    "Preencha todos os campos."
+                );
+
+                return;
+
+            }
+
+
+            const usuarioExiste =
+                funcionarios.some(function(item) {
+
+                    return item.usuario === usuario;
+
+                });
+
+
+            if (usuarioExiste) {
+
+                alert(
+                    "Esse usuário já existe."
+                );
+
+                return;
+
+            }
+
+
+            funcionarios.push({
+
+                nome: nome,
+                usuario: usuario,
+                senha: senha,
+                tipo: tipo
+
+            });
+
+
+            localStorage.setItem(
+                "granFornoFuncionarios",
+                JSON.stringify(funcionarios)
+            );
+
+
+            alert(
+                "Funcionário cadastrado com sucesso!"
+            );
+
+
+            document
+                .getElementById("novoNomeFuncionario")
+                .value = "";
+
+
+            document
+                .getElementById("novoUsuarioFuncionario")
+                .value = "";
+
+
+            document
+                .getElementById("novaSenhaFuncionario")
+                .value = "";
+
+
+            fecharCadastroFuncionario();
+
+        }
+
+
+        /* ========================================
+           PRODUTOS
+        ======================================== */
+
+        function carregarProdutos() {
+
+            const produtos =
+                [
+                    ...produtosPadrao,
+                    ...produtosCadastrados
+                ];
+
+
+            criarCartaoProduto(
+                produtos,
+                "todos"
+            );
+
+        }
+
+
+        function criarCartaoProduto(
+            lista,
+            categoria
+        ) {
+
+            const container =
+                document
+                .getElementById("listaProdutos");
+
+
+            container.innerHTML = "";
+
+
+            lista.forEach(function(produto) {
+
+                if (
+                    categoria !== "todos" &&
+                    produto.categoria !== categoria
+                ) {
+
+                    return;
+
+                }
+
+
+                const card =
+                    document.createElement("div");
+
+
+                card.className = "produto";
+
+
+                card.innerHTML = `
+
+                    <h3>
+                        ${produto.nome}
+                    </h3>
+
+                    <div class="preco">
+                        R$ ${produto.preco.toFixed(2)}
+                    </div>
+
+                    <button
+                        onclick="adicionarProduto(
+                            '${produto.nome.replace(/'/g, "\\'")}',
+                            ${produto.preco}
+                        )"
+                    >
+                        ADICIONAR
+                    </button>
+
+                `;
+
+
+                container.appendChild(card);
+
+            });
+
+        }
+
+
+        function filtrarProdutos(
+            categoria,
+            botao
+        ) {
+
+            document
+                .querySelectorAll(".categorias button")
+                .forEach(function(item) {
+
+                    item.classList.remove("ativo");
+
+                });
+
+
+            botao.classList.add("ativo");
+
+
+            const produtos =
+                [
+                    ...produtosPadrao,
+                    ...produtosCadastrados
+                ];
+
+
+            criarCartaoProduto(
+                produtos,
+                categoria
+            );
+
+        }
+
+
+        function abrirCadastroProduto() {
+
+            if (
+                !funcionarioLogado ||
+                funcionarioLogado.tipo !== "admin"
+            ) {
+
+                alert(
+                    "Apenas administradores podem cadastrar produtos."
+                );
+
+                return;
+
+            }
+
+
+            document
+                .getElementById("modalProduto")
+                .classList.add("ativo");
+
+        }
+
+
+        function fecharCadastroProduto() {
+
+            document
+                .getElementById("modalProduto")
+                .classList.remove("ativo");
+
+        }
+
+
+        function cadastrarProduto() {
+
+            const nome =
+                document
+                .getElementById("novoNomeProduto")
+                .value
+                .trim();
+
+
+            const preco =
+                parseFloat(
+                    document
+                    .getElementById("novoPrecoProduto")
+                    .value
+                );
+
+
+            const categoria =
+                document
+                .getElementById("novaCategoriaProduto")
+                .value;
+
+
+            if (
+                !nome ||
+                isNaN(preco) ||
+                preco <= 0
+            ) {
+
+                alert(
+                    "Preencha corretamente o nome e o preço."
+                );
+
+                return;
+
+            }
+
+
+            produtosCadastrados.push({
+
+                nome: nome,
+                preco: preco,
+                categoria: categoria
+
+            });
+
+
+            localStorage.setItem(
+                "granFornoProdutos",
+                JSON.stringify(produtosCadastrados)
+            );
+
+
+            alert(
+                "Produto cadastrado com sucesso!"
+            );
+
+
+            document
+                .getElementById("novoNomeProduto")
+                .value = "";
+
+
+            document
+                .getElementById("novoPrecoProduto")
+                .value = "";
+
+
+            fecharCadastroProduto();
+
+
+            carregarProdutos();
+
+        }
+
+
+        /* ========================================
+           NOVA COMANDA
+        ======================================== */
+
+        function iniciarComanda() {
+
+            const numero =
+                document
+                .getElementById("numeroComanda")
+                .value
+                .trim();
+
+
+            if (!numero) {
+
+                alert(
+                    "Digite o número da comanda."
+                );
+
+                return;
+
+            }
+
+
+            const existente =
+                comandas.find(function(comanda) {
+
+                    return comanda.numero === numero;
+
+                });
+
+
+            if (existente) {
+
+                alert(
+                    "Essa comanda já está aberta."
+                );
+
+                return;
+
+            }
+
+
+            numeroComandaAtual =
+                numero;
+
+
+            itensComanda = [];
+
+
+            document
+                .getElementById("numeroComanda")
+                .value = "";
+
+
+            mostrarTelaComanda();
+
+        }
+
+
+        /* ========================================
+           ABRIR COMANDA EXISTENTE
+        ======================================== */
+
+        function abrirComandaExistente(numero) {
+
+            const comanda =
+                comandas.find(function(item) {
+
+                    return item.numero === numero;
+
+                });
+
+
+            if (!comanda) {
+
+                return;
+
+            }
+
+
+            numeroComandaAtual =
+                comanda.numero;
+
+
+            itensComanda =
+                comanda.itens || [];
+
+
+            funcionarioLogado =
+                funcionarioLogado || {
+
+                    nome: comanda.funcionarioNome,
+                    tipo: "funcionario"
+
+                };
+
+
+            mostrarTelaComanda();
+
+        }
+
+
+        /* ========================================
+           MOSTRAR TELA DA COMANDA
+        ======================================== */
+
+        function mostrarTelaComanda() {
+
+            document
+                .getElementById("telaComandas")
+                .classList.remove("ativa");
+
+
+            document
+                .getElementById("telaCozinha")
+                .classList.remove("ativa");
+
+
+            document
+                .getElementById("telaCaixa")
+                .classList.remove("ativa");
+
+
+            document
+                .getElementById("telaComanda")
+                .classList.add("ativa");
+
+
+            document
+                .getElementById("numeroComandaAtual")
+                .textContent =
+                numeroComandaAtual;
+
+
+            document
+                .getElementById("funcionarioComanda")
+                .textContent =
+                "Funcionário: " +
+                funcionarioLogado.nome;
+
+
+            carregarProdutos();
+
+
+            mostrarComanda();
+
+        }
+
+
+        /* ========================================
+           ADICIONAR PRODUTO
+        ======================================== */
+
+        function adicionarProduto(
+            nome,
+            preco
+        ) {
+
+            const item =
+                itensComanda.find(function(item) {
+
+                    return item.nome === nome;
+
+                });
+
+
+            if (item) {
+
+                item.quantidade++;
+
+            } else {
+
+                itensComanda.push({
+
+                    nome: nome,
+                    preco: preco,
+                    quantidade: 1
+
+                });
+
+            }
+
+
+            mostrarComanda();
+
+        }
+
+
+        /* ========================================
+           ALTERAR QUANTIDADE
+        ======================================== */
+
+        function alterarQuantidade(
+            nome,
+            quantidade
+        ) {
+
+            const item =
+                itensComanda.find(function(item) {
+
+                    return item.nome === nome;
+
+                });
+
+
+            if (!item) {
+
+                return;
+
+            }
+
+
+            item.quantidade += quantidade;
+
+
+            if (item.quantidade <= 0) {
+
+                itensComanda =
+                    itensComanda.filter(function(itemAtual) {
+
+                        return itemAtual.nome !== nome;
+
+                    });
+
+            }
+
+
+            mostrarComanda();
+
+        }
+
+
+        /* ========================================
+           TOTAL
+        ======================================== */
+
+        function calcularTotal() {
+
+            return itensComanda.reduce(
+                function(total, item) {
+
+                    return total +
+                        (
+                            item.preco *
+                            item.quantidade
+                        );
+
+                },
+                0
+            );
+
+        }
+
+
+        /* ========================================
+           MOSTRAR COMANDA
+        ======================================== */
+
+        function mostrarComanda() {
+
+            const container =
+                document
+                .getElementById("itensComanda");
+
+
+            container.innerHTML = "";
+
+
+            itensComanda.forEach(function(item) {
+
+                const div =
+                    document.createElement("div");
+
+
+                div.className =
+                    "item-comanda";
+
+
+                div.innerHTML = `
+
+                    <div>
+
+                        <strong>
+                            ${item.nome}
+                        </strong>
+
+                        <br>
+
+                        R$ ${item.preco.toFixed(2)}
+
+                    </div>
+
+
+                    <div class="controles-quantidade">
+
+                        <button
+                            onclick="alterarQuantidade(
+                                '${item.nome.replace(/'/g, "\\'")}',
+                                -1
+                            )"
+                        >
+                            -
+                        </button>
+
+
+                        <strong>
+                            ${item.quantidade}
+                        </strong>
+
+
+                        <button
+                            onclick="alterarQuantidade(
+                                '${item.nome.replace(/'/g, "\\'")}',
+                                1
+                            )"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                `;
+
+
+                container.appendChild(div);
+
+            });
+
+
+            document
+                .getElementById("totalComanda")
+                .textContent =
+                calcularTotal().toFixed(2);
+
+
+            salvarComandaAtual();
+
+        }
+
+
+        /* ========================================
+           SALVAR COMANDA ATUAL
+        ======================================== */
+
+        function salvarComandaAtual() {
+
+            if (!numeroComandaAtual) {
+
+                return;
+
+            }
+
+
+            const existente =
+                comandas.find(function(comanda) {
+
+                    return comanda.numero ===
+                        numeroComandaAtual;
+
+                });
+
+
+            if (existente) {
+
+                existente.itens =
+                    itensComanda;
+
+
+                existente.funcionarioNome =
+                    funcionarioLogado.nome;
+
+            } else {
+
+                comandas.push({
+
+                    numero:
+                        numeroComandaAtual,
+
+                    itens:
+                        itensComanda,
+
+                    funcionarioNome:
+                        funcionarioLogado.nome,
+
+                    aberta: true,
+
+                    status: "aberta",
+
+                    enviadoCozinha: false,
+
+                    horarioEnvioCozinha: null,
+
+                    horarioPronto: null
+
+                });
+
+            }
+
+
+            salvarComandas();
+
+        }
+
+
+        function salvarComandas() {
+
+            localStorage.setItem(
+                "granFornoComandas",
+                JSON.stringify(comandas)
+            );
+
+        }
+
+
+        /* ========================================
+           ENVIAR PARA COZINHA
+        ======================================== */
+
+        function enviarParaCozinha() {
+
+            if (itensComanda.length === 0) {
+
+                alert(
+                    "Adicione pelo menos um produto."
+                );
+
+                return;
+
+            }
+
+
+            const comanda =
+                comandas.find(function(item) {
+
+                    return item.numero ===
+                        numeroComandaAtual;
+
+                });
+
+
+            if (!comanda) {
+
+                salvarComandaAtual();
+
+            }
+
+
+            const comandaAtualizada =
+                comandas.find(function(item) {
+
+                    return item.numero ===
+                        numeroComandaAtual;
+
+                });
+
+
+            comandaAtualizada.status =
+                "em_preparo";
+
+
+            comandaAtualizada.enviadoCozinha =
+                true;
+
+
+            comandaAtualizada.horarioEnvioCozinha =
+                Date.now();
+
+
+            comandaAtualizada.horarioPronto =
+                null;
+
+
+            salvarComandas();
+
+
+            alert(
+                "Pedido enviado para a cozinha!"
+            );
+
+
+            mostrarComandasAbertas();
+
+        }
+
+
+        /* ========================================
+           ABRIR COZINHA
+        ======================================== */
+
+        function abrirCozinha() {
+
+            document
+                .getElementById("telaComandas")
+                .classList.remove("ativa");
+
+
+            document
+                .getElementById("telaComanda")
+                .classList.remove("ativa");
+
+
+            document
+                .getElementById("telaCaixa")
+                .classList.remove("ativa");
+
+
+            document
+                .getElementById("telaCozinha")
+                .classList.add("ativa");
+
+
+            mostrarCozinha();
+
+        }
+
+
+        function voltarDaCozinha() {
+
+            document
+                .getElementById("telaCozinha")
+                .classList.remove("ativa");
+
+
+            document
+                .getElementById("telaComandas")
+                .classList.add("ativa");
+
+
+            mostrarComandasAbertas();
+
+        }
+
+
+        /* ========================================
+           MOSTRAR COZINHA
+        ======================================== */
+
+        function mostrarCozinha() {
+
+            const container =
+                document
+                .getElementById("listaCozinha");
+
+
+            container.innerHTML = "";
+
+
+            const pedidos =
+                comandas.filter(function(comanda) {
+
+                    return (
+                        comanda.status === "em_preparo" ||
+                        comanda.status === "pronto"
+                    );
+
+                });
+
+
+            if (pedidos.length === 0) {
+
+                container.innerHTML = `
+
+                    <div class="sem-vendas">
+
+                        Nenhum pedido na cozinha.
+
+                    </div>
+
+                `;
+
+
+                atualizarContadorCozinha();
+
+
+                return;
+
+            }
+
+
+            pedidos.forEach(function(comanda) {
+
+                const card =
+                    document.createElement("div");
+
+
+                card.className =
+                    "pedido-cozinha";
+
+
+                if (
+                    comanda.status === "pronto"
+                ) {
+
+                    card.classList.add("pronto");
+
+                }
+
+
+                let itensHTML = "";
+
+
+                comanda.itens.forEach(function(item) {
+
+                    itensHTML += `
+
+                        <li>
+                            ${item.quantidade}x
+                            ${item.nome}
+                        </li>
+
+                    `;
+
+                });
+
+
+                const statusHTML =
+                    comanda.status === "pronto"
+
+                    ?
+
+                    `
+                        <span class="status pronto">
+                            ✅ PRONTO
+                        </span>
+                    `
+
+                    :
+
+                    `
+                        <span class="status preparo">
+                            🔥 EM PREPARO
+                        </span>
+                    `;
+
+
+                let botaoHTML = "";
+
+
+                if (
+                    comanda.status === "em_preparo"
+                ) {
+
+                    botaoHTML = `
+
+                        <button
+                            onclick="marcarPedidoPronto(
+                                '${comanda.numero}'
+                            )"
+                        >
+                            ✅ MARCAR COMO PRONTO
+                        </button>
+
+                    `;
+
+                }
+
+
+                card.innerHTML = `
+
+                    <h3>
+                        Comanda #${comanda.numero}
+                    </h3>
+
+                    ${statusHTML}
+
+                    <p>
+                        👤 ${comanda.funcionarioNome}
+                    </p>
+
+                    <p>
+                        🕐 Enviado às:
+                        ${formatarHorario(
+                            comanda.horarioEnvioCozinha
+                        )}
+                    </p>
+
+                    <p>
+                        ⏱️ Tempo de preparo:
+                        <strong
+                            id="tempo-${comanda.numero}"
+                        >
+                            00:00
+                        </strong>
+                    </p>
+
+                    <ul>
+                        ${itensHTML}
+                    </ul>
+
+                    <p>
+
+                        <strong>
+
+                            Total: R$
+                            ${calcularTotalDaComanda(
+                                comanda
+                            ).toFixed(2)}
+
+                        </strong>
+
+                    </p>
+
+                    ${botaoHTML}
+
+                `;
+
+
+                container.appendChild(card);
+
+            });
+
+
+            atualizarTemposCozinha();
+
+            atualizarContadorCozinha();
+
+        }
+
+
+        /* ========================================
+           FORMATAR HORÁRIO
+        ======================================== */
+
+        function formatarHorario(horario) {
+
+            if (!horario) {
+
+                return "--:--:--";
+
+            }
+
+
+            return new Date(horario)
+                .toLocaleTimeString(
+                    "pt-BR"
+                );
+
+        }
+
+
+        /* ========================================
+           FORMATAR TEMPO
+        ======================================== */
+
+        function formatarTempo(segundos) {
+
+            const minutos =
+                Math.floor(segundos / 60);
+
+
+            const segundosRestantes =
+                segundos % 60;
+
+
+            return (
+                String(minutos).padStart(2, "0")
+                +
+                ":"
+                +
+                String(segundosRestantes).padStart(2, "0")
+            );
+
+        }
+
+
+        /* ========================================
+           ATUALIZAR TEMPOS DA COZINHA
+        ======================================== */
+
+        function atualizarTemposCozinha() {
+
+            comandas.forEach(function(comanda) {
+
+                if (
+                    comanda.status !==
+                    "em_preparo"
+                ) {
+
+                    return;
+
+                }
+
+
+                const elemento =
+                    document.getElementById(
+                        "tempo-" +
+                        comanda.numero
+                    );
+
+
+                if (!elemento) {
+
+                    return;
+
+                }
+
+
+                const agora =
+                    Date.now();
+
+
+                const diferenca =
+                    Math.floor(
+                        (
+                            agora -
+                            comanda.horarioEnvioCozinha
+                        ) / 1000
+                    );
+
+
+                elemento.textContent =
+                    formatarTempo(
+                        diferenca
+                    );
+
+            });
+
+        }
+
+
+        /* ========================================
+           MARCAR PEDIDO COMO PRONTO
+        ======================================== */
+
+        function marcarPedidoPronto(numero) {
+
+            const comanda =
+                comandas.find(function(item) {
+
+                    return item.numero === numero;
+
+                });
+
+
+            if (!comanda) {
+
+                return;
+
+            }
+
+
+            comanda.status =
+                "pronto";
+
+
+            comanda.horarioPronto =
+                Date.now();
+
+
+            salvarComandas();
+
+
+            mostrarCozinha();
+
+        }
+
+
+        /* ========================================
+           TOTAL DA COMANDA
+        ======================================== */
+
+        function calcularTotalDaComanda(
+            comanda
+        ) {
+
+            return comanda.itens.reduce(
+                function(total, item) {
+
+                    return total +
+                        (
+                            item.preco *
+                            item.quantidade
+                        );
+
+                },
+                0
+            );
+
+        }
+
+
+        /* ========================================
+           CONTADOR DA COZINHA
+        ======================================== */
+
+        function atualizarContadorCozinha() {
+
+            const contador =
+                comandas.filter(function(comanda) {
+
+                    return (
+                        comanda.status ===
+                        "em_preparo" ||
+
+                        comanda.status ===
+                        "pronto"
+                    );
+
+                }).length;
+
+
+            document
+                .getElementById("contadorCozinha")
+                .textContent = contador;
+
+        }
+
+
+        /* ========================================
+           MOSTRAR COMANDAS ABERTAS
+        ======================================== */
+
+        function mostrarComandasAbertas() {
+
+            const container =
+                document
+                .getElementById("listaComandas");
+
+
+            container.innerHTML = "";
+
+
+            if (comandas.length === 0) {
+
+                container.innerHTML = `
+
+                    <div class="sem-vendas">
+
+                        Nenhuma comanda aberta.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            comandas.forEach(function(comanda) {
+
+                const card =
+                    document.createElement("div");
+
+
+                card.className =
+                    "card-comanda";
+
+
+                let statusTexto =
+                    "🟡 Aberta";
+
+
+                if (
+                    comanda.status ===
+                    "em_preparo"
+                ) {
+
+                    statusTexto =
+                        "🔥 Em preparo";
+
+                }
+
+
+                if (
+                    comanda.status ===
+                    "pronto"
+                ) {
+
+                    statusTexto =
+                        "✅ Pronto";
+
+                }
+
+
+                card.innerHTML = `
+
+                    <h3>
+                        Comanda #${comanda.numero}
+                    </h3>
+
+                    <p>
+                        👤 ${comanda.funcionarioNome}
+                    </p>
+
+                    <p>
+                        📌 ${statusTexto}
+                    </p>
+
+                    <p>
+                        💰 R$
+                        ${calcularTotalDaComanda(
+                            comanda
+                        ).toFixed(2)}
+                    </p>
+
+                    <button
+                        onclick="abrirComandaExistente(
+                            '${comanda.numero}'
+                        )"
+                    >
+                        ABRIR COMANDA
+                    </button>
+
+                `;
+
+
+                container.appendChild(card);
+
+            });
+
+        }
+
+
+        /* ========================================
+           VOLTAR PARA COMANDAS
+        ======================================== */
+
+        function voltarParaComandas() {
+
+            salvarComandaAtual();
+
+
+            document
+                .getElementById("telaComanda")
+                .classList.remove("ativa");
+
+
+            document
+                .getElementById("telaComandas")
+                .classList.add("ativa");
+
+
+            mostrarComandasAbertas();
+
+        }
+
+
+        /* ========================================
+           FINALIZAR COMANDA
+        ======================================== */
+
+        function finalizarComanda() {
+
+            if (itensComanda.length === 0) {
+
+                alert(
+                    "Não é possível finalizar uma comanda vazia."
+                );
+
+                return;
+
+            }
+
+
+            document
+                .getElementById("modalFinalizacao")
+                .classList.add("ativo");
+
+        }
+
+
+        function fecharModalFinalizacao() {
+
+            document
+                .getElementById("modalFinalizacao")
+                .classList.remove("ativo");
+
+        }
+
+
+        /* ========================================
+           CONFIRMAR FINALIZAÇÃO
+        ======================================== */
+
+        function confirmarFinalizacao() {
+
+            const pagamento =
+                document
+                .getElementById("formaPagamento")
+                .value;
+
+
+            const total =
+                calcularTotal();
+
+
+            const novaVenda = {
+
+                numero:
+                    numeroComandaAtual,
+
+                itens:
+                    JSON.parse(
+                        JSON.stringify(
+                            itensComanda
+                        )
+                    ),
+
+                funcionarioNome:
+                    funcionarioLogado.nome,
+
+                total:
+                    total,
+
+                pagamento:
+                    pagamento,
+
+                data:
+                    new Date().toLocaleDateString(
+                        "pt-BR"
+                    ),
+
+                /*
+                    IMPORTANTE:
+                    A data usada aqui é a data local
+                    do computador.
+                    O Caixa usa a mesma função.
+                */
+
+                dataISO:
+                    obterDataHoje(),
+
+                horario:
+                    new Date().toLocaleTimeString(
+                        "pt-BR"
+                    )
+
+            };
+
+
+            vendas.push(
+                novaVenda
+            );
+
+
+            localStorage.setItem(
+                "granFornoVendas",
+                JSON.stringify(vendas)
+            );
+
+
+            comandas =
+                comandas.filter(function(comanda) {
+
+                    return (
+                        comanda.numero !==
+                        numeroComandaAtual
+                    );
+
+                });
+
+
+            salvarComandas();
+
+
+            alert(
+
+                "Comanda finalizada com sucesso!\n\n" +
+
+                "Pagamento: " +
+                pagamento +
+
+                "\nTotal: R$ " +
+                total.toFixed(2)
+
+            );
+
+
+            fecharModalFinalizacao();
+
+
+            numeroComandaAtual = null;
+
+            itensComanda = [];
+
+
+            document
+                .getElementById("telaComanda")
+                .classList.remove("ativa");
+
+
+            document
+                .getElementById("telaComandas")
+                .classList.add("ativa");
+
+
+            mostrarComandasAbertas();
+
+            atualizarContadorCozinha();
+
+        }
+
+
+        /* ========================================
+           CAIXA
+        ======================================== */
+
+        function abrirCaixa() {
+
+            document
+                .getElementById("telaComandas")
+                .classList.remove("ativa");
+
+
+            document
+                .getElementById("telaComanda")
+                .classList.remove("ativa");
+
+
+            document
+                .getElementById("telaCozinha")
+                .classList.remove("ativa");
+
+
+            document
+                .getElementById("telaCaixa")
+                .classList.add("ativa");
+
+
+            mostrarCaixa();
+
+        }
+
+
+        function voltarDoCaixa() {
+
+            document
+                .getElementById("telaCaixa")
+                .classList.remove("ativa");
+
+
+            document
+                .getElementById("telaComandas")
+                .classList.add("ativa");
+
+
+            mostrarComandasAbertas();
+
+        }
+
+
+        /* ========================================
+           DATA DE HOJE
+        ======================================== */
+
+        function obterDataHoje() {
+
+            const agora =
+                new Date();
+
+
+            const ano =
+                agora.getFullYear();
+
+
+            const mes =
+                String(
+                    agora.getMonth() + 1
+                ).padStart(2, "0");
+
+
+            const dia =
+                String(
+                    agora.getDate()
+                ).padStart(2, "0");
+
+
+            return (
+                ano +
+                "-" +
+                mes +
+                "-" +
+                dia
+            );
+
+        }
+
+
+        /* ========================================
+           DATA FORMATADA
+        ======================================== */
+
+        function obterDataFormatada() {
+
+            return new Date()
+                .toLocaleDateString(
+                    "pt-BR"
+                );
+
+        }
+
+
+        /* ========================================
+           MOSTRAR CAIXA
+        ======================================== */
+
+        function mostrarCaixa() {
+
+            const hoje =
+                obterDataHoje();
+
+
+            const vendasHoje =
+                vendas.filter(function(venda) {
+
+                    return (
+                        venda.dataISO === hoje
+                    );
+
+                });
+
+
+            let total =
+                0;
+
+            let dinheiro =
+                0;
+
+            let pix =
+                0;
+
+            let debito =
+                0;
+
+            let credito =
+                0;
+
+
+            vendasHoje.forEach(function(venda) {
+
+                total +=
+                    Number(venda.total);
+
+
+                if (
+                    venda.pagamento ===
+                    "Dinheiro"
+                ) {
+
+                    dinheiro +=
+                        Number(venda.total);
+
+                }
+
+
+                if (
+                    venda.pagamento ===
+                    "Pix"
+                ) {
+
+                    pix +=
+                        Number(venda.total);
+
+                }
+
+
+                if (
+                    venda.pagamento ===
+                    "Cartão de Débito"
+                ) {
+
+                    debito +=
+                        Number(venda.total);
+
+                }
+
+
+                if (
+                    venda.pagamento ===
+                    "Cartão de Crédito"
+                ) {
+
+                    credito +=
+                        Number(venda.total);
+
+                }
+
+            });
+
+
+            document
+                .getElementById("caixaTotal")
+                .textContent =
+                total
+                .toFixed(2)
+                .replace(".", ",");
+
+
+            document
+                .getElementById("caixaQuantidade")
+                .textContent =
+                vendasHoje.length;
+
+
+            document
+                .getElementById("caixaDinheiro")
+                .textContent =
+                dinheiro
+                .toFixed(2)
+                .replace(".", ",");
+
+
+            document
+                .getElementById("caixaPix")
+                .textContent =
+                pix
+                .toFixed(2)
+                .replace(".", ",");
+
+
+            document
+                .getElementById("caixaDebito")
+                .textContent =
+                debito
+                .toFixed(2)
+                .replace(".", ",");
+
+
+            document
+                .getElementById("caixaCredito")
+                .textContent =
+                credito
+                .toFixed(2)
+                .replace(".", ",");
+
+
+            /* ================================
+               FECHAMENTO
+            ================================= */
+
+            document
+                .getElementById("fechamentoData")
+                .textContent =
+                obterDataFormatada();
+
+
+            document
+                .getElementById("fechamentoQuantidade")
+                .textContent =
+                vendasHoje.length;
+
+
+            document
+                .getElementById("fechamentoDinheiro")
+                .textContent =
+                dinheiro
+                .toFixed(2)
+                .replace(".", ",");
+
+
+            document
+                .getElementById("fechamentoPix")
+                .textContent =
+                pix
+                .toFixed(2)
+                .replace(".", ",");
+
+
+            document
+                .getElementById("fechamentoDebito")
+                .textContent =
+                debito
+                .toFixed(2)
+                .replace(".", ",");
+
+
+            document
+                .getElementById("fechamentoCredito")
+                .textContent =
+                credito
+                .toFixed(2)
+                .replace(".", ",");
+
+
+            document
+                .getElementById("fechamentoTotal")
+                .textContent =
+                total
+                .toFixed(2)
+                .replace(".", ",");
+
+
+            mostrarHistoricoVendas(
+                vendasHoje
+            );
+
+        }
+
+
+        /* ========================================
+           HISTÓRICO DE VENDAS
+        ======================================== */
+
+        function mostrarHistoricoVendas(
+            vendasHoje
+        ) {
+
+            const container =
+                document
+                .getElementById("listaVendas");
+
+
+            container.innerHTML = "";
+
+
+            if (vendasHoje.length === 0) {
+
+                container.innerHTML = `
+
+                    <div class="sem-vendas">
+
+                        Nenhuma venda realizada hoje.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            const vendasOrdenadas =
+                [...vendasHoje].reverse();
+
+
+            vendasOrdenadas.forEach(
+                function(venda) {
+
+                    const div =
+                        document.createElement("div");
+
+
+                    div.className =
+                        "venda";
+
+
+                    let itensHTML = "";
+
+
+                    venda.itens.forEach(
+                        function(item) {
+
+                            itensHTML += `
+
+                                <li>
+                                    ${item.quantidade}x
+                                    ${item.nome}
+                                </li>
+
+                            `;
+
+                        }
+                    );
+
+
+                    div.innerHTML = `
+
+                        <div class="venda-topo">
+
+                            <strong>
+                                🧾 Comanda #${venda.numero}
+                            </strong>
+
+                            <span class="venda-total">
+
+                                R$
+                                ${Number(
+                                    venda.total
+                                ).toFixed(2)}
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="venda-info">
+
+                            🕐 ${venda.horario}
+
+                            &nbsp; | &nbsp;
+
+                            💳 ${venda.pagamento}
+
+                        </div>
+
+
+                        <div class="venda-info">
+
+                            👤 Funcionário:
+                            ${venda.funcionarioNome}
+
+                        </div>
+
+
+                        <ul class="venda-itens">
+
+                            ${itensHTML}
+
+                        </ul>
+
+                    `;
+
+
+                    container.appendChild(div);
+
+                }
+            );
+
+        }
+
+
+        /* ========================================
+           IMPRIMIR FECHAMENTO
+        ======================================== */
+
+        function imprimirFechamento() {
+
+            mostrarCaixa();
+
+            window.print();
+
+        }
+
+
+        /* ========================================
+           TIMER DA COZINHA
+        ======================================== */
+
+        setInterval(
+            function() {
+
+                const cozinha =
+                    document
+                    .getElementById(
+                        "telaCozinha"
+                    );
+
+
+                if (
+                    cozinha &&
+                    cozinha.classList.contains(
+                        "ativa"
+                    )
+                ) {
+
+                    atualizarTemposCozinha();
+
+                }
+
+            },
+            1000
+        );
+
+
+        /* ========================================
+           INICIALIZAÇÃO
+        ======================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                carregarProdutos();
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

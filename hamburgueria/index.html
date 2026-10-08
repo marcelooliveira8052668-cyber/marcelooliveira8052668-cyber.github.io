@@ -1,0 +1,40 @@
+﻿<!-- Desenvolvido por Prof. Marcelo Oliveira -->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Brasa Burger - pedidos, carrinho, pagamento e acompanhamento do pedido.">
+<title>Brasa Burger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="nav"><a class="logo" href="#inicio"><span id="brandName">BRASA</span> <b>BURGER</b></a><button id="menuBtn" aria-label="Abrir menu">☰</button><nav id="menu"><a href="#cardapio">Cardápio</a><a href="#acompanhar">Acompanhar</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a><button class="cart-nav" id="openCart">🛒 Carrinho <b id="cartCount">0</b></button></nav></div></header>
+<main>
+<section class="hero" id="inicio"><div class="heroText"><small id="heroTag">ARTESANAL • GRELHADO NA HORA • DELIVERY</small><h1 id="heroTitle">O hambúrguer que <em>merece sua fome.</em></h1><p id="heroDescription">Pão macio, carne suculenta, ingredientes selecionados e aquele sabor de brasa.</p><a class="btn red" href="#cardapio">Ver cardápio</a><button class="btn green" id="heroCart">🛒 Meu carrinho</button></div></section>
+<section class="delivery" id="entrega"><div><small>PEÇA DO SEU JEITO</small><h2>Delivery rápido e fácil</h2></div><div class="apps"><a id="ifood" target="_blank">iFood</a><a id="keeta" target="_blank">Keeta</a><a id="noventaENove" target="_blank">99Food</a><button class="green app-button" id="deliveryCart">🛒 Carrinho</button></div></section>
+<section class="section menu" id="cardapio"><div class="heading"><small>CARDÁPIO</small><h2>Escolha seu <span>favorito</span></h2><p>Adicione produtos ao carrinho e envie o pedido para pagamento e cozinha.</p></div><div class="grid" id="products"></div><div class="heading drinks"><small>BEBIDAS</small><h2>Geladas para <span>acompanhar</span></h2></div><div class="drinkgrid" id="drinks"></div></section>
+<section class="section tracking" id="acompanhar"><div class="heading"><small>ACOMPANHAMENTO</small><h2>Onde está meu <span>pedido?</span></h2><p>Digite o número do pedido para acompanhar o andamento.</p></div><div class="tracking-box"><input id="trackNumber" placeholder="Ex.: 1042" inputmode="numeric"><button class="btn red" id="trackBtn">Acompanhar</button><div id="trackingResult" class="tracking-result"></div></div></section>
+<section class="section about" id="sobre"><div class="aboutgrid"><img id="aboutImage" src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1100&q=85" alt="Hambúrguer artesanal"><div><small>SOBRE A <span id="aboutBrand">BRASA</span></small><h2 id="aboutTitle">Feito com cuidado. <span>Servido com sabor.</span></h2><p id="aboutText">Uma hamburgueria criada para transformar um lanche comum em uma experiência.</p><div class="stats"><b>100%<small>Artesanal</small></b><b>5★<small>Atendimento</small></b><b>30min<small>Preparo médio*</small></b></div></div></div></section>
+<section class="section photos" id="fotos"><div class="heading"><small>GALERIA</small><h2>Deu água na boca? <span>Olha isso.</span></h2></div><div class="gallery" id="gallery"></div></section>
+<section class="cta"><small>FOME NÃO ESPERA</small><h2>Peça agora e acompanhe tudo.</h2><button class="btn white" id="ctaCart">🛒 Abrir carrinho</button></section>
+<section class="section contact" id="contato"><div class="contactgrid"><div><small>ONDE ESTAMOS</small><h2>Venha conhecer a <span id="contactBrand">Brasa.</span></h2><p>📍 <b>Endereço</b><br><span id="address"></span></p><p>📱 <b>WhatsApp</b><br><span id="phone"></span></p><p>🕐 <b>Horário</b><br><span id="hours"></span></p></div><iframe id="map" title="Mapa da localização" loading="lazy"></iframe></div></section>
+</main>
+<footer><div class="footer"><div class="logo"><span id="footerBrand">BRASA</span> <b>BURGER</b><p id="footerDescription">Hambúrguer artesanal e sabor de verdade.</p></div><div><a href="#cardapio">Cardápio</a> · <a href="#acompanhar">Acompanhar pedido</a> · <a href="#contato">Contato</a></div></div><div class="copy">© <span id="year"></span> <span id="copyrightBrand">Brasa Burger</span>. Todos os direitos reservados.</div></footer>
+<a class="float" id="floatWhatsapp" target="_blank" aria-label="WhatsApp">💬</a><div class="toast" id="toast"></div>
+
+<!-- CARRINHO -->
+<div class="modal" id="cartModal" aria-hidden="true"><div class="modal-card cart-modal"><button class="close" data-close="cartModal">×</button><div class="modal-head"><div><small>SEU PEDIDO</small><h2>Meu carrinho</h2></div><span class="cart-badge" id="cartCountModal">0 itens</span></div><div id="cartItems"></div><div class="cart-empty" id="cartEmpty">Seu carrinho está vazio. Escolha algo delicioso no cardápio.</div><div class="cart-total"><span>Total</span><strong id="cartTotal">R$ 0,00</strong></div><button class="btn red full" id="checkoutBtn">Ir para pagamento</button></div></div>
+
+<!-- PAGAMENTO -->
+<div class="modal" id="paymentModal" aria-hidden="true"><div class="modal-card payment-modal"><button class="close" data-close="paymentModal">×</button><div class="modal-head"><div><small>FINALIZAÇÃO</small><h2>Pagamento</h2></div></div><div class="order-summary" id="paymentSummary"></div><form id="paymentForm"><label>Nome<input id="customerName" required placeholder="Nome do cliente"></label><label>WhatsApp<input id="customerPhone" required placeholder="(11) 99999-9999"></label><label>Tipo de entrega<select id="deliveryType"><option value="delivery">Entrega</option><option value="pickup">Retirada no balcão</option></select></label><label>Endereço de entrega<textarea id="customerAddress" rows="2" placeholder="Rua, número, bairro"></textarea></label><div class="payment-methods"><p>Forma de pagamento</p><label class="pay-option"><input type="radio" name="payment" value="pix" checked><span>PIX<small>Pagamento via PIX (modo demonstração)</small></span></label><label class="pay-option"><input type="radio" name="payment" value="card"><span>Cartão<small>Pagamento na entrega/maquininha</small></span></label><label class="pay-option"><input type="radio" name="payment" value="cash"><span>Dinheiro<small>Pagamento na entrega</small></span></label></div><button class="btn red full" type="submit">Confirmar pedido</button></form></div></div>
+
+<!-- PAINEL COZINHA / OPERACIONAL -->
+<div class="modal" id="kitchenModal" aria-hidden="true"><div class="modal-card kitchen-modal"><button class="close" data-close="kitchenModal">×</button><div class="modal-head"><div><small>ÁREA INTERNA</small><h2>Pedidos da cozinha</h2></div><button class="btn dark" id="clearOrders">Limpar testes</button></div><p class="panel-note">Painel demonstrativo local. Em produção, os pedidos devem ficar em um banco compartilhado para a cozinha, caixa e cliente verem as mesmas informações.</p><div class="kitchen-filters"><button class="filter active" data-filter="all">Todos</button><button class="filter" data-filter="received">Recebidos</button><button class="filter" data-filter="preparing">Preparando</button><button class="filter" data-filter="ready">Prontos</button><button class="filter" data-filter="out">Saiu</button></div><div id="kitchenOrders"></div></div></div>
+
+<!-- ACESSO INTERNO DISCRETO -->
+<button class="staff-access" id="staffAccess" title="Área interna">⚙</button>
+<script src="config.js"></script><script src="script.js"></script>
+</body></html>
+

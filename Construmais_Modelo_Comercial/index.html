@@ -1,0 +1,181 @@
+﻿<!-- Desenvolvido por Prof. Marcelo Oliveira -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Construmais - modelo comercial para loja de materiais de construção.">
+    <title>Construmais | Materiais de Construção</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="top">
+        <div class="container nav"><a class="brand" href="#inicio"><span>CM</span>
+                <div><strong>CONSTRUMAIS</strong><small>Materiais de Construção</small></div>
+            </a>
+            <nav><a href="#produtos">Produtos</a><a href="#categorias">Categorias</a><a href="#entrega">Entrega</a><a
+                    href="#contato">Contato</a></nav><button class="cart-btn" onclick="openCart()">🛒 Carrinho <b
+                    id="cartCount">0</b></button><button class="menu" onclick="toggleNav()">☰</button>
+        </div>
+    </header>
+    <main>
+        <section class="hero" id="inicio">
+            <div class="container hero-grid">
+                <div><span class="eyebrow">MATERIAL CERTO • ENTREGA RÁPIDA</span>
+                    <h1>Construção começa com <em>material de qualidade.</em></h1>
+                    <p>Um modelo completo de loja de materiais de construção com catálogo, carrinho, checkout, entrega e
+                        painel de estoque.</p>
+                    <div class="hero-actions"><a class="btn primary" href="#produtos">Comprar agora</a><a
+                            class="btn outline" href="#categorias">Ver categorias</a></div>
+                </div>
+                <div class="hero-card">
+                    <div><small>OFERTA DA SEMANA</small><strong>Até 15% OFF</strong>
+                        <p>em materiais selecionados</p>
+                    </div>
+                    <div class="hero-icon">🏗️</div>
+                </div>
+            </div>
+        </section>
+        <section class="features">
+            <div class="container feature-grid">
+                <div>🚚 <strong>Entrega rápida</strong><small>Consulte seu CEP</small></div>
+                <div>🔒 <strong>Compra segura</strong><small>Checkout protegido</small></div>
+                <div>📦 <strong>Estoque atualizado</strong><small>Disponibilidade em tempo real</small></div>
+                <div>📞 <strong>Atendimento</strong><small>WhatsApp e telefone</small></div>
+            </div>
+        </section>
+        <section id="categorias" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div><span class="eyebrow">ENCONTRE O QUE PRECISA</span>
+                        <h2>Categorias</h2>
+                    </div>
+                </div>
+                <div class="categories"><button onclick="filterProducts('all')">🏪 Todos</button><button
+                        onclick="filterProducts('cimento')">🧱 Cimento e Argamassa</button><button
+                        onclick="filterProducts('ferramentas')">🔨 Ferramentas</button><button
+                        onclick="filterProducts('hidraulica')">🚿 Hidráulica</button><button
+                        onclick="filterProducts('eletrica')">💡 Elétrica</button><button
+                        onclick="filterProducts('tintas')">🎨 Tintas</button></div>
+            </div>
+        </section>
+        <section id="produtos" class="section products-section">
+            <div class="container">
+                <div class="section-head">
+                    <div><span class="eyebrow">CATÁLOGO</span>
+                        <h2>Produtos em destaque</h2>
+                    </div><select id="sort" onchange="sortProducts()">
+                        <option value="default">Ordenar</option>
+                        <option value="low">Menor preço</option>
+                        <option value="high">Maior preço</option>
+                    </select>
+                </div>
+                <div id="products" class="products"></div>
+            </div>
+        </section>
+        <section id="entrega" class="delivery section">
+            <div class="container delivery-grid">
+                <div><span class="eyebrow">ENTREGA</span>
+                    <h2>Receba no endereço da obra.</h2>
+                    <p>Informe o CEP no checkout. O sistema calcula uma estimativa de entrega e organiza o pedido para
+                        separação e expedição.</p>
+                </div>
+                <div class="cep-box"><label>Consulte seu CEP</label>
+                    <div><input id="cep" placeholder="00000-000" maxlength="9"><button class="btn primary"
+                            onclick="checkCep()">Consultar</button></div><small id="cepResult">Digite um CEP para
+                        simular a entrega.</small>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <div><span class="eyebrow">COMO FUNCIONA</span>
+                        <h2>Da compra à entrega</h2>
+                    </div>
+                </div>
+                <div class="steps">
+                    <div><b>01</b>
+                        <h3>Cliente compra</h3>
+                        <p>Seleciona produtos e monta o carrinho.</p>
+                    </div>
+                    <div><b>02</b>
+                        <h3>Pagamento</h3>
+                        <p>Confirma endereço e forma de pagamento.</p>
+                    </div>
+                    <div><b>03</b>
+                        <h3>Separação</h3>
+                        <p>Equipe recebe o pedido e separa os materiais.</p>
+                    </div>
+                    <div><b>04</b>
+                        <h3>Entrega</h3>
+                        <p>Pedido sai para entrega e cliente acompanha.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contato" class="contact">
+            <div class="container contact-grid">
+                <div><span class="eyebrow">CONSTRUMAIS</span>
+                    <h2>Seu parceiro na obra.</h2>
+                    <p>Rua das Obras, 250 — Centro — São Paulo/SP</p>
+                    <p>Seg a Sex: 8h às 18h • Sáb: 8h às 13h</p>
+                </div>
+                <div><a class="btn primary" href="https://wa.me/5511999999999" target="_blank">Falar no WhatsApp</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container"><strong>CONSTRUMAIS</strong><span>Modelo comercial • Personalize os dados do cliente
+                antes da publicação.</span></div>
+    </footer>
+    <div id="toast"></div>
+    <div id="cartModal" class="modal">
+        <div class="modal-card"><button class="close" onclick="closeCart()">×</button>
+            <h2>Seu carrinho</h2>
+            <div id="cartItems"></div>
+            <div class="cart-total"><span>Total</span><strong id="cartTotal">R$ 0,00</strong></div><button
+                class="btn primary full" onclick="openCheckout()">Continuar para pagamento</button>
+        </div>
+    </div>
+    <div id="checkoutModal" class="modal">
+        <div class="modal-card checkout"><button class="close" onclick="closeCheckout()">×</button>
+            <h2>Finalizar pedido</h2>
+            <div class="checkout-grid">
+                <div><label>Nome<input id="customerName" placeholder="Seu nome"></label><label>WhatsApp<input
+                            id="customerPhone" placeholder="(11) 99999-9999"></label><label>Endereço<input
+                            id="customerAddress" placeholder="Rua, número, bairro"></label><label>Forma de
+                        pagamento<select id="payment">
+                            <option>PIX</option>
+                            <option>Cartão</option>
+                            <option>Dinheiro</option>
+                        </select></label><label>Observação<textarea id="notes"
+                            placeholder="Ex.: entregar nos fundos da obra"></textarea></label></div>
+                <div class="summary">
+                    <h3>Resumo</h3>
+                    <div id="checkoutSummary"></div>
+                    <hr><strong id="checkoutTotal">R$ 0,00</strong><button class="btn primary full"
+                        onclick="placeOrder()">Confirmar pedido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="adminModal" class="modal">
+        <div class="modal-card"><button class="close" onclick="closeAdmin()">×</button>
+            <h2>Painel de estoque</h2>
+            <p class="muted">Demonstração local. Em produção, conecte ao Firebase/Firestore.</p>
+            <div id="stockTable"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

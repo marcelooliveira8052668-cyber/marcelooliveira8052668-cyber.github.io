@@ -1,0 +1,427 @@
+﻿<!-- Desenvolvido por Prof. Marcelo Oliveira -->
+<!DOCTYPE html>
+<!-- Define que este documento usa HTML5. -->
+<html lang="pt-BR">
+<!-- Abre o documento e informa que o idioma é português do Brasil. -->
+<head>
+<!-- Abre a área de configurações da página. -->
+<meta charset="UTF-8">
+<!-- Permite acentos e caracteres especiais corretamente. -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Faz o site se adaptar a celulares, tablets e computadores. -->
+<meta name="description" content="Gran Forno — Empório de Pães, Vinhos e Pizzas.">
+<!-- Define uma descrição básica para mecanismos de busca. -->
+<title>Gran Forno | Empório de Pães, Vinhos e Pizzas</title>
+<!-- Define o título que aparece na aba do navegador. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<!-- Prepara a conexão com o serviço de fontes. -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Melhora a conexão com as fontes externas. -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<!-- Carrega fontes elegantes para o projeto. -->
+<link rel="stylesheet" href="style.css">
+<!-- Conecta o arquivo CSS separado. -->
+</head>
+<!-- Fecha a área de configurações. -->
+<body>
+<!-- Inicia o conteúdo visível do site. -->
+
+<header class="header" id="inicio">
+<!-- Cria o cabeçalho principal do restaurante. -->
+<div class="container header-content">
+<!-- Centraliza e organiza o conteúdo do cabeçalho. -->
+<a class="logo-link" href="#inicio" aria-label="Gran Forno - início">
+<!-- Cria um link clicável para voltar ao início. -->
+<img class="logo" src="images/logo.png" alt="Logo Gran Forno">
+<!-- LOGO: troque images/logo.png se quiser usar outro arquivo. -->
+</a>
+<!-- Fecha o link da logo. -->
+<button class="menu-button" id="menuButton" aria-label="Abrir menu" aria-expanded="false">
+<!-- Cria o botão do menu para celulares. -->
+<span></span>
+<!-- Primeira linha do ícone do menu. -->
+<span></span>
+<!-- Segunda linha do ícone do menu. -->
+<span></span>
+<!-- Terceira linha do ícone do menu. -->
+</button>
+<!-- Fecha o botão do menu. -->
+<nav class="nav" id="nav">
+<!-- Cria a navegação principal. -->
+<a href="#inicio">Início</a>
+<!-- LINK: leva para o início. -->
+<a href="#sobre">Sobre</a>
+<!-- LINK: leva para a apresentação do estabelecimento. -->
+<a href="#cardapio">Cardápio</a>
+<!-- LINK: leva para o cardápio. -->
+<a href="#galeria">Galeria</a>
+<!-- LINK: leva para a área reservada para fotos. -->
+<a href="#contato">Contato</a>
+<!-- LINK: leva para os contatos. -->
+<a class="nav-whatsapp" href="https://wa.me/5511920676006?text=Ol%C3%A1%20Gran%20Forno!%20Gostaria%20de%20fazer%20um%20pedido." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+<!-- WHATSAPP: número atual configurado como 11 92067-6006. -->
+</nav>
+<!-- Fecha a navegação. -->
+</div>
+<!-- Fecha o conteúdo do cabeçalho. -->
+</header>
+<!-- Fecha o cabeçalho. -->
+
+<main>
+<!-- Inicia o conteúdo principal. -->
+
+<section class="hero">
+<!-- Cria a primeira seção de destaque. -->
+<div class="hero-overlay"></div>
+<!-- Cria uma camada visual sobre o fundo. -->
+<div class="container hero-content">
+<!-- Centraliza o conteúdo do destaque. -->
+<p class="eyebrow">EMPÓRIO • PADARIA • PIZZARIA</p>
+<!-- TEXTO: altere aqui o pequeno texto acima do título. -->
+<h1>Sabor artesanal para todos os momentos.</h1>
+<!-- TEXTO PRINCIPAL: altere aqui o título do site. -->
+<p class="hero-text">Pães, pizzas, vinhos e sabores especiais preparados para você.</p>
+<!-- TEXTO: altere aqui a frase de apresentação. -->
+<div class="hero-buttons">
+<!-- Agrupa os botões principais. -->
+<a class="button button-primary" href="#cardapio">Ver cardápio</a>
+<!-- BOTÃO: leva diretamente ao cardápio. -->
+<a class="button button-whatsapp" href="https://wa.me/5511920676006?text=Ol%C3%A1%20Gran%20Forno!%20Gostaria%20de%20fazer%20um%20pedido." target="_blank" rel="noopener noreferrer">Pedir pelo WhatsApp</a>
+<!-- BOTÃO: abre uma conversa no WhatsApp. -->
+</div>
+<!-- Fecha os botões. -->
+</div>
+<!-- Fecha o conteúdo do destaque. -->
+</section>
+<!-- Fecha o destaque. -->
+
+<section class="section about" id="sobre">
+<!-- Cria a seção Sobre. -->
+<div class="container about-grid">
+<!-- Organiza texto e espaço visual em duas colunas. -->
+<div>
+<!-- Abre a coluna de texto. -->
+<p class="section-label">SOBRE O GRAN FORNO</p>
+<!-- TEXTO: altere o nome ou subtítulo desta seção. -->
+<h2>Um lugar para comer bem e aproveitar.</h2>
+<!-- TEXTO: altere o título desta seção. -->
+<p>O Gran Forno reúne o clima acolhedor de uma padaria, a experiência de um empório e o sabor de uma boa pizzaria.</p>
+<!-- TEXTO: substitua este parágrafo pela história real do estabelecimento. -->
+<p>Este espaço foi preparado para apresentar a marca, os produtos, o cardápio e os canais de atendimento de forma profissional.</p>
+<!-- TEXTO: substitua este parágrafo pelas informações reais do restaurante. -->
+<a class="text-link" href="#contato">Fale com a gente →</a>
+<!-- LINK: leva o visitante para os contatos. -->
+</div>
+<!-- Fecha a coluna de texto. -->
+<div class="about-card">
+<!-- Cria um cartão de destaque. -->
+<div class="about-icon">✦</div>
+<!-- Cria um pequeno elemento visual. -->
+<h3>Feito para receber você</h3>
+<!-- TEXTO: altere este título se quiser. -->
+<p>Um ambiente pensado para café, almoço, pizza, vinho e bons momentos.</p>
+<!-- TEXTO: substitua pelas características reais do local. -->
+</div>
+<!-- Fecha o cartão. -->
+</div>
+<!-- Fecha o grid. -->
+</section>
+<!-- Fecha a seção Sobre. -->
+
+<section class="section menu-section" id="cardapio">
+<!-- Cria a seção do cardápio. -->
+<div class="container">
+<!-- Centraliza o conteúdo do cardápio. -->
+<div class="section-heading">
+<!-- Cria o cabeçalho do cardápio. -->
+<p class="section-label">NOSSO CARDÁPIO</p>
+<!-- TEXTO: altere o subtítulo do cardápio. -->
+<h2>Escolha seu sabor.</h2>
+<!-- TEXTO: altere o título do cardápio. -->
+<p>Os nomes, descrições e preços abaixo são exemplos editáveis.</p>
+<!-- AVISO: substitua pelos produtos e preços reais antes de publicar. -->
+</div>
+<!-- Fecha o cabeçalho do cardápio. -->
+
+<div class="menu-grid">
+<!-- Cria a grade de produtos. -->
+
+<article class="menu-card">
+<!-- Produto 1. -->
+<div class="photo-placeholder">
+<!-- ÁREA DE FOTO: substitua este bloco por uma imagem quando quiser. -->
+<span>COLOQUE A FOTO AQUI</span>
+<!-- TEXTO DA ÁREA DE FOTO. -->
+</div>
+<!-- Fecha a área de foto. -->
+<div class="menu-card-content">
+<!-- Abre o conteúdo do produto. -->
+<span class="tag">PADARIA</span>
+<!-- CATEGORIA: altere se necessário. -->
+<h3>Pão Artesanal</h3>
+<!-- PRODUTO: altere o nome aqui. -->
+<p>Pão fresco e artesanal para acompanhar seu café.</p>
+<!-- PRODUTO: altere a descrição aqui. -->
+<div class="menu-bottom">
+<!-- Agrupa preço e botão. -->
+<strong>R$ 00,00</strong>
+<!-- PREÇO: coloque o preço real aqui. -->
+<button class="order-button" data-item="Pão Artesanal">Pedir</button>
+<!-- BOTÃO: envia o produto escolhido para o WhatsApp. -->
+</div>
+<!-- Fecha o grupo de preço e botão. -->
+</div>
+<!-- Fecha o conteúdo do produto. -->
+</article>
+<!-- Fecha o produto 1. -->
+
+<article class="menu-card">
+<!-- Produto 2. -->
+<div class="photo-placeholder">
+<!-- ÁREA DE FOTO: substitua este bloco por uma imagem quando quiser. -->
+<span>COLOQUE A FOTO AQUI</span>
+<!-- TEXTO DA ÁREA DE FOTO. -->
+</div>
+<!-- Fecha a área de foto. -->
+<div class="menu-card-content">
+<!-- Abre o conteúdo do produto. -->
+<span class="tag">PIZZA</span>
+<!-- CATEGORIA: altere se necessário. -->
+<h3>Pizza da Casa</h3>
+<!-- PRODUTO: altere o nome aqui. -->
+<p>Uma pizza especial preparada com ingredientes selecionados.</p>
+<!-- PRODUTO: altere a descrição aqui. -->
+<div class="menu-bottom">
+<!-- Agrupa preço e botão. -->
+<strong>R$ 00,00</strong>
+<!-- PREÇO: coloque o preço real aqui. -->
+<button class="order-button" data-item="Pizza da Casa">Pedir</button>
+<!-- BOTÃO: envia o produto escolhido para o WhatsApp. -->
+</div>
+<!-- Fecha o grupo de preço e botão. -->
+</div>
+<!-- Fecha o conteúdo do produto. -->
+</article>
+<!-- Fecha o produto 2. -->
+
+<article class="menu-card">
+<!-- Produto 3. -->
+<div class="photo-placeholder">
+<!-- ÁREA DE FOTO: substitua este bloco por uma imagem quando quiser. -->
+<span>COLOQUE A FOTO AQUI</span>
+<!-- TEXTO DA ÁREA DE FOTO. -->
+</div>
+<!-- Fecha a área de foto. -->
+<div class="menu-card-content">
+<!-- Abre o conteúdo do produto. -->
+<span class="tag">VINHOS</span>
+<!-- CATEGORIA: altere se necessário. -->
+<h3>Vinho Selecionado</h3>
+<!-- PRODUTO: altere o nome aqui. -->
+<p>Seleção de vinhos para acompanhar bons momentos.</p>
+<!-- PRODUTO: altere a descrição aqui. -->
+<div class="menu-bottom">
+<!-- Agrupa preço e botão. -->
+<strong>R$ 00,00</strong>
+<!-- PREÇO: coloque o preço real aqui. -->
+<button class="order-button" data-item="Vinho Selecionado">Pedir</button>
+<!-- BOTÃO: envia o produto escolhido para o WhatsApp. -->
+</div>
+<!-- Fecha o grupo de preço e botão. -->
+</div>
+<!-- Fecha o conteúdo do produto. -->
+</article>
+<!-- Fecha o produto 3. -->
+
+<article class="menu-card">
+<!-- Produto 4. -->
+<div class="photo-placeholder">
+<!-- ÁREA DE FOTO: substitua este bloco por uma imagem quando quiser. -->
+<span>COLOQUE A FOTO AQUI</span>
+<!-- TEXTO DA ÁREA DE FOTO. -->
+</div>
+<!-- Fecha a área de foto. -->
+<div class="menu-card-content">
+<!-- Abre o conteúdo do produto. -->
+<span class="tag">CAFÉ</span>
+<!-- CATEGORIA: altere se necessário. -->
+<h3>Café Especial</h3>
+<!-- PRODUTO: altere o nome aqui. -->
+<p>Uma pausa especial para começar ou terminar bem o dia.</p>
+<!-- PRODUTO: altere a descrição aqui. -->
+<div class="menu-bottom">
+<!-- Agrupa preço e botão. -->
+<strong>R$ 00,00</strong>
+<!-- PREÇO: coloque o preço real aqui. -->
+<button class="order-button" data-item="Café Especial">Pedir</button>
+<!-- BOTÃO: envia o produto escolhido para o WhatsApp. -->
+</div>
+<!-- Fecha o grupo de preço e botão. -->
+</div>
+<!-- Fecha o conteúdo do produto. -->
+</article>
+<!-- Fecha o produto 4. -->
+
+</div>
+<!-- Fecha a grade do cardápio. -->
+</div>
+<!-- Fecha o container. -->
+</section>
+<!-- Fecha o cardápio. -->
+
+<section class="section gallery-section" id="galeria">
+<!-- Cria a seção reservada para as fotos. -->
+<div class="container">
+<!-- Centraliza a galeria. -->
+<div class="section-heading">
+<!-- Cabeçalho da galeria. -->
+<p class="section-label">GALERIA</p>
+<!-- TEXTO: altere o subtítulo da galeria. -->
+<h2>Coloque aqui as fotos reais do Gran Forno.</h2>
+<!-- TEXTO: altere o título da galeria. -->
+<p>Os espaços abaixo já estão preparados para receber suas imagens.</p>
+<!-- TEXTO: altere esta descrição se desejar. -->
+</div>
+<!-- Fecha o cabeçalho da galeria. -->
+
+<div class="gallery-grid">
+<!-- Cria a grade de imagens. -->
+<div class="gallery-placeholder">FOTO 01</div>
+<!-- FOTO 01: coloque sua imagem neste espaço. -->
+<div class="gallery-placeholder">FOTO 02</div>
+<!-- FOTO 02: coloque sua imagem neste espaço. -->
+<div class="gallery-placeholder">FOTO 03</div>
+<!-- FOTO 03: coloque sua imagem neste espaço. -->
+<div class="gallery-placeholder">FOTO 04</div>
+<!-- FOTO 04: coloque sua imagem neste espaço. -->
+</div>
+<!-- Fecha a grade de imagens. -->
+</div>
+<!-- Fecha o container. -->
+</section>
+<!-- Fecha a galeria. -->
+
+<section class="cta">
+<!-- Cria uma chamada para ação. -->
+<div class="container cta-content">
+<!-- Centraliza a chamada. -->
+<div>
+<!-- Abre o texto da chamada. -->
+<p class="section-label">FAÇA SEU PEDIDO</p>
+<!-- TEXTO: altere o subtítulo se desejar. -->
+<h2>Quer pedir agora?</h2>
+<!-- TEXTO: altere o título se desejar. -->
+<p>Fale diretamente com o Gran Forno pelo WhatsApp.</p>
+<!-- TEXTO: altere a mensagem se desejar. -->
+</div>
+<!-- Fecha o texto. -->
+<a class="button button-light" href="https://wa.me/5511920676006?text=Ol%C3%A1%20Gran%20Forno!%20Gostaria%20de%20fazer%20um%20pedido." target="_blank" rel="noopener noreferrer">Chamar no WhatsApp</a>
+<!-- BOTÃO: abre o WhatsApp do restaurante. -->
+</div>
+<!-- Fecha a chamada. -->
+</section>
+<!-- Fecha a chamada para ação. -->
+
+<section class="section contact" id="contato">
+<!-- Cria a seção de contato. -->
+<div class="container">
+<!-- Centraliza o contato. -->
+<div class="section-heading">
+<!-- Cabeçalho do contato. -->
+<p class="section-label">CONTATO</p>
+<!-- TEXTO: altere o subtítulo se desejar. -->
+<h2>Gran Forno</h2>
+<!-- TEXTO: altere o nome se necessário. -->
+<p>Atualize abaixo endereço, horário e outros dados reais do estabelecimento.</p>
+<!-- TEXTO: substitua pelas informações reais. -->
+</div>
+<!-- Fecha o cabeçalho. -->
+
+<div class="contact-grid">
+<!-- Cria os cartões de contato. -->
+<div class="contact-card">
+<!-- Cartão do WhatsApp. -->
+<span>WHATSAPP</span>
+<!-- Rótulo do contato. -->
+<strong>(11) 92067-6006</strong>
+<!-- TELEFONE: já configurado com o número informado. -->
+<a href="https://wa.me/5511920676006?text=Ol%C3%A1%20Gran%20Forno!%20Gostaria%20de%20fazer%20um%20pedido." target="_blank" rel="noopener noreferrer">Enviar mensagem</a>
+<!-- LINK: abre o WhatsApp. -->
+</div>
+<!-- Fecha o cartão do WhatsApp. -->
+
+<div class="contact-card">
+<!-- Cartão do iFood. -->
+<span>IFOOD</span>
+<!-- Rótulo do serviço. -->
+<strong>Faça seu pedido pelo iFood</strong>
+<!-- TEXTO: altere se quiser. -->
+<a href="https://www.ifood.com.br/" target="_blank" rel="noopener noreferrer">Abrir iFood</a>
+<!-- IFOOD: troque este link pelo link da página do Gran Forno no iFood. -->
+</div>
+<!-- Fecha o cartão do iFood. -->
+
+<div class="contact-card">
+<!-- Cartão de endereço. -->
+<span>ENDEREÇO</span>
+<!-- Rótulo do endereço. -->
+<strong>SEU ENDEREÇO AQUI</strong>
+<!-- ENDEREÇO: substitua pelo endereço real. -->
+<p>São Paulo - SP</p>
+<!-- ENDEREÇO: substitua pela cidade/UF real. -->
+</div>
+<!-- Fecha o cartão de endereço. -->
+
+<div class="contact-card">
+<!-- Cartão de horário. -->
+<span>HORÁRIO</span>
+<!-- Rótulo do horário. -->
+<strong>SEU HORÁRIO AQUI</strong>
+<!-- HORÁRIO: substitua pelos horários reais. -->
+<p>Consulte os horários atualizados.</p>
+<!-- TEXTO: substitua por informações reais. -->
+</div>
+<!-- Fecha o cartão de horário. -->
+</div>
+<!-- Fecha a grade de contato. -->
+</div>
+<!-- Fecha o container. -->
+</section>
+<!-- Fecha a seção de contato. -->
+
+</main>
+<!-- Fecha o conteúdo principal. -->
+
+<footer class="footer">
+<!-- Cria o rodapé. -->
+<div class="container footer-content">
+<!-- Centraliza o rodapé. -->
+<img src="images/logo.png" alt="Gran Forno" class="footer-logo">
+<!-- LOGO: usa a mesma logo da pasta images. -->
+<p>© <span id="year"></span> Gran Forno. Todos os direitos reservados.</p>
+<!-- O JavaScript coloca automaticamente o ano atual. -->
+<div class="footer-links">
+<!-- Cria os links do rodapé. -->
+<a href="#inicio">Início</a>
+<!-- LINK: volta ao início. -->
+<a href="#cardapio">Cardápio</a>
+<!-- LINK: vai para o cardápio. -->
+<a href="https://wa.me/5511920676006?text=Ol%C3%A1%20Gran%20Forno!%20Gostaria%20de%20fazer%20um%20pedido." target="_blank" rel="noopener noreferrer">WhatsApp</a>
+<!-- LINK: abre o WhatsApp. -->
+</div>
+<!-- Fecha os links. -->
+</div>
+<!-- Fecha o conteúdo do rodapé. -->
+</footer>
+<!-- Fecha o rodapé. -->
+
+<a class="floating-whatsapp" href="https://wa.me/5511920676006?text=Ol%C3%A1%20Gran%20Forno!%20Gostaria%20de%20fazer%20um%20pedido." target="_blank" rel="noopener noreferrer" aria-label="Pedir pelo WhatsApp">WA</a>
+<!-- BOTÃO FLUTUANTE: fica disponível em toda a página. -->
+
+<script src="script.js"></script>
+<!-- Conecta o JavaScript separado. -->
+</body>
+<!-- Fecha o corpo da página. -->
+</html>
+<!-- Fecha o documento HTML. -->
+

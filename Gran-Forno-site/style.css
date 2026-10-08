@@ -1,0 +1,808 @@
+﻿/* Desenvolvido por Prof. Marcelo Oliveira */
+/* Define as variáveis principais do projeto. */
+:root {
+  /* Cor escura principal. */
+  --dark: #17120f;
+  /* Cor marrom. */
+  --brown: #6d3f25;
+  /* Cor dourada. */
+  --gold: #c69a45;
+  /* Cor dourada clara. */
+  --gold-light: #e5c37b;
+  /* Cor creme. */
+  --cream: #f7f1e7;
+  /* Cor branca. */
+  --white: #ffffff;
+  /* Cor de texto secundário. */
+  --muted: #766b61;
+  /* Sombra padrão. */
+  --shadow: 0 18px 45px rgba(35, 22, 12, 0.12);
+  /* Raio padrão dos cartões. */
+  --radius: 18px;
+}
+
+/* Remove margens e melhora o cálculo de tamanhos. */
+* {
+  /* Inclui padding e borda no tamanho dos elementos. */
+  box-sizing: border-box;
+}
+
+/* Define rolagem suave. */
+html {
+  /* Faz os links internos deslizarem suavemente. */
+  scroll-behavior: smooth;
+}
+
+/* Define o estilo geral do corpo. */
+body {
+  /* Remove a margem padrão do navegador. */
+  margin: 0;
+  /* Define a fonte principal. */
+  font-family: "Montserrat", sans-serif;
+  /* Define a cor principal do texto. */
+  color: var(--dark);
+  /* Define o fundo geral. */
+  background: var(--cream);
+  /* Melhora a leitura. */
+  line-height: 1.6;
+}
+
+/* Remove decoração dos links. */
+a {
+  /* Remove o sublinhado padrão. */
+  text-decoration: none;
+  /* Faz os links herdarem a cor. */
+  color: inherit;
+}
+
+/* Define uma largura máxima reutilizável. */
+.container {
+  /* Ocupa toda a largura disponível. */
+  width: min(1120px, calc(100% - 40px));
+  /* Centraliza horizontalmente. */
+  margin-inline: auto;
+}
+
+/* Estiliza o cabeçalho. */
+.header {
+  /* Mantém o cabeçalho no topo durante a rolagem. */
+  position: sticky;
+  /* Define a distância do topo. */
+  top: 0;
+  /* Mantém o cabeçalho acima dos outros elementos. */
+  z-index: 1000;
+  /* Define fundo translúcido. */
+  background: rgba(23, 18, 15, 0.96);
+  /* Adiciona uma linha inferior. */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Organiza os itens do cabeçalho. */
+.header-content {
+  /* Ativa flexbox. */
+  display: flex;
+  /* Alinha verticalmente. */
+  align-items: center;
+  /* Distribui os elementos. */
+  justify-content: space-between;
+  /* Define altura mínima. */
+  min-height: 82px;
+  /* Define espaço entre itens. */
+  gap: 24px;
+}
+
+/* Define o tamanho da logo. */
+.logo {
+  /* Define largura da logo. */
+  width: 150px;
+  /* Impede deformação da imagem. */
+  height: auto;
+  /* Faz a logo ocupar seu espaço corretamente. */
+  display: block;
+}
+
+/* Organiza a navegação. */
+.nav {
+  /* Coloca os links lado a lado. */
+  display: flex;
+  /* Centraliza verticalmente. */
+  align-items: center;
+  /* Define espaço entre links. */
+  gap: 24px;
+}
+
+/* Estiliza os links da navegação. */
+.nav a {
+  /* Define cor clara. */
+  color: var(--white);
+  /* Define tamanho do texto. */
+  font-size: 0.88rem;
+  /* Deixa o texto um pouco mais forte. */
+  font-weight: 600;
+  /* Cria uma transição suave. */
+  transition: 0.25s ease;
+}
+
+/* Cria efeito ao passar o mouse. */
+.nav a:hover {
+  /* Muda a cor para dourado. */
+  color: var(--gold-light);
+}
+
+/* Destaca o link do WhatsApp. */
+.nav-whatsapp {
+  /* Define fundo verde do WhatsApp. */
+  background: #25d366;
+  /* Mantém texto branco. */
+  color: #fff !important;
+  /* Cria espaço interno. */
+  padding: 10px 16px;
+  /* Arredonda o botão. */
+  border-radius: 999px;
+}
+
+/* Define o botão do menu mobile. */
+.menu-button {
+  /* Esconde no desktop. */
+  display: none;
+  /* Remove aparência padrão. */
+  background: transparent;
+  /* Remove borda. */
+  border: 0;
+  /* Permite clicar. */
+  cursor: pointer;
+}
+
+/* Define as linhas do botão mobile. */
+.menu-button span {
+  /* Faz cada linha ser um bloco. */
+  display: block;
+  /* Define largura. */
+  width: 26px;
+  /* Define altura. */
+  height: 2px;
+  /* Define espaço entre linhas. */
+  margin: 5px;
+  /* Define cor branca. */
+  background: var(--white);
+}
+
+/* Cria o destaque inicial. */
+.hero {
+  /* Define altura mínima. */
+  min-height: 650px;
+  /* Cria fundo sofisticado sem depender de foto. */
+  background: radial-gradient(circle at 70% 30%, #a87335 0%, #5a321d 42%, #1b120d 100%);
+  /* Permite posicionar o conteúdo. */
+  position: relative;
+  /* Esconde excesso. */
+  overflow: hidden;
+}
+
+/* Cria uma textura visual discreta. */
+.hero::after {
+  /* Cria conteúdo vazio. */
+  content: "";
+  /* Posiciona sobre o hero. */
+  position: absolute;
+  /* Ocupa toda a área. */
+  inset: 0;
+  /* Cria padrão visual. */
+  background-image: radial-gradient(rgba(255,255,255,.12) 1px, transparent 1px);
+  /* Define o tamanho do padrão. */
+  background-size: 24px 24px;
+  /* Controla a transparência. */
+  opacity: 0.25;
+}
+
+/* Cria uma camada de contraste. */
+.hero-overlay {
+  /* Posiciona a camada. */
+  position: absolute;
+  /* Ocupa toda a área. */
+  inset: 0;
+  /* Cria gradiente. */
+  background: linear-gradient(90deg, rgba(23,18,15,.88), rgba(23,18,15,.32));
+}
+
+/* Organiza o conteúdo do hero. */
+.hero-content {
+  /* Posiciona acima das camadas. */
+  position: relative;
+  /* Define z-index. */
+  z-index: 2;
+  /* Organiza verticalmente. */
+  min-height: 650px;
+  /* Usa flexbox. */
+  display: flex;
+  /* Centraliza verticalmente. */
+  align-items: center;
+  /* Limita largura do texto. */
+  max-width: 1120px;
+  /* Mantém o conteúdo no início. */
+  justify-content: flex-start;
+}
+
+/* Limita a largura do conteúdo interno do hero. */
+.hero-content > * {
+  /* Permite que o texto fique em uma coluna. */
+  max-width: 680px;
+}
+
+/* Estiliza o pequeno texto de destaque. */
+.eyebrow,
+.section-label {
+  /* Define cor dourada. */
+  color: var(--gold-light);
+  /* Define peso. */
+  font-weight: 800;
+  /* Define espaçamento das letras. */
+  letter-spacing: 0.16em;
+  /* Define tamanho. */
+  font-size: 0.75rem;
+}
+
+/* Define o título principal. */
+.hero h1 {
+  /* Usa fonte elegante. */
+  font-family: "Playfair Display", serif;
+  /* Define tamanho responsivo. */
+  font-size: clamp(3rem, 7vw, 5.8rem);
+  /* Define altura das linhas. */
+  line-height: 0.98;
+  /* Define cor branca. */
+  color: var(--white);
+  /* Remove margem superior. */
+  margin: 18px 0;
+}
+
+/* Define o texto do hero. */
+.hero-text {
+  /* Define tamanho. */
+  font-size: 1.12rem;
+  /* Define cor. */
+  color: rgba(255,255,255,.82);
+  /* Define largura. */
+  max-width: 560px;
+}
+
+/* Organiza os botões do hero. */
+.hero-buttons {
+  /* Coloca botões lado a lado. */
+  display: flex;
+  /* Permite quebra em telas menores. */
+  flex-wrap: wrap;
+  /* Define espaço. */
+  gap: 12px;
+  /* Define margem superior. */
+  margin-top: 30px;
+}
+
+/* Define o padrão dos botões. */
+.button {
+  /* Permite controlar padding. */
+  display: inline-flex;
+  /* Centraliza conteúdo. */
+  align-items: center;
+  /* Centraliza horizontalmente. */
+  justify-content: center;
+  /* Define espaço interno. */
+  padding: 14px 22px;
+  /* Arredonda o botão. */
+  border-radius: 999px;
+  /* Define peso. */
+  font-weight: 800;
+  /* Cria transição. */
+  transition: 0.25s ease;
+}
+
+/* Define o botão dourado. */
+.button-primary {
+  /* Define fundo. */
+  background: var(--gold);
+  /* Define texto escuro. */
+  color: var(--dark);
+}
+
+/* Define o botão WhatsApp. */
+.button-whatsapp {
+  /* Define fundo verde. */
+  background: #25d366;
+  /* Define texto branco. */
+  color: #fff;
+}
+
+/* Define botão claro. */
+.button-light {
+  /* Define fundo branco. */
+  background: var(--white);
+  /* Define texto escuro. */
+  color: var(--dark);
+}
+
+/* Cria efeito nos botões. */
+.button:hover {
+  /* Move o botão levemente para cima. */
+  transform: translateY(-2px);
+  /* Aumenta a sombra. */
+  box-shadow: 0 12px 28px rgba(0,0,0,.18);
+}
+
+/* Define espaçamento padrão das seções. */
+.section {
+  /* Cria espaço vertical. */
+  padding: 90px 0;
+}
+
+/* Organiza a seção sobre. */
+.about-grid {
+  /* Cria duas colunas. */
+  display: grid;
+  /* Define proporção. */
+  grid-template-columns: 1.4fr .8fr;
+  /* Define espaço. */
+  gap: 60px;
+  /* Alinha verticalmente. */
+  align-items: center;
+}
+
+/* Define títulos das seções. */
+h2 {
+  /* Usa fonte elegante. */
+  font-family: "Playfair Display", serif;
+  /* Define tamanho responsivo. */
+  font-size: clamp(2.2rem, 4vw, 3.7rem);
+  /* Define altura. */
+  line-height: 1.08;
+  /* Remove margem superior. */
+  margin: 8px 0 18px;
+}
+
+/* Define cartão de apresentação. */
+.about-card {
+  /* Define fundo escuro. */
+  background: var(--dark);
+  /* Define texto claro. */
+  color: var(--white);
+  /* Define espaço interno. */
+  padding: 42px;
+  /* Arredonda. */
+  border-radius: var(--radius);
+  /* Adiciona sombra. */
+  box-shadow: var(--shadow);
+}
+
+/* Define ícone do cartão. */
+.about-icon {
+  /* Define tamanho. */
+  font-size: 2.5rem;
+  /* Define cor dourada. */
+  color: var(--gold-light);
+}
+
+/* Define link textual. */
+.text-link {
+  /* Define cor. */
+  color: var(--brown);
+  /* Define peso. */
+  font-weight: 800;
+}
+
+/* Define fundo do cardápio. */
+.menu-section {
+  /* Mantém fundo claro. */
+  background: #eee5d8;
+}
+
+/* Centraliza títulos de seção. */
+.section-heading {
+  /* Define largura máxima. */
+  max-width: 700px;
+  /* Centraliza. */
+  margin: 0 auto 42px;
+  /* Centraliza o texto. */
+  text-align: center;
+}
+
+/* Cria a grade de produtos. */
+.menu-grid {
+  /* Usa grid. */
+  display: grid;
+  /* Cria quatro colunas. */
+  grid-template-columns: repeat(4, 1fr);
+  /* Define espaço. */
+  gap: 20px;
+}
+
+/* Estiliza o cartão de produto. */
+.menu-card {
+  /* Define fundo branco. */
+  background: var(--white);
+  /* Arredonda. */
+  border-radius: var(--radius);
+  /* Esconde conteúdo fora da borda. */
+  overflow: hidden;
+  /* Adiciona sombra. */
+  box-shadow: 0 12px 35px rgba(35,22,12,.08);
+}
+
+/* Define a área de foto editável. */
+.photo-placeholder {
+  /* Define altura. */
+  height: 220px;
+  /* Centraliza o texto. */
+  display: grid;
+  /* Centraliza horizontal e verticalmente. */
+  place-items: center;
+  /* Define fundo. */
+  background: linear-gradient(135deg, #d7c3a5, #a98257);
+  /* Define cor do texto. */
+  color: rgba(255,255,255,.95);
+  /* Define peso. */
+  font-weight: 800;
+  /* Define tamanho. */
+  font-size: .75rem;
+  /* Define espaçamento. */
+  letter-spacing: .12em;
+}
+
+/* Define o conteúdo do cartão. */
+.menu-card-content {
+  /* Define espaço interno. */
+  padding: 22px;
+}
+
+/* Define a etiqueta da categoria. */
+.tag {
+  /* Define tamanho. */
+  font-size: .68rem;
+  /* Define peso. */
+  font-weight: 800;
+  /* Define espaçamento. */
+  letter-spacing: .12em;
+  /* Define cor. */
+  color: var(--brown);
+}
+
+/* Define o título do produto. */
+.menu-card h3 {
+  /* Remove margem superior. */
+  margin: 7px 0;
+  /* Define tamanho. */
+  font-size: 1.2rem;
+}
+
+/* Define a descrição do produto. */
+.menu-card p {
+  /* Define cor secundária. */
+  color: var(--muted);
+  /* Define tamanho. */
+  font-size: .9rem;
+}
+
+/* Organiza preço e botão. */
+.menu-bottom {
+  /* Usa flexbox. */
+  display: flex;
+  /* Alinha verticalmente. */
+  align-items: center;
+  /* Distribui os elementos. */
+  justify-content: space-between;
+  /* Define espaço. */
+  gap: 10px;
+  /* Define margem superior. */
+  margin-top: 20px;
+}
+
+/* Define o botão pedir. */
+.order-button {
+  /* Remove borda. */
+  border: 0;
+  /* Define fundo escuro. */
+  background: var(--dark);
+  /* Define texto branco. */
+  color: var(--white);
+  /* Define espaço. */
+  padding: 9px 13px;
+  /* Arredonda. */
+  border-radius: 999px;
+  /* Define cursor. */
+  cursor: pointer;
+  /* Define peso. */
+  font-weight: 700;
+}
+
+/* Define seção de galeria. */
+.gallery-section {
+  /* Mantém fundo creme. */
+  background: var(--cream);
+}
+
+/* Cria grade da galeria. */
+.gallery-grid {
+  /* Usa grid. */
+  display: grid;
+  /* Cria quatro colunas. */
+  grid-template-columns: repeat(4, 1fr);
+  /* Define espaço. */
+  gap: 16px;
+}
+
+/* Define cada espaço de foto. */
+.gallery-placeholder {
+  /* Define proporção. */
+  aspect-ratio: 1 / 1;
+  /* Centraliza conteúdo. */
+  display: grid;
+  /* Centraliza texto. */
+  place-items: center;
+  /* Define fundo. */
+  background: #d8c8b1;
+  /* Define cor. */
+  color: var(--brown);
+  /* Define peso. */
+  font-weight: 800;
+  /* Define borda. */
+  border: 2px dashed rgba(109,63,37,.35);
+  /* Arredonda. */
+  border-radius: var(--radius);
+}
+
+/* Define a chamada final. */
+.cta {
+  /* Define fundo escuro. */
+  background: var(--dark);
+  /* Define cor do texto. */
+  color: var(--white);
+  /* Cria espaço. */
+  padding: 65px 0;
+}
+
+/* Organiza a chamada. */
+.cta-content {
+  /* Usa flexbox. */
+  display: flex;
+  /* Alinha verticalmente. */
+  align-items: center;
+  /* Distribui conteúdo. */
+  justify-content: space-between;
+  /* Define espaço. */
+  gap: 30px;
+}
+
+/* Remove margem do título da chamada. */
+.cta h2 {
+  /* Remove margem inferior. */
+  margin-bottom: 8px;
+}
+
+/* Define cartões de contato. */
+.contact-grid {
+  /* Usa grid. */
+  display: grid;
+  /* Cria quatro colunas. */
+  grid-template-columns: repeat(4, 1fr);
+  /* Define espaço. */
+  gap: 18px;
+}
+
+/* Define cada cartão de contato. */
+.contact-card {
+  /* Define fundo branco. */
+  background: var(--white);
+  /* Define espaço. */
+  padding: 25px;
+  /* Arredonda. */
+  border-radius: var(--radius);
+  /* Adiciona sombra. */
+  box-shadow: 0 10px 30px rgba(35,22,12,.06);
+}
+
+/* Define rótulo do contato. */
+.contact-card span {
+  /* Exibe como bloco. */
+  display: block;
+  /* Define tamanho. */
+  font-size: .68rem;
+  /* Define peso. */
+  font-weight: 800;
+  /* Define espaçamento. */
+  letter-spacing: .12em;
+  /* Define cor. */
+  color: var(--brown);
+  /* Define margem. */
+  margin-bottom: 10px;
+}
+
+/* Define título do contato. */
+.contact-card strong {
+  /* Exibe como bloco. */
+  display: block;
+  /* Define margem inferior. */
+  margin-bottom: 8px;
+}
+
+/* Define links dos cartões. */
+.contact-card a {
+  /* Define cor. */
+  color: var(--brown);
+  /* Define peso. */
+  font-weight: 700;
+}
+
+/* Define o rodapé. */
+.footer {
+  /* Define fundo. */
+  background: #100d0b;
+  /* Define texto. */
+  color: rgba(255,255,255,.75);
+  /* Define espaço. */
+  padding: 35px 0;
+}
+
+/* Organiza o rodapé. */
+.footer-content {
+  /* Usa flexbox. */
+  display: flex;
+  /* Centraliza. */
+  align-items: center;
+  /* Distribui. */
+  justify-content: space-between;
+  /* Permite quebra. */
+  flex-wrap: wrap;
+  /* Define espaço. */
+  gap: 20px;
+}
+
+/* Define logo do rodapé. */
+.footer-logo {
+  /* Define largura. */
+  width: 105px;
+  /* Mantém proporção. */
+  height: auto;
+}
+
+/* Organiza links do rodapé. */
+.footer-links {
+  /* Usa flexbox. */
+  display: flex;
+  /* Define espaço. */
+  gap: 18px;
+}
+
+/* Define botão flutuante do WhatsApp. */
+.floating-whatsapp {
+  /* Mantém o botão fixo. */
+  position: fixed;
+  /* Define posição inferior. */
+  right: 20px;
+  /* Define posição lateral. */
+  bottom: 20px;
+  /* Define largura. */
+  width: 58px;
+  /* Define altura. */
+  height: 58px;
+  /* Centraliza o texto. */
+  display: grid;
+  /* Centraliza o conteúdo. */
+  place-items: center;
+  /* Define fundo verde. */
+  background: #25d366;
+  /* Define texto branco. */
+  color: #fff;
+  /* Arredonda totalmente. */
+  border-radius: 50%;
+  /* Define peso. */
+  font-weight: 900;
+  /* Mantém acima do conteúdo. */
+  z-index: 999;
+  /* Adiciona sombra. */
+  box-shadow: 0 10px 25px rgba(0,0,0,.22);
+}
+
+/* Adapta o site para telas médias. */
+@media (max-width: 980px) {
+  /* Reduz o número de colunas do cardápio. */
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Reduz o número de colunas da galeria. */
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Reduz o número de colunas dos contatos. */
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Reduz o grid da seção sobre. */
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Adapta o site para celulares. */
+@media (max-width: 760px) {
+  /* Mostra o botão do menu. */
+  .menu-button {
+    display: block;
+  }
+
+  /* Transforma a navegação em menu móvel. */
+  .nav {
+    position: absolute;
+    top: 82px;
+    left: 0;
+    right: 0;
+    background: var(--dark);
+    padding: 20px;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Mostra a navegação quando recebe a classe active. */
+  .nav.active {
+    display: flex;
+  }
+
+  /* Centraliza os links móveis. */
+  .nav a {
+    text-align: center;
+    padding: 10px;
+  }
+
+  /* Reduz a altura do hero. */
+  .hero,
+  .hero-content {
+    min-height: 570px;
+  }
+
+  /* Organiza a chamada final verticalmente. */
+  .cta-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Adapta o site para celulares pequenos. */
+@media (max-width: 560px) {
+  /* Coloca os produtos em uma coluna. */
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Coloca as fotos em duas colunas. */
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Coloca os contatos em uma coluna. */
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Reduz o container lateral. */
+  .container {
+    width: min(100% - 28px, 1120px);
+  }
+
+  /* Reduz o tamanho da logo. */
+  .logo {
+    width: 125px;
+  }
+
+  /* Reduz o tamanho do hero. */
+  .hero h1 {
+    font-size: 3rem;
+  }
+
+  /* Coloca os botões em coluna. */
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+

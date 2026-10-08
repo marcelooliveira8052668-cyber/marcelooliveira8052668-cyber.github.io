@@ -1,0 +1,138 @@
+﻿<!-- Desenvolvido por Prof. Marcelo Oliveira -->
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DevBook — Livro didático interativo de programação Full Stack: HTML, CSS, JavaScript, React, Node.js e SQL.">
+<meta name="theme-color" content="#0b1220">
+<title>DevBook — Livro Didático de Programação</title>
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Fraunces:opsz,wght@9..144,700;9..144,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128218;</text></svg>">
+</head>
+<body>
+
+<!-- ═══════════ TOASTS ═══════════ -->
+<div id="toastZone" aria-live="polite"></div>
+
+<!-- ═══════════ SIDEBAR (menu lateral) ═══════════ -->
+<aside id="sidebar" class="sidebar" aria-label="Navegação do livro">
+  <div class="sidebar-brand">
+    <div class="brand-logo">📚</div>
+    <div class="brand-text">
+      <strong>DevBook</strong>
+      <span>Full Stack do Zero</span>
+    </div>
+    <button id="btnCloseSidebar" class="icon-btn only-mobile" aria-label="Fechar menu">&#10005;</button>
+  </div>
+
+  <!-- Perfil / Streak -->
+  <div class="sidebar-profile" id="sidebarProfile">
+    <div class="profile-row">
+      <div class="profile-avatar" id="avatarEl">🧑‍💻</div>
+      <div class="profile-info">
+        <div class="profile-level" id="levelEl">Nível 1 — Iniciante</div>
+        <div class="xp-bar"><div class="xp-fill" id="xpFill"></div></div>
+        <div class="profile-xp" id="xpText">0 / 100 XP</div>
+      </div>
+    </div>
+    <div class="profile-stats">
+      <div class="stat" title="Sequência de dias"><span class="stat-ico">🔥</span><span id="streakEl">0</span></div>
+      <div class="stat" title="Conquistas"><span class="stat-ico">🏅</span><span id="badgesEl">0</span></div>
+      <div class="stat" title="Capítulos lidos"><span class="stat-ico">📖</span><span id="chaptersDoneEl">0</span></div>
+    </div>
+  </div>
+
+  <!-- Busca -->
+  <div class="sidebar-search">
+    <input type="search" id="searchInput" placeholder="Buscar capítulo, assunto…" autocomplete="off" aria-label="Buscar no livro">
+  </div>
+
+  <!-- Sumário -->
+  <nav id="tocNav" class="toc"></nav>
+
+  <div class="sidebar-foot">
+    <button id="btnResetProgress" class="btn-ghost small">↺ Zerar progresso</button>
+  </div>
+</aside>
+<div id="sidebarBackdrop" class="sidebar-backdrop"></div>
+
+<!-- ═══════════ CONTEÚDO PRINCIPAL ═══════════ -->
+<div class="shell">
+
+  <!-- Header -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button id="btnOpenSidebar" class="icon-btn only-mobile" aria-label="Abrir menu">&#9776;</button>
+      <div class="breadcrumb" id="breadcrumb"><span>DevBook</span></div>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-progress" title="Progresso total do curso">
+        <div class="mini-ring"><svg viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.9"/><circle class="ring-fg" id="totalRing" cx="18" cy="18" r="15.9"/></svg><span id="totalPct">0%</span></div>
+      </div>
+      <button id="btnFlashcards" class="btn-ghost" title="Revisar flashcards (F)">🃏 <span class="hide-sm">Revisar</span></button>
+      <button id="btnTheme" class="icon-btn" title="Alternar tema (T)">🌙</button>
+    </div>
+  </header>
+
+  <!-- Área de renderização -->
+  <main id="view" class="view" tabindex="-1"></main>
+
+  <!-- Navegação de capítulos (rodapé) -->
+  <nav id="chapterNav" class="chapter-nav hidden">
+    <button id="btnPrev" class="btn-nav prev">← <span></span></button>
+    <button id="btnComplete" class="btn-complete">✓ Concluir capítulo</button>
+    <button id="btnNext" class="btn-nav next"><span></span> →</button>
+  </nav>
+
+  <footer class="foot">
+    <p>DevBook — Livro didático interativo de programação · Feito com HTML, CSS &amp; JavaScript puros · <span id="offlineBadge" class="badge-offline hidden">⚡ Offline</span></p>
+  </footer>
+</div>
+
+<!-- ═══════════ MODAL FLASHCARDS (repetição espaçada) ═══════════ -->
+<div id="flashModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Revisão de flashcards">
+  <div class="modal-card">
+    <header class="modal-head">
+      <h3>🃏 Revisão Espaçada</h3>
+      <button class="icon-btn" data-close-modal aria-label="Fechar">&#10005;</button>
+    </header>
+    <div class="modal-body" id="flashBody"></div>
+  </div>
+</div>
+
+<!-- ═══════════ MODAL CONQUISTAS ═══════════ -->
+<div id="badgeModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Conquistas">
+  <div class="modal-card">
+    <header class="modal-head">
+      <h3>🏅 Conquistas</h3>
+      <button class="icon-btn" data-close-modal aria-label="Fechar">&#10005;</button>
+    </header>
+    <div class="modal-body" id="badgeBody"></div>
+  </div>
+</div>
+
+<!-- ═══════════ BARRA DE PWA: atalho offline ═══════════ -->
+<div id="pwaBar" class="pwa-bar hidden">
+  <span>⚡ Instale o DevBook para usar offline</span>
+  <button id="btnInstall" class="btn-primary small">Instalar</button>
+  <button id="btnDismissPwa" class="icon-btn" aria-label="Dispensar">&#10005;</button>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/playground.js"></script>
+<script src="js/flashcards.js"></script>
+<script src="js/app.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  }
+</script>
+</body>
+</html>
+

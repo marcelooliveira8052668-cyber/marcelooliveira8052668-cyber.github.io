@@ -1,0 +1,177 @@
+﻿<!-- Desenvolvido por Prof. Marcelo Oliveira -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sylvia Studio de Beleza</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Poppins', sans-serif; background: #1a0f14; color: #f5e6ec; }
+  h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; width: 100%; background: rgba(26,15,20,.9); backdrop-filter: blur(10px); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 100; border-bottom: 2px solid #d63384; }
+  nav .logo { font-family: 'Playfair Display'; font-size: 27px; color: #e7549d; font-weight: 800; }
+  nav ul { display: flex; gap: 20px; list-style: none; }
+  nav a { color: #f5e6ec; text-decoration: none; font-size: 14px; text-transform: uppercase; transition: .3s; }
+  nav a:hover { color: #e7549d; }
+
+  /* HERO */
+  header { height: 100vh; background: linear-gradient(rgba(0,0,0,.4), rgba(26,15,20,.95)), url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=1600') center/cover; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  header h1 { font-size: 70px; color: #fff; text-shadow: 0 0 30px #d63384; }
+  header h1 span { color: #e7549d; }
+  header p { font-size: 20px; margin: 15px 0 30px; color: #ddd; }
+  .btn { background: #d63384; color: #fff; padding: 14px 35px; border: none; font-size: 16px; cursor: pointer; text-transform: uppercase; border-radius: 30px; transition: .3s; text-decoration: none; display: inline-block; }
+  .btn:hover { background: #fff; color: #d63384; transform: scale(1.05); }
+
+  section { padding: 80px 5%; }
+  h2 { font-size: 42px; text-align: center; margin-bottom: 10px; color: #e7549d; }
+  .sub { text-align: center; color: #aaa; margin-bottom: 45px; }
+
+  /* SERVIÇOS */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+  .card { background: #2a1620; border-radius: 15px; overflow: hidden; cursor: pointer; transition: .3s; border: 1px solid #3d1f30; }
+  .card:hover { transform: translateY(-10px); border-color: #d63384; box-shadow: 0 10px 30px rgba(214,51,132,.3); }
+  .card img { width: 100%; height: 220px; object-fit: cover; }
+  .card .body { padding: 20px; }
+  .card h3 { font-size: 22px; }
+  .card .price { color: #e7549d; font-size: 22px; font-weight: bold; margin: 8px 0; }
+  .card p { color: #b79aa8; font-size: 14px; }
+
+  /* CONTATO */
+  #contato { background: #15090f; text-align: center; }
+  #contato p { color: #c9a8b8; margin-bottom: 12px; }
+
+  footer { text-align: center; padding: 25px; background: #0e0509; color: #8a6a7a; font-size: 13px; }
+
+  /* AGENDAMENTO */
+  form { max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
+  input, select { padding: 14px; border-radius: 10px; border: 1px solid #3d1f30; background: #2a1620; color: #f5e6ec; font-size: 15px; }
+  input::placeholder { color: #8a6a7a; }
+
+  /* SOBRE */
+  #sobre p { max-width: 700px; margin: 0 auto; text-align: center; color: #c9a8b8; line-height: 1.8; }
+
+  /* GALERIA */
+  .galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+  .galeria img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px; transition: .3s; border: 1px solid #3d1f30; }
+  .galeria img:hover { transform: scale(1.03); border-color: #d63384; }
+
+  @media (max-width: 600px) {
+    nav ul { gap: 12px; }
+    nav a { font-size: 11px; }
+    header h1 { font-size: 42px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">SYLVIA STUDIO DE BELEZA</div>
+  <ul>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+    <li><a href="#agendar">Agendar</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<header>
+  <h1>REALCE SUA <span>BELEZA</span></h1>
+  <p>Cabelo, unhas, maquiagem e tratamentos estéticos</p>
+  <a class="btn" href="#servicos">Ver Serviços</a>
+</header>
+
+<section id="sobre">
+  <h2>Sobre Nós</h2>
+  <p class="sub">Conheça a Sylvia Studio de Beleza</p>
+  <p>Há mais de 10 anos cuidando da beleza e autoestima das nossas clientes. Nossa equipe é formada por profissionais qualificados, apaixonados pelo que fazem, usando sempre os melhores produtos do mercado. Venha nos visitar!</p>
+</section>
+
+<section id="servicos">
+  <h2>Nossos Serviços</h2>
+  <p class="sub">Qualidade e carinho em cada detalhe</p>
+  <div class="cards">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=800" alt="Cabelo">
+      <div class="body">
+        <h3>Cabelo</h3>
+        <div class="price">A partir de R$ 60</div>
+        <p>Corte, coloração, hidratação e penteados para todas as ocasiões.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800" alt="Unhas">
+      <div class="body">
+        <h3>Unhas</h3>
+        <div class="price">A partir de R$ 35</div>
+        <p>Manicure, pedicure, alongamento e nail art com muito cuidado.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=800" alt="Maquiagem">
+      <div class="body">
+        <h3>Maquiagem</h3>
+        <div class="price">A partir de R$ 80</div>
+        <p>Maquiagem social, para noivas e produção completa de eventos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="galeria">
+  <h2>Galeria</h2>
+  <p class="sub">Alguns dos nossos trabalhos</p>
+  <div class="galeria">
+    <img src="https://images.unsplash.com/photo-1595475884562-073c30d45670?w=600" alt="Trabalho 1">
+    <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600" alt="Trabalho 2">
+    <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=600" alt="Trabalho 3">
+    <img src="https://images.unsplash.com/photo-1633681926035-ec1ac984418a?w=600" alt="Trabalho 4">
+  </div>
+</section>
+
+<section id="agendar">
+  <h2>Agendar Horário</h2>
+  <p class="sub">Preencha o formulário e confirme seu horário</p>
+  <form onsubmit="enviarWhatsApp(); return false;">
+    <input id="nome" type="text" placeholder="Seu nome" required>
+    <input id="telefone" type="tel" placeholder="Seu telefone" required>
+    <select id="servico" required>
+      <option value="">Escolha o serviço</option>
+      <option>Cabelo</option>
+      <option>Unhas</option>
+      <option>Maquiagem</option>
+    </select>
+    <input id="data" type="date" required>
+    <input id="hora" type="time" required>
+    <button class="btn" type="submit">Agendar</button>
+  </form>
+  <script>
+    function enviarWhatsApp() {
+      var nome = document.getElementById('nome').value;
+      var tel = document.getElementById('telefone').value;
+      var servico = document.getElementById('servico').value;
+      var data = document.getElementById('data').value;
+      var hora = document.getElementById('hora').value;
+      var msg = 'Olá! Quero agendar na Sylvia Studio de Beleza.%0ANome: ' + nome + '%0ATelefone: ' + tel + '%0AServiço: ' + servico + '%0AData: ' + data + '%0AHorário: ' + hora;
+      window.open('https://wa.me/5511999990000?text=' + msg, '_blank');
+    }
+  </script>
+</section>
+
+<section id="contato">
+  <h2>Contato</h2>
+  <p class="sub">Agende seu horário agora mesmo!</p>
+  <p>📞 (11) 99999-0000</p>
+  <p>📍 Rua das Flores, 123 - Centro</p>
+  <p>🕐 Seg a Sáb: 9h às 19h</p>
+</section>
+
+<footer>© 2026 Sylvia Studio de Beleza - Todos os direitos reservados</footer>
+
+</body>
+</html>
+
