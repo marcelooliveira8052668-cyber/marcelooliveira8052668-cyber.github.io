@@ -195,6 +195,9 @@ function aplicarFuncao(nome, x) {
             if (x < 0) throw erroCalc('Raiz de número negativo');
             return Math.sqrt(x);
 
+        case 'exp':
+            return ajustar(Math.exp(x));
+
         case 'abs': return Math.abs(x);
     }
     throw erroCalc('Função desconhecida');
@@ -215,7 +218,7 @@ function valorDe(x) {
 const FUNCOES = {
     sin: true, cos: true, tan: true,
     asin: true, acos: true, atan: true,
-    ln: true, log: true, sqrt: true, abs: true
+    ln: true, log: true, exp: true, sqrt: true, abs: true
 };
 
 /** Aceita vírgula brasileira, sinal de multiplicação bonito etc. */
@@ -433,7 +436,9 @@ function avaliarRPN(rpn) {
                 pilha.push({ v: 1 / x });
             }
             else if (tk.v === '!')  pilha.push({ v: fatorial(x) });
-            else if (tk.v === '%')  pilha.push({ v: x / 100, pct: true });
+            // Guardamos o valor ORIGINAL com pct=true — a divisão por 100
+            // acontece só na operação final (para respeitar 200+20%=240).
+            else if (tk.v === '%')  pilha.push({ v: x, pct: true });
             continue;
         }
 
@@ -447,11 +452,14 @@ function avaliarRPN(rpn) {
             const a = pegar();
             const x = valorDe(a);
 
-            // "200 + 10%" = 220 (percentual relativo à base)
-            // "50 × 20%"  = 10  (percentual como fração)
+            // 200+20% → 240 (percentual relativo à base)
+            // 50×20%  → 10  (percentual como fração)
             let y;
-            if (b && b.pct && (tk.v === '+' || tk.v === '-')) y = x * valorDe(b);
-            else y = valorDe(b);
+            if (b && b.pct) {
+                y = (tk.v === '+' || tk.v === '-') ? x * (b.v / 100) : b.v / 100;
+            } else {
+                y = b ? b.v : 0;
+            }
 
             pilha.push({ v: aplicarOperador(tk.v, x, y) });
             continue;
@@ -494,7 +502,8 @@ const EXIBICAO = {
     'ln('   : 'ln(',
     'log('  : 'log(',
     'sqrt(' : '√(',
-    'abs('  : 'abs('
+    'exp('  : 'eˣ(',
+    'abs('  : '|x|'
 };
 
 /** Deixa a expressão legível: × ÷ √ , e inversas trigonométricas. */
@@ -502,7 +511,7 @@ function textoParaExibir(bruto) {
     let s = normalizar(bruto);
 
     s = s.replace(
-        /(^|[^a-z])(asin\(|acos\(|atan\(|sin\(|cos\(|tan\(|ln\(|log\(|sqrt\(|abs\()/g,
+        /(^|[^a-z])(asin\(|acos\(|atan\(|sin\(|cos\(|tan\(|ln\(|log\(|sqrt\(|exp\(|abs\()/g,
         (m, prefixo, fn) => prefixo + (EXIBICAO[fn] || fn)
     );
 
@@ -689,7 +698,7 @@ function apagar() {
     if (!estado.expressao) return;
     estado.posResultado = false;
 
-    const mFuncao = /(asin\(|acos\(|atan\(|sin\(|cos\(|tan\(|ln\(|log\(|sqrt\(|abs\(|√\()$/
+    const mFuncao = /(asin\(|acos\(|atan\(|sin\(|cos\(|tan\(|ln\(|log\(|sqrt\(|exp\(|abs\(|√\()$/
         .exec(estado.expressao);
 
     if (mFuncao) {
